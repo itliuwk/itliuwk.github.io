@@ -2,261 +2,13 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://itliuwk.github.io</id>
     <title>刘伟坤</title>
-    <updated>2019-05-30T07:58:50.716Z</updated>
+    <updated>2019-05-30T08:06:08.442Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://itliuwk.github.io"/>
     <link rel="self" href="https://itliuwk.github.io/atom.xml"/>
     <logo>https://itliuwk.github.io/images/avatar.png</logo>
     <icon>https://itliuwk.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 刘伟坤</rights>
-    <entry>
-        <title type="html"><![CDATA[centOS6.8安装nginx]]></title>
-        <id>https://itliuwk.github.io/post/centos68-an-zhuang-nginx</id>
-        <link href="https://itliuwk.github.io/post/centos68-an-zhuang-nginx">
-        </link>
-        <updated>2019-05-30T07:53:22.000Z</updated>
-        <summary type="html"><![CDATA[<p>1.安装nginx所需环境：
-yum install gcc
-yum install pcre-devel
-yum install zlib zlib-devel
-yum install openssl openssl-devel
-或者一键安装：yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>1.安装nginx所需环境：
-yum install gcc
-yum install pcre-devel
-yum install zlib zlib-devel
-yum install openssl openssl-devel
-或者一键安装：yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel</p>
-<!-- more --> 
-<p>2.下载nginx压缩包：
-wget <a href="http://nginx.org/download/nginx-1.15.7.tar.gz" > http://nginx.org/download/nginx-1.15.7.tar.gz</a></p>
-<p>下载在当前目录</p>
-<p>3.解压缩：tar -zxvf nginx-1.15.7.tar.gz</p>
-<p>4.进入nginx-1.10.2目录：cd nginx-1.15.7</p>
-<ol start="5">
-<li>
-<p>执行 ./configure</p>
-</li>
-<li>
-<p>执行make</p>
-</li>
-<li>
-<p>执行make install</p>
-</li>
-<li>
-<p>查找nginx安装目录：whereis nginx</p>
-</li>
-</ol>
-<p>9.进入niginx安装目录,默认在 cd /usr/local/nginx/sbin</p>
-<ol start="10">
-<li>执行 ./nginx</li>
-</ol>
-<p>11.打开浏览器，输入ip地址，看到welcome to nginx！即安装成功</p>
-<p>如不行 在 sbin目录下执行下面步骤</p>
-<p>fuser -k 80/tcp 强制停止80端口</p>
-<p>./nginx -s reload 重载 nginx</p>
-<p>./nginx -t 启动</p>
-<p>./nginx 启动</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[前端 nginx 跨域访问配置]]></title>
-        <id>https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi</id>
-        <link href="https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi">
-        </link>
-        <updated>2019-05-30T07:39:00.000Z</updated>
-        <content type="html"><![CDATA[<!-- more -->
-<p>1、首先下载nginx ： <a href="http://nginx.org/en/download.html" target="_blcnk">http://nginx.org/en/download.html</a></p>
-<p>2、<img src="https://img-blog.csdnimg.cn/20181214173849776.png" />
-一般选择 Stable version 稳定版</p>
-<p>3、 下载后 解压 随意放在那个盘 我以前下载的<code>nginx-1.12.0</code>版本</p>
-<p>4、<code>E:\nginx-1.12.0\conf\nginx.conf</code> 我这放在E盘 打开 <code>nginx.conf</code></p>
-<pre><code>#user  nobody;
-worker_processes  1;
-
-#error_log  logs/error.log;
-#error_log  logs/error.log  notice;
-#error_log  logs/error.log  info;
-
-#pid        logs/nginx.pid;
-
-
-events {
-    worker_connections  1024;
-}
-
-
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-
-#log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
-#                  '$status $body_bytes_sent &quot;$http_referer&quot; '
-#                  '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
-
-#access_log  logs/access.log  main;
-
-sendfile        on;
-#tcp_nopush     on;
-
-#keepalive_timeout  0;
-keepalive_timeout  65;
-
-#gzip  on;
-
-server {
-    listen       80;    ##  随意改动  我这里不改
-    server_name  localhost;   ##
-
-    #charset utf-8;  //   ##改为 utf-8; 
-
-    #access_log  logs/host.access.log  main;
-
-    location / {
-        root   html;    ##主页   可改为其他目录
-        index  index.html index.htm;   ## 主页目录入口
-    }
-
-
-    location /apis/{  ## 这个名称在后面请求的时候用到
-        proxy_pass  http://192.168.0.104/;  ##  我这是后台的接口地址
-    }
-
-    #error_page  404              /404.html;
-
-    # redirect server error pages to the static page /50x.html
-    #
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   html;
-    }
-
-    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
-    #
-    #location ~ \.php$ {
-    #    proxy_pass   http://127.0.0.1;
-    #}
-
-    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    #
-    #location ~ \.php$ {
-    #    root           html;
-    #    fastcgi_pass   127.0.0.1:9000;
-    #    fastcgi_index  index.php;
-    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-    #    include        fastcgi_params;
-    #}
-
-    # deny access to .htaccess files, if Apache's document root
-    # concurs with nginx's one
-    #
-    #location ~ /\.ht {
-    #    deny  all;
-    #}
-}
-
-
-# another virtual host using mix of IP-, name-, and port-based configuration
-#
-#server {
-#    listen       8000;
-#    listen       somename:8080;
-#    server_name  somename  alias  another.alias;
-
-#    location / {
-#        root   html;
-#        index  index.html index.htm;
-#    }
-#}
-
-
-# HTTPS server
-#
-#server {
-#    listen       443 ssl;
-#    server_name  localhost;
-
-#    ssl_certificate      cert.pem;
-#    ssl_certificate_key  cert.key;
-
-#    ssl_session_cache    shared:SSL:1m;
-#    ssl_session_timeout  5m;
-
-#    ssl_ciphers  HIGH:!aNULL:!MD5;
-#    ssl_prefer_server_ciphers  on;
-
-#    location / {
-#        root   html;
-#        index  index.html index.htm;
-#    }
-#} 
-#   }
-
-</code></pre>
-<p>保存</p>
-<p>启动 <code>E:\nginx-1.12.0 下的 nginx.exe</code> 然后浏览器打开<code>localhost</code></p>
-<p><strong>这是前端的页面代码</strong></p>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-3.1.0.min.js&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-    $(function() {
-        $.ajax({
-     		    //http://192.168.0.104/admin/employee/getTree  原来后台的接口
-            url: &quot;http://localhost/apis/admin/employee/getTree&quot;, //  这里直接改成    apis  会通过ngiux转为我们设置的接口
-             //url: &quot;apis/movie/in_theaters&quot;, //  或者改成这样
-            type: &quot;GET&quot;,
-            success: function (data) {
-                $(&quot;.text&quot;).html(JSON.stringify(data));
-            },
-            error: function (text) {
-                $(&quot;text&quot;).html(JSON.stringify(text))
-            }
-        });
-    });
-&lt;/script&gt;
-
-&lt;body&gt;
-&lt;span class=&quot;text&quot;&gt;&lt;/span&gt;
-&lt;/body&gt;
-
-&lt;/html&gt;
-
-</code></pre>
-<p><strong>成功</strong></p>
-<img src="https://img-blog.csdnimg.cn/201812141750551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTMzMTYwOTM=,size_16,color_FFFFFF,t_70" />
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Git简单生成生成公钥和私钥方法]]></title>
-        <id>https://itliuwk.github.io/post/git-jian-dan-sheng-cheng-sheng-cheng-gong-yao-he-si-yao-fang-fa</id>
-        <link href="https://itliuwk.github.io/post/git-jian-dan-sheng-cheng-sheng-cheng-gong-yao-he-si-yao-fang-fa">
-        </link>
-        <updated>2019-05-30T07:28:19.000Z</updated>
-        <summary type="html"><![CDATA[<p><strong>Git配置</strong></p>
-<p>Git安装完之后，需做最后一步配置。打开git bash，分别执行以下两句命令</p>
-]]></summary>
-        <content type="html"><![CDATA[<p><strong>Git配置</strong></p>
-<p>Git安装完之后，需做最后一步配置。打开git bash，分别执行以下两句命令</p>
-<!-- more -->
-<pre><code>git config --global user.name &quot;liuwk&quot;
-
-git config --global user.email &quot;1834183435@qq.com&quot;
-
-</code></pre>
-<p>用户名看自己喜欢起，一般都是起些容易记的，亦或者某个简称，邮箱选自己邮箱即可。（值得一提的是，我第一次生成的时候并没有执行上两句命令，而是直接在配置那里写邮箱和用户名，生成的公钥匙直接显示我的邮箱，后来拿去用不了；后来我有一步一步写的时候生成的公钥其实最后显示的并不是邮箱，而是本机名，当时我一直以为显示邮箱是对的，后面也是别人指点才得知。当然，具体什么原因我不明白，菜鸟一枚，欢迎补充！）</p>
-<p><strong>SSH配置</strong></p>
-<p>1、打开 git bash</p>
-<p>2、执行生成公钥和私钥的命令： <code>ssh-keygen -t rsa</code>  并按回车3下（为什么按三下，是因为有提示你是否需要设置密码，如果设置了每次使用Git都会用到密码，一般都是直接不写为空，直接回车就好了）。会在一个文件夹里面生成一个私钥 id_rsa和一个公钥id_rsa.pub（可执行start ~ 命令，生成的公私钥在 .ssh的文件夹里面）</p>
-<p>3、执行查看公钥的命令：<code>cat ~/.ssh/id_rsa.pub</code></p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[vue基于七牛云 上传图片、视频]]></title>
         <id>https://itliuwk.github.io/post/vue-ji-yu-qi-niu-yun-shang-chuan-tu-pian-shi-pin</id>
@@ -568,6 +320,203 @@ export default {
 ]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[前端 nginx 跨域访问配置]]></title>
+        <id>https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi</id>
+        <link href="https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi">
+        </link>
+        <updated>2018-12-14T07:39:00.000Z</updated>
+        <content type="html"><![CDATA[<!-- more -->
+<p>1、首先下载nginx ： <a href="http://nginx.org/en/download.html" target="_blcnk">http://nginx.org/en/download.html</a></p>
+<p>2、<img src="https://img-blog.csdnimg.cn/20181214173849776.png" />
+一般选择 Stable version 稳定版</p>
+<p>3、 下载后 解压 随意放在那个盘 我以前下载的<code>nginx-1.12.0</code>版本</p>
+<p>4、<code>E:\nginx-1.12.0\conf\nginx.conf</code> 我这放在E盘 打开 <code>nginx.conf</code></p>
+<pre><code>#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+#log_format  main  '$remote_addr - $remote_user [$time_local] &quot;$request&quot; '
+#                  '$status $body_bytes_sent &quot;$http_referer&quot; '
+#                  '&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;';
+
+#access_log  logs/access.log  main;
+
+sendfile        on;
+#tcp_nopush     on;
+
+#keepalive_timeout  0;
+keepalive_timeout  65;
+
+#gzip  on;
+
+server {
+    listen       80;    ##  随意改动  我这里不改
+    server_name  localhost;   ##
+
+    #charset utf-8;  //   ##改为 utf-8; 
+
+    #access_log  logs/host.access.log  main;
+
+    location / {
+        root   html;    ##主页   可改为其他目录
+        index  index.html index.htm;   ## 主页目录入口
+    }
+
+
+    location /apis/{  ## 这个名称在后面请求的时候用到
+        proxy_pass  http://192.168.0.104/;  ##  我这是后台的接口地址
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #
+    #location ~ \.php$ {
+    #    root           html;
+    #    fastcgi_pass   127.0.0.1:9000;
+    #    fastcgi_index  index.php;
+    #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+    #    include        fastcgi_params;
+    #}
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    #location ~ /\.ht {
+    #    deny  all;
+    #}
+}
+
+
+# another virtual host using mix of IP-, name-, and port-based configuration
+#
+#server {
+#    listen       8000;
+#    listen       somename:8080;
+#    server_name  somename  alias  another.alias;
+
+#    location / {
+#        root   html;
+#        index  index.html index.htm;
+#    }
+#}
+
+
+# HTTPS server
+#
+#server {
+#    listen       443 ssl;
+#    server_name  localhost;
+
+#    ssl_certificate      cert.pem;
+#    ssl_certificate_key  cert.key;
+
+#    ssl_session_cache    shared:SSL:1m;
+#    ssl_session_timeout  5m;
+
+#    ssl_ciphers  HIGH:!aNULL:!MD5;
+#    ssl_prefer_server_ciphers  on;
+
+#    location / {
+#        root   html;
+#        index  index.html index.htm;
+#    }
+#} 
+#   }
+
+</code></pre>
+<p>保存</p>
+<p>启动 <code>E:\nginx-1.12.0 下的 nginx.exe</code> 然后浏览器打开<code>localhost</code></p>
+<p><strong>这是前端的页面代码</strong></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/jquery-3.1.0.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $(function() {
+        $.ajax({
+     		    //http://192.168.0.104/admin/employee/getTree  原来后台的接口
+            url: &quot;http://localhost/apis/admin/employee/getTree&quot;, //  这里直接改成    apis  会通过ngiux转为我们设置的接口
+             //url: &quot;apis/movie/in_theaters&quot;, //  或者改成这样
+            type: &quot;GET&quot;,
+            success: function (data) {
+                $(&quot;.text&quot;).html(JSON.stringify(data));
+            },
+            error: function (text) {
+                $(&quot;text&quot;).html(JSON.stringify(text))
+            }
+        });
+    });
+&lt;/script&gt;
+
+&lt;body&gt;
+&lt;span class=&quot;text&quot;&gt;&lt;/span&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+</code></pre>
+<p><strong>成功</strong></p>
+<img src="https://img-blog.csdnimg.cn/201812141750551.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTMzMTYwOTM=,size_16,color_FFFFFF,t_70" />
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Git简单生成生成公钥和私钥方法]]></title>
+        <id>https://itliuwk.github.io/post/git-jian-dan-sheng-cheng-sheng-cheng-gong-yao-he-si-yao-fang-fa</id>
+        <link href="https://itliuwk.github.io/post/git-jian-dan-sheng-cheng-sheng-cheng-gong-yao-he-si-yao-fang-fa">
+        </link>
+        <updated>2018-12-14T04:28:19.000Z</updated>
+        <summary type="html"><![CDATA[<p><strong>Git配置</strong></p>
+<p>Git安装完之后，需做最后一步配置。打开git bash，分别执行以下两句命令</p>
+]]></summary>
+        <content type="html"><![CDATA[<p><strong>Git配置</strong></p>
+<p>Git安装完之后，需做最后一步配置。打开git bash，分别执行以下两句命令</p>
+<!-- more -->
+<pre><code>git config --global user.name &quot;liuwk&quot;
+
+git config --global user.email &quot;1834183435@qq.com&quot;
+
+</code></pre>
+<p>用户名看自己喜欢起，一般都是起些容易记的，亦或者某个简称，邮箱选自己邮箱即可。（值得一提的是，我第一次生成的时候并没有执行上两句命令，而是直接在配置那里写邮箱和用户名，生成的公钥匙直接显示我的邮箱，后来拿去用不了；后来我有一步一步写的时候生成的公钥其实最后显示的并不是邮箱，而是本机名，当时我一直以为显示邮箱是对的，后面也是别人指点才得知。当然，具体什么原因我不明白，菜鸟一枚，欢迎补充！）</p>
+<p><strong>SSH配置</strong></p>
+<p>1、打开 git bash</p>
+<p>2、执行生成公钥和私钥的命令： <code>ssh-keygen -t rsa</code>  并按回车3下（为什么按三下，是因为有提示你是否需要设置密码，如果设置了每次使用Git都会用到密码，一般都是直接不写为空，直接回车就好了）。会在一个文件夹里面生成一个私钥 id_rsa和一个公钥id_rsa.pub（可执行start ~ 命令，生成的公私钥在 .ssh的文件夹里面）</p>
+<p>3、执行查看公钥的命令：<code>cat ~/.ssh/id_rsa.pub</code></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[前端怎样使用base64图片上传到七牛云]]></title>
         <id>https://itliuwk.github.io/post/qian-duan-zen-yang-shi-yong-base64-tu-pian-shang-chuan-dao-qi-niu-yun</id>
         <link href="https://itliuwk.github.io/post/qian-duan-zen-yang-shi-yong-base64-tu-pian-shang-chuan-dao-qi-niu-yun">
@@ -641,6 +590,57 @@ export default {
 4）最后一步检验nodejs是否已变为全局</p>
 <p>在Linux命令行node -v 命令会显示nodejs版本，如图所示为大功告成</p>
 <img src="https://images2015.cnblogs.com/blog/625378/201703/625378-20170301111018532-950176454.png" alt="在这里插入图片描述">]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[centOS6.8安装nginx]]></title>
+        <id>https://itliuwk.github.io/post/centos68-an-zhuang-nginx</id>
+        <link href="https://itliuwk.github.io/post/centos68-an-zhuang-nginx">
+        </link>
+        <updated>2018-12-13T06:48:22.000Z</updated>
+        <summary type="html"><![CDATA[<p>1.安装nginx所需环境：
+yum install gcc
+yum install pcre-devel
+yum install zlib zlib-devel
+yum install openssl openssl-devel
+或者一键安装：yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>1.安装nginx所需环境：
+yum install gcc
+yum install pcre-devel
+yum install zlib zlib-devel
+yum install openssl openssl-devel
+或者一键安装：yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel</p>
+<!-- more --> 
+<p>2.下载nginx压缩包：
+wget <a href="http://nginx.org/download/nginx-1.15.7.tar.gz" > http://nginx.org/download/nginx-1.15.7.tar.gz</a></p>
+<p>下载在当前目录</p>
+<p>3.解压缩：tar -zxvf nginx-1.15.7.tar.gz</p>
+<p>4.进入nginx-1.10.2目录：cd nginx-1.15.7</p>
+<ol start="5">
+<li>
+<p>执行 ./configure</p>
+</li>
+<li>
+<p>执行make</p>
+</li>
+<li>
+<p>执行make install</p>
+</li>
+<li>
+<p>查找nginx安装目录：whereis nginx</p>
+</li>
+</ol>
+<p>9.进入niginx安装目录,默认在 cd /usr/local/nginx/sbin</p>
+<ol start="10">
+<li>执行 ./nginx</li>
+</ol>
+<p>11.打开浏览器，输入ip地址，看到welcome to nginx！即安装成功</p>
+<p>如不行 在 sbin目录下执行下面步骤</p>
+<p>fuser -k 80/tcp 强制停止80端口</p>
+<p>./nginx -s reload 重载 nginx</p>
+<p>./nginx -t 启动</p>
+<p>./nginx 启动</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[layui 表格的下拉选择]]></title>
@@ -811,8 +811,8 @@ export default {
     </entry>
     <entry>
         <title type="html"><![CDATA[浅谈js中子页面父页面方法 变量相互调用]]></title>
-        <id>https://itliuwk.github.io/post/qian-tan-js-zhong-zi-ye-mian-fu-ye-mian-fang-fa-bian-liang-xiang-hu-diao-yong</id>
-        <link href="https://itliuwk.github.io/post/qian-tan-js-zhong-zi-ye-mian-fu-ye-mian-fang-fa-bian-liang-xiang-hu-diao-yong">
+        <id>https://itliuwk.github.io/post/qianTan</id>
+        <link href="https://itliuwk.github.io/post/qianTan">
         </link>
         <updated>2018-08-23T08:07:32.000Z</updated>
         <summary type="html"><![CDATA[<p><strong>(1）子页面调用父页面的方法或者变量：</strong></p>
@@ -845,216 +845,145 @@ childWindow.formSubmit();//调取子页面的formSubmit方法 jquery的写法
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[最全的 JavaScript 知识总结]]></title>
-        <id>https://itliuwk.github.io/post/zui-quan-de-javascript-zhi-shi-zong-jie</id>
-        <link href="https://itliuwk.github.io/post/zui-quan-de-javascript-zhi-shi-zong-jie">
+        <title type="html"><![CDATA[js 上传多个文件 可以随意删除某个文件]]></title>
+        <id>https://itliuwk.github.io/post/js-shang-chuan-duo-ge-wen-jian-ke-yi-sui-yi-shan-chu-mou-ge-wen-jian</id>
+        <link href="https://itliuwk.github.io/post/js-shang-chuan-duo-ge-wen-jian-ke-yi-sui-yi-shan-chu-mou-ge-wen-jian">
         </link>
-        <updated>2018-06-30T00:15:43.000Z</updated>
-        <summary type="html"><![CDATA[<p>本文主要总结了JavaScript 常用功能总结，如一些常用的JS 对象，基本数据结构，功能函数等，还有一些常用的设计模式...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>本文主要总结了JavaScript 常用功能总结，如一些常用的JS 对象，基本数据结构，功能函数等，还有一些常用的设计模式...</p>
-<!--more-->
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: large;"><span style="color: #000000;">目录：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">众所周知，JavaScript是动态的面向对象的编程语言，能够实现以下效果：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">1. 丰富Web 网页功能</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">2. 丰富Web界面</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">3. 实现本地或远程存储。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">4. 实现分布式网络应用的前端组件，并在后台进行数据存储管理。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">5. 使用JavaScript可以实现完整的分布式Web 应用。</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: large;"><span style="color: #000000;">JavaScript 中的数据类型</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JavaScript 提供三种元数据类型，string，number，和Boolean,可使用typeof(v) 测试变量V 的类型，typeof(v)==="number"</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">提供五种基本的引用类型：Object, Array, Function, Date 及RegExp。数组，函数，日期和正则表达式是特殊类型，但是严格来讲，日期和正则表达式是元数据类型，可封装在其他对象中。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JS 中变量类型，数组元素类型，函数参数以及返回值的类型不需要声明类型，类型之间的转换是自动执行的。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">变量值可以是：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">1. 数值：如字符串，数字或布尔值。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">2. 对象引用： 可引用典型对象，也可以是数据，函数，日期或正则表达式。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">3. 特殊数据值，Null,是典型的用于初始化对象的默认值。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">4. 特殊数据undefined，常用于已被定义，但未赋值的变量。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">string 是一系列的Unicode 字符串，String 如“hello world”,’A3FO’或空字符串“”，字符串连接可通过+操作符来执行，也可以使用=号来验证两个字符串是否相等；</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">if (firstName + lastName === "James Bond") ...</span></span></span><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">numeric 表示64位的浮点数，在JS 中没有明显的区分整形和浮点数，如果一个表达式的值不等于某个数字，那么它的值可设为NaN,表示非数字，可联合isNaN使用。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>如下表是详细的类型测试和转换</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><a href="http://images2015.cnblogs.com/blog/139239/201601/139239-20160120162420984-1701763792.png" target="_blank"><img id="aimg_B0Oow" class="zoom" src="http://images2015.cnblogs.com/blog/139239/201601/139239-20160120162421859-1583318774.png" alt="" height="336" border="0"></a></span></span></span></p>
-<p>
-<br><br><span style="font-family: 微软雅黑;"><span style="font-size: large;"><span style="color: #000000;">变量作用域范围</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">目前，JavaScript，ES5提供两种作用域类型：全局变量及函数作用域，没有块作用域。块作用域的范围不太明确，所以应当避免块作用域的使用。如下代码，尽管是开发人员常用的Pattern,却是一个陷阱。</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">function foo() {<br>&nbsp;&nbsp;for (var i=0; i &lt; 10; i++) {<br>&nbsp; &nbsp; ...&nbsp;&nbsp;// do something with i<br>&nbsp;&nbsp;}<br>}<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">所有的变量声明最好是在函数的开始位置。在JS，ES6版本中支持块作用域，采用关键字let 定义变量。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: large;"><span style="color: #000000;">严格模式（Strict Mode）</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">从ES5开始， 严格模式用于检测运行时的错误，在严格模式下，所有的变量必须声明，如果给未声明的变量赋值会抛出异常。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">在JavaScript 文件或&lt;Script&gt;元素内，通过输入以下代码切换到严格模式：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">use strict;</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">建议采用严格模式，除非项目依赖的库不兼容严格模式。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: large;"><span style="color: #000000;">多种对象</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JS中的对象概念不同于OO或UML中的对象，尤其是在JS中对象不需要实例化，也可以有自己的方法，不仅有property slots，也包含method slots。除此之外还包含key-value slots；因此他们总共有三种Slots， 而常见的对象只有属性槽。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JS对象是由一系列的name-value 组成的Slot。而name 可以是属性名称，函数名称，映射名称。对象可通过一种特定的方式创建，使用JS 对象声明语法（JSON），而不需要实例化一个类。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">代码如下：</span></span></span></p>
-<div align="left"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var person1 = { lastName:"Smith", firstName:"Tom"};</span></span></span></div>
-<div align="left"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var o1 = Object.create( null);&nbsp;&nbsp;</span></span></span></div>
-<div align="left"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">// an empty object with no slots</span></span></span></div>
-<div align="left"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></div>
-<div align="left"><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">如果Slot 的name 是合法的JS 标识符，则Slot可表示属性，方法，或键值对。如果名称含有一些特殊字符如空格，则Slot代表键值对，是一种映射元素，如下：</span></span></span></div>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Property Slot&nbsp;&nbsp;中的name:</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">1. data value 属性，在这种情况下，Value 表示变量值，或是值表达式。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">2. object-valued 属性，Value 表示对象的引用或对象表达式。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">method Slot 表示的是JS 函数，它的值是JS 函数定义表达式：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Object 属性可以使用两种方法来访问：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">1. 使用”.”(与C++ 和Java的类似)：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">person1.lastName = "Smith"</span></span></span><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">2. 使用map：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">person1["lastName"] = "Smith"</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JS 对象能够用于各种途径，以下是五种常见情况：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">1. Record是Property slots集合，如：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var myRecord = {firstName:"Tom", lastName:"Smith", age:26}</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">2. map 如Hash map，数组，hash表；</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var numeral2number = {"one":"1", "two":"2", "three":"3"}</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">3. Untyped 对象不需要实例化类，它可能包含property slot 和function slots:</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var person1 = {&nbsp;<br>&nbsp;&nbsp;lastName: "Smith",&nbsp;<br>&nbsp;&nbsp;firstName: "Tom",<br>&nbsp;&nbsp;getFullName: function () {<br>&nbsp; &nbsp; return this.firstName +" "+ this.lastName;&nbsp;<br>&nbsp;&nbsp;}&nbsp;&nbsp;<br>};</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Array List</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JS array 即逻辑数据结构，通过数组下标访问。如数组初始化：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var a = [1,2,3];</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JS数组可动态增长，因此数组索引有可能比实际元素个数多，如下：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">a[4] = 7;</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">数组循环：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">for (i=0; i &lt; a.length; i++) { ...}</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">数组是特殊的对象类型，因此有很多情况下，需要判断变量是否为数组类型，使用IsArray方法：Array.isArray( a)。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">添加新元素到数组：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">a.push( newElement);</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>删除：<br>a.splice( i, 1);</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>查找：<br>if (a.indexOf(v) &gt; -1)&nbsp;&nbsp;...</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>循环：<br>var i=0;<br>for (i=0; i &lt; a.length; i++) {<br>&nbsp;&nbsp;console.log( a<em>);</em><br>}</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">如果数组较小，可使用foreach 循环：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">a.forEach( function (elem) {<br>&nbsp;&nbsp;console.log( elem);<br>})&nbsp;</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JS 也提供克隆数组的函数：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var clone = a.slice(0);&nbsp;</span></span></span><br><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Maps</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">map 提供key 到值得映射。JS map 是一串字符集，可包含空格：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var myTranslation = {&nbsp;<br>&nbsp; &nbsp; "my house": "mein Haus",&nbsp;<br>&nbsp; &nbsp; "my boat": "mein Boot",&nbsp;<br>&nbsp; &nbsp; "my horse": "mein Pferd"<br>}</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>增加：<br>myTranslation["my car"] = "mein Auto";</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>删除：<br>myTranslation["my car"] = "mein Auto";</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>查找：<br>if ("my bike" in myTranslation)&nbsp;&nbsp;...</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>循环：<br>var i=0, key="", keys=[];<br>keys = Object.keys( m);<br>for (i=0; i &lt; keys.length; i++) {<br><em>&nbsp;&nbsp;key = keys;</em><br>console.log( m[key]);<br>}</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>如果map 较小可使用foreach 语句：<br>Object.keys( m).forEach( function (key) {<br>&nbsp;&nbsp;console.log( m[key]);<br>})&nbsp;<br>复制map<br>var clone = JSON.parse( JSON.stringify( m))</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br>小结：JavaScript 支持4种基本的数据结构。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">1：array lists：如["one","two","three"]，special JS对象</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">2：records：特殊的JS 对象，如{firstName:"Tom", lastName:"Smith"}；</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">3：maps： 如{"one":1, "two":2, "three":3}</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">4：entity 表：如下表所示,是一种特殊的map，值是有固定ID的记录。</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><a href="http://images2015.cnblogs.com/blog/139239/201601/139239-20160119135124906-373867481.png" target="_blank"><img id="aimg_MP74g" class="zoom" src="http://images2015.cnblogs.com/blog/139239/201601/139239-20160119135125531-956491583.png" alt="" height="179" border="0"></a></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">record，map，entity 在实际应用中没有明显的区分，只是概念上的区分。对JS 引擎而言，都是对象。但是从概念上是有区分的。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">函数</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">如表1 所示，函数是特殊的JS 对象，有name 属性和length属性表示参数的个数，如下，判断v是否指向函数：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">if (typeof( v) === "function") {...}</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">函数定义：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var myFunction = function theNameOfMyFunction () {...}</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">theNameOfMyFunction 是可选的，如果省略函数名称，则称该函数为匿名函数。通常，函数是通过变量来调用的，如上面的代码，则表示</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">myFunction 会调用myFunction（）函数，而不是使用theNameOfMyFunction()调用。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">匿名函数表达式在其他编程语言中称为lambda 表达式。如下代码是匿名函数。可以与预定义的sort函数对比：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var list = [[1,2],[1,3],[1,1],[2,1]];&nbsp;<br>list.sort( function (x,y) {&nbsp;<br>&nbsp;&nbsp;return ((x[0] === y[0]) ? x[1]-y[1] : x[0]-y[0]);<br>});</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">函数声明：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">function theNameOfMyFunction () {...}<br>与代码<br>var theNameOfMyFunction = function theNameOfMyFunction () {...}</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">等价；</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">声明了函数theNameOfMyFunction ，并使用theNameOfMyFunction 变量来引用函数。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JS 提供函数内联，closure机制允许JS 函数调用函数之外的使用变量。函数可以创建closure&nbsp;来存储当前的环境。如下，不需要通过参数将外部变量的结果传给内部函数，它本身就是可用的。</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var sum = function (numbers) {<br>&nbsp;&nbsp;var result = 0;<br>&nbsp;&nbsp;numbers.forEach( function (n) {<br>&nbsp; &nbsp;&nbsp; &nbsp;result += n;<br>&nbsp;&nbsp;});<br>&nbsp;&nbsp;return result;<br>};<br>console.log( sum([1,2,3,4]));<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">当执行一个方法时，可以使用内置arguments 对象访问函数内的参数，arguments 对象与数组使用方法类似，有长度属性，也有索引，并且可以使用For语句来循环迭代。但是由于它并不是Array 实例，因此JS arrary的部分方法无法应用如foreach。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">arguments 对象的元素个数与函数参数个数相同，也可以定义方法的时候不指定参数个数，在调用时，可为函数赋多个参数，如：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var sum = function () {<br>&nbsp;&nbsp;var result = 0, i=0;<br>&nbsp;&nbsp;for (i=0; i &lt; arguments.length; i++) {<br>&nbsp; &nbsp; result = result + arguments;<br>&nbsp;&nbsp;}<br>&nbsp;&nbsp;return result;<br>};<br>console.log( sum(0,1,1,2,3,5,8));&nbsp;&nbsp;// 20<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">方法是在构造函数的原型上定义的，可以通过对象创建的构造器调用，如Array.prototype.forEach；Array表示构造器，调用类的实例作为上下文对象参考的，如下： 在foreach中numbers表示上下文对象：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var numbers = [1,2,3];&nbsp;&nbsp;// create an instance of Array<br>numbers.forEach( function (n) {<br>&nbsp;&nbsp;console.log( n);<br>});<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">无论原型方法是否被上下文对象调用，但是只要是参数为对象，可以使用JS函数的Call 方法来辅助调用对象。如下，我们可以使用foreach 循环方法：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var sum = function () {<br>&nbsp;&nbsp;var result = 0;<br>&nbsp;&nbsp;Array.prototype.forEach.call( arguments, function (n) {<br>&nbsp; &nbsp; result = result + n;<br>&nbsp;&nbsp;});<br>&nbsp;&nbsp;return result;<br>};<br><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Function.prototype.call方法和apply都是为了改变某个函数运行时的 context 即上下文而存在的。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">定义和使用类</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">类是面向对象中的基本概念，对象的实例化称为类。JS中定义类需要满足以下五个需求：1.指定类的名称，实例级别的属性和方法，类级别的属性和方法。2. 是可预测的实力，能够用于验证是否是某一对象的实例。3. 实例级别的属性用于检测对象的直接类型。4. 属性继承5.方法继承。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">除此之外还支持对哦集成和多分类。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">JS中对类没有统一的定义规范，可以使用不同代码模式来定义类，并应用于多种不同的框架。JS中最常用的定义类的方法如下：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">1. 构造函数规范，可通过prototype chain实现方法继承，并支持创建新的类实例。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">2. factory 对象，用于预定义Object.create 方法来创建新实例。该方法中基于构造函数的继承机制可以被其他机制代替。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">创建App都需要使用类，因此经常需要定义类之间的关系，所以必须保证，使用相同类</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Constructor-based classes</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">只有ES6引入了定义基于构造器的类。新语法支持定义一些简单的类继承，具体步骤如下：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Step 1.a 基类Person 具有两个属性，first Name 和Last Name，实例层的方法toString和静态方法checkLastName；</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">class Person {<br>&nbsp;&nbsp;constructor( first, last) {<br>&nbsp; &nbsp; this.firstName = first;<br>&nbsp; &nbsp; this.lastName = last;<br>&nbsp;&nbsp;}<br>&nbsp;&nbsp;toString() {<br>&nbsp; &nbsp; return this.firstName + " " +<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;this.lastName;<br>&nbsp;&nbsp;}<br>&nbsp;&nbsp;static checkLastName( ln) {<br>&nbsp; &nbsp; if (typeof(ln)!=="string" ||&nbsp;<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;ln.trim()==="") {<br>&nbsp; &nbsp;&nbsp; &nbsp;console.log("Error: " +<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; "invalid last name!");<br>&nbsp; &nbsp; }<br>&nbsp;&nbsp;}<br>}<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Step 1.b 类层次的属性定义：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Person.instances = {};</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">在第二步中，会定义一个带有其他属性和方法的子类，也有可能重写父类的相关方法：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">class Student extends Person {&nbsp;&nbsp;constructor( first, last, studNo) {<br>&nbsp; &nbsp; super.constructor( first, last);<br>&nbsp; &nbsp; this.studNo = studNo;&nbsp;<br>&nbsp;&nbsp;}<br>&nbsp;&nbsp;// method overrides superclass method<br>&nbsp;&nbsp;toString() {<br>&nbsp; &nbsp; return super.toString() + "(" +<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;this.studNo +")";<br>&nbsp;&nbsp;}<br>}<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">ES5中，可以定义继承基于构造器类的子类。如下：</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Step1.a 首先定义构造函数，能够隐式的定义类的属性并赋值；</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">function Person( first, last) {<br>&nbsp;&nbsp;this.firstName = first;&nbsp;<br>&nbsp;&nbsp;this.lastName = last;&nbsp;<br>}<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">注意，上述代码中的this 指的是新生成的对象，当构造函数被调用时，该对象就已经生成了。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Step1.b 定义实例层的方法：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Person.prototype.toString = function () {<br>&nbsp;&nbsp;return this.firstName + " " + this.lastName;<br>}</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Step 1.c 定义静态方法：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Person.checkLastName = function (ln) {<br>&nbsp;&nbsp;if (typeof(ln)!=="string" || ln.trim()==="") {<br>&nbsp; &nbsp; console.log("Error: invalid last name!");<br>&nbsp;&nbsp;}<br>}</span></span></span><br><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;"><br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Step 1.d 定义类层次的静态属性</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Step 2.a 定义子类：<br>&nbsp; &nbsp;1:&nbsp;&nbsp;function Student( first, last, studNo) {<br>&nbsp; &nbsp;2:&nbsp; &nbsp; // invoke superclass constructor<br>&nbsp; &nbsp;3:&nbsp; &nbsp; Person.call( this, first, last);<br>&nbsp; &nbsp;4:&nbsp; &nbsp; // define and assign additional properties<br>&nbsp; &nbsp;5:&nbsp; &nbsp; this.studNo = studNo;&nbsp;&nbsp;<br>&nbsp; &nbsp;6:&nbsp;&nbsp;}<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">通过调用超类的构造函数Person.call( this, ...)，来创建新对象。其中This指的是Student，Property Slots 在超类的构造函数中已经创建（(firstName 和lastName） 以及其他子类相关的属性。在这种情况下可使用Property Inheritance 机制保证所有的属性已经被定义且被创建。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Step2b,通过构造函数的prototype 属性安装method inheritance 。如下，分配了一个新对象创建子类型构造函数的Prototype 属性，并做出适当的调整：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">// Student inherits from PersonStudent.prototype = Object.create(&nbsp; &nbsp;&nbsp;&nbsp;Person.prototype);// adjust the subtype's constructor propertyStudent.prototype.constructor = Student;</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Step2c， 重新定义子类方法重写超类方法：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">// Student inherits from Person<br>Student.prototype = Object.create(&nbsp;<br>&nbsp; &nbsp; Person.prototype);<br>// adjust the subtype's constructor property<br>Student.prototype.constructor = Student;<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">基于构造器类的实例化是通过应用new 操作符来创建的，并提供合适的构造参数：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">Student.prototype.toString = function () {<br>&nbsp;&nbsp;return Person.prototype.toString.call( this) +<br>&nbsp; &nbsp;&nbsp; &nbsp;"(" + this.studNo + ")";<br>};<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">方法toString 通过pers1. 来调用：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">alert("The full name of the person are: " +&nbsp; &nbsp;&nbsp; &nbsp;pers1.toString());<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">在JS中，prototype 是具有method slots 的对象，可以通过JS方法或属性槽继承的。</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">&nbsp;</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">基于Factory 的类</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">在该方法中定义了JS 对象Person，含有特殊的Create 方法来调用预定义的Object.Create方法，创建Person类型的对象；</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var Person = {<br>&nbsp;&nbsp;name: "Person",<br>&nbsp;&nbsp;properties: {<br>&nbsp; &nbsp; firstName: {range:"NonEmptyString", label:"First name",&nbsp;<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;writable: true, enumerable: true},<br>&nbsp; &nbsp; lastName: {range:"NonEmptyString", label:"Last name",&nbsp;<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;writable: true, enumerable: true}<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;methods: {<br>&nbsp; &nbsp; getFullName: function () {<br>&nbsp; &nbsp;&nbsp; &nbsp;return this.firstName +" "+ this.lastName;&nbsp;<br>&nbsp; &nbsp; }<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;create: function (slots) {<br>&nbsp; &nbsp; // create object<br>&nbsp; &nbsp; var obj = Object.create( this.methods, this.properties);<br>&nbsp; &nbsp; // add special property for *direct type* of object<br>&nbsp; &nbsp; Object.defineProperty( obj, "type",&nbsp;<br>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;{value: this, writable: false, enumerable: true});<br>&nbsp; &nbsp; // initialize object<br>&nbsp; &nbsp; Object.keys( slots).forEach( function (prop) {<br>&nbsp; &nbsp;&nbsp; &nbsp;if (prop in this.properties) obj[prop] = slots[prop];<br>&nbsp; &nbsp; })<br>&nbsp; &nbsp; return obj;<br>&nbsp;&nbsp;}<br>};<br></span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">注意JS对象Person实际表示的是factory-based 类。factory-based类的实例化是通过调用它自己的Create方法实现的：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">var pers1 = Person.create( {firstName:"Tom", lastName:"Smith"});</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">getFullName 方法是通过pers1. 调用的，如下：</span></span></span></p>
-<p>
-<span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">alert("The full name of the person are: " + pers1.getFullName());</span></span></span></p>
-<p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">每个属性的声明都是使用Object.Create 声明的，其中包含三个参数及值，'descriptors'writable: true and enumerable: true；如上面第五行的。</span></span></span></p></div>]]></content>
+        <updated>2018-08-22T08:06:22.000Z</updated>
+        <content type="html"><![CDATA[<!-- more -->
+<pre><code>         &lt;a href=&quot;javascript:void(0)&quot; class=&quot;select_the_file&quot;&gt;选择文件
+                        &lt;input type=&quot;file&quot; class=&quot;iptFile&quot; onchange=&quot;upFile(this)&quot;&gt; //把事件写在这里
+                    &lt;/a&gt;  //用 a链接包住的原因是为了美化 input file
+                    &lt;span class=&quot;no_file&quot;&gt;未选择文件&lt;/span&gt;
+                    &lt;ul class=&quot;upload-enclosure-ul&quot;&gt; // 根据上传的文件生成 每个 li
+                          &lt;!--   &lt;li&gt;
+                                 &lt;span&gt;asdasdgfbhfdfdfsd.pdf&lt;/span&gt;  //文件名
+                                 &lt;span class=&quot;size&quot;&gt;(267kb)&lt;/span&gt;   //大小
+                                 &lt;span class=&quot;remove&quot;&gt;删除&lt;/span&gt;  //删除对应 input file 标签
+                             &lt;/li&gt;
+                             &lt;li&gt;
+                                 &lt;span&gt;dfsgdfdfgdfg.doc&lt;/span&gt;
+                                 &lt;span class=&quot;size&quot;&gt;(267kb)&lt;/span&gt;
+                                 &lt;span class=&quot;remove&quot;&gt;删除&lt;/span&gt;
+                             &lt;/li&gt;--&gt;
+                    &lt;/ul&gt;
+</code></pre>
+<p><strong>对应的界面</strong></p>
+<img src="https://img-blog.csdn.net/20180822154658183?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTMzMTYwOTM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述" title="">
+<p><strong>对用的事件方法</strong></p>
+<pre><code>function upFile(a) {
+
+    var flag = $(a);
+    if (!flag[0].files || !flag[0].files[0]) {
+        return;
+    }
+    var name = flag[0].files[0].name;
+    var suffix =suffixName(name)[0].toLowerCase(); //后缀名
+    var size = flag[0].files[0].size;  //文件大小
+    var fr = new FileReader(); // 这个FileReader应该对应于每一个读取的文件都需要重新new一个
+    var files = flag[0].files[0]; // files可以获取当前文件输入框中选择的所有文件，返回列表
+    fr.readAsDataURL(files); // 读取的内容是加密以后的本地文件路径
+    fr.onload = function (e) { // 数据读取完成时触发onload对应的响应函数
+        console.log(123);
+        var timeStamp = Math.floor(Math.random() * 10000); //自定义一个随机数
+        $(flag).parent().addClass('li' + timeStamp).hide(); //每次隐藏之前添加一个Class
+        var html = '&lt;a href=&quot;javascript:void(0)&quot; class=&quot;select_the_file&quot;&gt;选择文件\n' +
+            '                        &lt;input type=&quot;file&quot; class=&quot;iptFile&quot; onchange=&quot;upFile(this)&quot;&gt;\n' +
+            '                    &lt;/a&gt;';
+        $('.no_file').before(html);//每次生成一个input file  插入到节点
+
+        var li;
+        if (suffix == '.jpg' || suffix == '.jpeg' || suffix == '.png' || suffix == '.bmp' || suffix == '.gif') { //图片格式
+            li =   '&lt;li&gt; &lt;span&gt;&lt;i class=&quot;fa fa-file-image-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        } else if (suffix == '.doc' || suffix == '.docx') {//word格式
+            li = '&lt;li&gt;&lt;span&gt;&lt;i class=&quot;fa fa-file-word-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        } else if (suffix == '.xls' || suffix == '.xlsx') {//excel格式
+            li = '&lt;li&gt;&lt;span&gt;&lt;i class=&quot;fa fa-file-excel-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        } else if (suffix == '.ppt' || suffix == '.pptx') {//PPT格式
+            li = '&lt;li&gt;&lt;span&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        }else if (suffix == '.ppt' || suffix == '.pdf') {//PDF格式
+            li = '&lt;li&gt;&lt;span&gt;&lt;i class=&quot;fa fa-file-pdf-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        }else if (suffix == '.zip' || suffix == '.rar'|| suffix == '.7z') {//压缩格式
+            li = '&lt;li&gt;&lt;span&gt;&lt;i class=&quot;fa fa-file-excel-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        }else if (suffix == '.wav' || suffix == '.mp3'|| suffix == '.aac'|| suffix == '.wma') {//声音格式
+            li = '&lt;li&gt;&lt;span&gt;&lt;i class=&quot;fa fa-file-video-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        }else if (suffix == '.avi' || suffix == '.mp4'|| suffix == '.mov'|| suffix == '.mkv'||suffix == '.rm' || suffix == '.rmvb'|| suffix == '.mpg'|| suffix == '.mpeg') {//视频格式
+            li = '&lt;li&gt;&lt;span&gt;&lt;i class=&quot;fa fa-file-video-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        }else if (suffix == '.txt' ) {//文本格式
+            li = '&lt;li&gt;&lt;span&gt;&lt;i class=&quot;fa fa-file-text-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        }else {
+            li = '&lt;li&gt;&lt;span&gt;&lt;i class=&quot;fa fa-file-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;';
+        }
+
+        if ($('.upload-enclosure-ul li').length &lt; 10) {  //判断不能超过10个  可自行写入多少
+            $('.upload-enclosure-ul').append(li);
+        } else {
+            pageCommon.layerMsg(&quot;最多能选择10个附件&quot;, 2, true)
+        }
+
+        if ($('.upload-enclosure-ul li').length != 0) {  // 显示隐藏 未选择文件字眼
+            $('.no_file').hide();
+        } else {
+            $('.no_file').show();
+        }
+    };
+
+
+}
+
+
+
+function deleteLi(a) {
+    $(a).parent().remove();
+    var attr = $(a).attr('data-class');
+    var newAttr = '.' + attr;
+    $('.inspection_item_con_file  ' + newAttr + '').remove(); //删除对应 input file
+
+    if ($('.upload-enclosure-ul li').length != 0) { // 显示隐藏 未选择文件字眼
+        $('.no_file').hide();
+    } else {
+        $('.no_file').show();
+    }
+}
+
+
+
+function suffixName(file_name){
+    var result = /\.[^\.]+/.exec(file_name);
+    return result;
+}
+</code></pre>
+<p><strong>思路：每次选择完文件 fr.onload 方法 里面随机生成一个数 然后 给当前的 input file 设 class 为 随机生成的数后隐藏元素</strong></p>
+<pre><code> var timeStamp = Math.floor(Math.random() * 10000); //自定义一个随机数
+ $(flag).parent().addClass('li' + timeStamp).hide(); //每次隐藏当前input file之前添加一个Class
+</code></pre>
+<p>重点是 每个ul 的 li 里面 也自定义一个属性 值为 随机生成的数 相对应好 input file 我这里的自定义属性为
+data-class 为了删除的时候好拿值 生成li 就要 添加到 ul 标签里面</p>
+<pre><code>&lt;li&gt; &lt;span&gt;&lt;i class=&quot;fa fa-file-image-o&quot;&gt;&amp;nbsp;&lt;/i&gt;' + name + '&lt;/span&gt; &lt;span class=&quot;size&quot;&gt;(' + parseInt(files.size / 1000) + 'kb)&lt;/span&gt; &lt;span class=&quot;remove&quot; data-class=&quot;li' + timeStamp + '&quot;  onclick=&quot;deleteLi(this)&quot;&gt;删除&lt;/span&gt; &lt;/li&gt;
+</code></pre>
+<p>因为当前的 input file 隐藏了 就要生成回去页面</p>
+<pre><code>var html = '&lt;a href=&quot;javascript:void(0)&quot; class=&quot;select_the_file&quot;&gt;选择文件\n' +
+            '                        &lt;input type=&quot;file&quot; class=&quot;iptFile&quot; onchange=&quot;upFile(this)&quot;&gt;\n' +
+            '                    &lt;/a&gt;';
+        $('.no_file').before(html);//每次生成一个input file  插入到节点
+</code></pre>
+<p>上传了两个文件的结果</p>
+<img src="https://img-blog.csdn.net/20180822160205583?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTMzMTYwOTM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述" title="">
+<p>下面是删除 因为每个 li 里面 的 <strong>删除</strong> 写了个 deleteLi事件</p>
+<pre><code>function deleteLi(a) {
+
+    var attr = $(a).attr('data-class'); //获取到 定义的自定义属性值   值对应隐藏的input file  的class
+    var newAttr = '.' + attr;
+    $('.inspection_item_con_file  ' + newAttr + '').remove(); //删除对应 input file
+
+    if ($('.upload-enclosure-ul li').length != 0) {  // 显示隐藏 未选择文件字眼
+        $('.no_file').hide();
+    } else {
+        $('.no_file').show();
+    }
+    $(a).parent().remove();//自己删除自己
+}
+</code></pre>
+]]></content>
     </entry>
 </feed>
