@@ -2,13 +2,64 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://itliuwk.github.io</id>
     <title>刘伟坤</title>
-    <updated>2019-05-30T07:52:53.010Z</updated>
+    <updated>2019-05-30T07:58:50.716Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://itliuwk.github.io"/>
     <link rel="self" href="https://itliuwk.github.io/atom.xml"/>
     <logo>https://itliuwk.github.io/images/avatar.png</logo>
     <icon>https://itliuwk.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 刘伟坤</rights>
+    <entry>
+        <title type="html"><![CDATA[centOS6.8安装nginx]]></title>
+        <id>https://itliuwk.github.io/post/centos68-an-zhuang-nginx</id>
+        <link href="https://itliuwk.github.io/post/centos68-an-zhuang-nginx">
+        </link>
+        <updated>2019-05-30T07:53:22.000Z</updated>
+        <summary type="html"><![CDATA[<p>1.安装nginx所需环境：
+yum install gcc
+yum install pcre-devel
+yum install zlib zlib-devel
+yum install openssl openssl-devel
+或者一键安装：yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>1.安装nginx所需环境：
+yum install gcc
+yum install pcre-devel
+yum install zlib zlib-devel
+yum install openssl openssl-devel
+或者一键安装：yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel</p>
+<!-- more --> 
+<p>2.下载nginx压缩包：
+wget <a href="http://nginx.org/download/nginx-1.15.7.tar.gz" > http://nginx.org/download/nginx-1.15.7.tar.gz</a></p>
+<p>下载在当前目录</p>
+<p>3.解压缩：tar -zxvf nginx-1.15.7.tar.gz</p>
+<p>4.进入nginx-1.10.2目录：cd nginx-1.15.7</p>
+<ol start="5">
+<li>
+<p>执行 ./configure</p>
+</li>
+<li>
+<p>执行make</p>
+</li>
+<li>
+<p>执行make install</p>
+</li>
+<li>
+<p>查找nginx安装目录：whereis nginx</p>
+</li>
+</ol>
+<p>9.进入niginx安装目录,默认在 cd /usr/local/nginx/sbin</p>
+<ol start="10">
+<li>执行 ./nginx</li>
+</ol>
+<p>11.打开浏览器，输入ip地址，看到welcome to nginx！即安装成功</p>
+<p>如不行 在 sbin目录下执行下面步骤</p>
+<p>fuser -k 80/tcp 强制停止80端口</p>
+<p>./nginx -s reload 重载 nginx</p>
+<p>./nginx -t 启动</p>
+<p>./nginx 启动</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[前端 nginx 跨域访问配置]]></title>
         <id>https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi</id>
@@ -592,6 +643,208 @@ export default {
 <img src="https://images2015.cnblogs.com/blog/625378/201703/625378-20170301111018532-950176454.png" alt="在这里插入图片描述">]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[layui 表格的下拉选择]]></title>
+        <id>https://itliuwk.github.io/post/layui-biao-ge-de-xia-la-xuan-ze</id>
+        <link href="https://itliuwk.github.io/post/layui-biao-ge-de-xia-la-xuan-ze">
+        </link>
+        <updated>2018-09-13T06:40:33.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;layui 模仿下拉框 &lt;/title&gt;
+    &lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../js/plugins/layui/css/layui.css&quot;/&gt;
+    &lt;style&gt;
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: none;
+        }
+
+        html, body {
+            position: relative;
+            background: #EDF0F5;
+            color: #505458;
+            font-family: &quot;微软雅黑&quot;;
+            font-size: 14px;
+        }
+
+        .layui-table thead tr {
+            background-color: #fff;
+        }
+
+        .laytable-cell-1-sel {
+            overflow: inherit;
+        }
+
+        .layui-table-cell span {
+            font-weight: bold;
+        }
+
+        .layui-table-body tbody tr {
+            height: 50px;
+        }
+
+        .selectDemo {
+            height: 30px;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+        }
+
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;table class=&quot;layui-hide&quot; id=&quot;test&quot;&gt;&lt;/table&gt;
+
+
+&lt;script type=&quot;text/html&quot; id=&quot;select&quot;&gt;
+    &lt;select lay-filter=&quot;selDome&quot; class=&quot;selectDemo&quot; data-id=&quot;{{d.id}}&quot; lay-ignore onchange=&quot;selectDemo(this)&quot;&gt;
+        {{# layui.each(d.sel, function(index, item){ }}
+            &lt;option value=&quot;{{item}}&quot;&gt;{{item}}&lt;/option&gt;
+        {{# }); }}
+    &lt;/select&gt;
+&lt;/script&gt;
+&lt;script src=&quot;../assets/scripts/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;../js/plugins/layui/layui.all.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+
+&lt;script&gt;
+
+
+    var table = layui.table
+        , form = layui.form;
+
+    table.render({
+        elem: '#test'
+        , url: 'index.json'
+        , sort: false
+        , unresize: true
+        , skin: 'line'
+        , cols: [[
+            {type: 'numbers'}
+            , {field: 'id', title: 'ID', width: 100}
+            , {field: 'username', title: '用户名', templet: '#usernameTpl'}
+            , {field: 'city', title: '城市'}
+            , {field: 'wealth', title: '财富', minWidth: 120}
+            , {field: 'sel', title: '下拉选择', width: 110, templet: '#select'}
+        ]]
+    });
+
+    function selectDemo(a) {
+        console.log($(a).attr('data-id'));
+        console.log($(a).val());
+    }
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>lindex.json</strong></p>
+<pre><code>{
+  &quot;code&quot;: 0,
+  &quot;count&quot;: 1000,
+  &quot;data&quot;: [
+    {
+      &quot;city&quot;: &quot;城市-0&quot;,
+      &quot;classify&quot;: &quot;作家&quot;,
+      &quot;experience&quot;: 255,
+      &quot;id&quot;: 10000,
+      &quot;logins&quot;: 24,
+      &quot;score&quot;: 57,
+      &quot;sex&quot;: &quot;女&quot;,
+      &quot;sign&quot;: &quot;签名-0&quot;,
+      &quot;username&quot;: &quot;user-0&quot;,
+      &quot;wealth&quot;: 82830700,
+      &quot;sel&quot;:[&quot;测试1&quot;,&quot;测试2&quot;,&quot;测试3&quot;,&quot;测试4&quot;]
+    },
+    {
+      &quot;city&quot;: &quot;城市-1&quot;,
+      &quot;classify&quot;: &quot;词人&quot;,
+      &quot;experience&quot;: 884,
+      &quot;id&quot;: 10001,
+      &quot;logins&quot;: 58,
+      &quot;score&quot;: 27,
+      &quot;sex&quot;: &quot;男&quot;,
+      &quot;sign&quot;: &quot;签名-1&quot;,
+      &quot;username&quot;: &quot;user-1&quot;,
+      &quot;wealth&quot;: 64928690,
+      &quot;sel&quot;:[&quot;测试1&quot;,&quot;测试2&quot;,&quot;测试3&quot;]
+    },
+    {
+      &quot;city&quot;: &quot;城市-2&quot;,
+      &quot;classify&quot;: &quot;码农&quot;,
+      &quot;experience&quot;: 884,
+      &quot;id&quot;: 10003,
+      &quot;logins&quot;: 58,
+      &quot;score&quot;: 27,
+      &quot;sex&quot;: &quot;女&quot;,
+      &quot;sign&quot;: &quot;签名-1&quot;,
+      &quot;username&quot;: &quot;user-1&quot;,
+      &quot;wealth&quot;: 64928690,
+      &quot;sel&quot;:[&quot;测试1&quot;,&quot;测试2&quot;,&quot;测试3&quot;]
+    },
+    {
+      &quot;city&quot;: &quot;城市-3&quot;,
+      &quot;classify&quot;: &quot;码农&quot;,
+      &quot;experience&quot;: 884,
+      &quot;id&quot;: 10004,
+      &quot;logins&quot;: 58,
+      &quot;score&quot;: 27,
+      &quot;sex&quot;: &quot;女&quot;,
+      &quot;sign&quot;: &quot;签名-1&quot;,
+      &quot;username&quot;: &quot;user-1&quot;,
+      &quot;wealth&quot;: 64928690,
+      &quot;sel&quot;:[&quot;测试1&quot;,&quot;测试2&quot;,&quot;测试3&quot;]
+    }
+  ],
+  &quot;msg&quot;: &quot;&quot;
+}
+</code></pre>
+<p><strong>页面显示</strong></p>
+<img src="https://img-blog.csdn.net/20180913144420870?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTMzMTYwOTM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述" title="">]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[浅谈js中子页面父页面方法 变量相互调用]]></title>
+        <id>https://itliuwk.github.io/post/qian-tan-js-zhong-zi-ye-mian-fu-ye-mian-fang-fa-bian-liang-xiang-hu-diao-yong</id>
+        <link href="https://itliuwk.github.io/post/qian-tan-js-zhong-zi-ye-mian-fu-ye-mian-fang-fa-bian-liang-xiang-hu-diao-yong">
+        </link>
+        <updated>2018-08-23T08:07:32.000Z</updated>
+        <summary type="html"><![CDATA[<p><strong>(1）子页面调用父页面的方法或者变量：</strong></p>
+<p>window.parent.方法()或者变量名
+window.parent相当于定位到父页面 之后的操作和在父页面中写代码一样写</p>
+]]></summary>
+        <content type="html"><![CDATA[<p><strong>(1）子页面调用父页面的方法或者变量：</strong></p>
+<p>window.parent.方法()或者变量名
+window.parent相当于定位到父页面 之后的操作和在父页面中写代码一样写</p>
+<!-- more -->
+<pre><code>window.parent.aa();//调取aa函数
+window.parent.bb;//调取bb变量
+
+例如：想在子页面中得到id为aaa的文本框的值
+
+window.parent.$(&quot;#aaa&quot;).val();//这种写法的前提是引用了jquery 
+
+window.parent.getElementById(&quot;aaa&quot;).value; //js的写法
+</code></pre>
+<p>**（2）父页面调取子页面 **</p>
+<p>主要是通过contentWindow定位到子页面</p>
+<pre><code>document.getElementById(&quot;childframe&quot;).contentWindow.childtest();
+//调取子页面中的childtest方法 js的写法
+
+var childWindow = $(&quot;#addFrame&quot;)[0].contentWindow;//获取子窗体中的对象
+childWindow.formSubmit();//调取子页面的formSubmit方法 jquery的写法
+//注释：其中 childframe和addFrame 都时iframe的id
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[最全的 JavaScript 知识总结]]></title>
         <id>https://itliuwk.github.io/post/zui-quan-de-javascript-zhi-shi-zong-jie</id>
         <link href="https://itliuwk.github.io/post/zui-quan-de-javascript-zhi-shi-zong-jie">
@@ -803,1008 +1056,5 @@ export default {
 <p>
 <span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">alert("The full name of the person are: " + pers1.getFullName());</span></span></span></p>
 <p><span style="font-family: 微软雅黑;"><span style="font-size: medium;"><span style="color: #000000;">每个属性的声明都是使用Object.Create 声明的，其中包含三个参数及值，'descriptors'writable: true and enumerable: true；如上面第五行的。</span></span></span></p></div>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[送给前端的你，推荐前端汇总文章]]></title>
-        <id>https://itliuwk.github.io/post/song-gei-qian-duan-de-ni-tui-jian-qian-duan-hui-zong-wen-zhang</id>
-        <link href="https://itliuwk.github.io/post/song-gei-qian-duan-de-ni-tui-jian-qian-duan-hui-zong-wen-zhang">
-        </link>
-        <updated>2018-06-13T12:40:24.000Z</updated>
-        <summary type="html"><![CDATA[<p>这篇文章起初是想做：有哪些适合新手练手的前端项目？也欢迎各位朋友在学习过程中碰到不错的练习项目可以积极的推荐。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>这篇文章起初是想做：有哪些适合新手练手的前端项目？也欢迎各位朋友在学习过程中碰到不错的练习项目可以积极的推荐。</p>
-<!--more-->
-<p></p>
-<p>学习编程专栏连载的练手项目篇，如有兴趣可以访问前三篇：</p>
-<p><a class="internal" target="_blank" href="https://zhuanlan.zhihu.com/p/22062736?refer=passer">有哪些适合新手练手的Java项目？ - 学习编程 - 知乎专栏</a></p>
-<p><a class="internal" target="_blank" href="https://zhuanlan.zhihu.com/p/22112669?refer=passer">有哪些适合新手练手的Java Web项目？ - 学习编程 - 知乎专栏</a></p>
-<p><a class="internal" target="_blank" href="https://zhuanlan.zhihu.com/p/22164270?refer=passer">有哪些适合新手练手的Python项目？ - 学习编程 - 知乎专栏</a></p>
-<p>本篇文章推荐分享五篇关于前端资源汇总的帖子，希望可以帮助到学习前端的你。同时你可以去看一看前端技能树喔：<a class=" wrap external" href="http://html5ify.com/fks/fks_chart/" rel="nofollow noreferrer" target="_blank">前端技能</a><iframe id="iframe_0.6092935394350165" src="data:text/html;charset=utf8,%3Cstyle%3Ebody%7Bmargin:0;padding:0%7D%3C/style%3E%3Cimg%20id=%22img%22%20src=%22https://pic3.zhimg.com/5ec466a4f037413355806dab812bcc5a_b.jpg?_=5832279%22%20style=%22border:none;max-width:848px%22%3E%3Cscript%3Ewindow.onload%20=%20function%20()%20%7Bvar%20img%20=%20document.getElementById('img');%20window.parent.postMessage(%7BiframeId:'iframe_0.6092935394350165',width:img.width,height:img.height%7D,%20'http://www.cnblogs.com');%7D%3C/script%3E" style="border: none; width: 600px; height: 60px;" frameborder="0" scrolling="no"></iframe></p>
-<p>第一篇：<a class=" wrap external" href="http://collect.w3ctrain.com/" rel="nofollow noreferrer" target="_blank">前端收藏夹</a> ，以及他们的github地址：<a class=" wrap external" href="https://github.com/w3ctrain/w3ctrain.github.io" rel="nofollow noreferrer" target="_blank">GitHub - w3ctrain/w3ctrain.github.io: w3ctrian前端收藏夹</a></p>
-<p>以下是目录，更多信息请访问他们的主页：</p>
-<h3>前端工具</h3>
-<p>自动化：<a class=" wrap external" href="http://gulpjs.com/" rel="nofollow noreferrer" target="_blank"> Gulp</a><a class=" wrap external" href="http://gruntjs.com/" rel="nofollow noreferrer" target="_blank">  、  Grunt</a><a class=" wrap external" href="http://fis.baidu.com/" rel="nofollow noreferrer" target="_blank"> 、百度Fis</a><a class=" wrap external" href="http://ant.apache.org/" rel="nofollow noreferrer" target="_blank"> 、Ant</a><a class=" wrap external" href="http://yeoman.io/" rel="nofollow noreferrer" target="_blank">、Yeoman</a><a class=" wrap external" href="https://incident57.com/codekit/" rel="nofollow noreferrer" target="_blank">、Codekit</a><a class=" wrap external" href="https://github.com/oklai/koala" rel="nofollow noreferrer" target="_blank">、Koala</a><a class=" wrap external" href="https://webpack.github.io/" rel="nofollow noreferrer" target="_blank">、Webpack</a></p>
-<p>预编译：<a class=" wrap external" href="https://github.com/slim-template/slim" rel="nofollow noreferrer" target="_blank"> Slim</a>、<a class=" wrap external" href="https://github.com/haml/haml" rel="nofollow noreferrer" target="_blank">Haml、</a><a class=" wrap external" href="https://github.com/jashkenas/coffeescript" rel="nofollow noreferrer" target="_blank">Coffeescript、</a><a class=" wrap external" href="http://sass-lang.com/" rel="nofollow noreferrer" target="_blank">Sass、</a><a class=" wrap external" href="https://babeljs.io/" rel="nofollow noreferrer" target="_blank">BabelJs、</a><a class=" wrap external" href="https://github.com/jadejs/jade" rel="nofollow noreferrer" target="_blank">Jade</a>、<a class=" wrap external" href="http://lesscss.org/" rel="nofollow noreferrer" target="_blank">Less</a>、<a class=" wrap external" href="https://github.com/stylus/stylus" rel="nofollow noreferrer" target="_blank">Stylus</a>、<a class=" wrap external" href="http://pleeease.io/" rel="nofollow noreferrer" target="_blank">Pleeease、</a><a class=" wrap external" href="https://github.com/postcss/postcss" rel="nofollow noreferrer" target="_blank">PostCSS</a>、</p>
-<p>查找工具：<a class=" wrap external" href="http://csstriggers.com/" rel="nofollow noreferrer" target="_blank">CssTriggers</a><a class=" wrap external" href="http://screensiz.es/phone" rel="nofollow noreferrer" target="_blank">、screensiz.es</a><a class=" wrap external" href="http://www.umindex.com/devices/android_resolutions" rel="nofollow noreferrer" target="_blank">、友盟指数</a><a class=" wrap external" href="http://www.javascripting.com/" rel="nofollow noreferrer" target="_blank">、javascripting</a><a class=" wrap external" href="http://builtwith.com/" rel="nofollow noreferrer" target="_blank">、builtwith</a><a class=" wrap external" href="http://thetoolbox.cc/" rel="nofollow noreferrer" target="_blank">、thetoolbox</a><a class=" wrap external" href="https://stylesheets.co/" rel="nofollow noreferrer" target="_blank">、stylesheets</a></p>
-<p>版本控制：<a class=" wrap external" href="https://github.com" rel="nofollow noreferrer" target="_blank">Github</a><a class=" wrap external" href="https://gitcafe.com/" rel="nofollow noreferrer" target="_blank">、GitCafe</a><a class=" wrap external" href="https://about.gitlab.com/" rel="nofollow noreferrer" target="_blank">、GitLab</a><a class=" wrap external" href="https://bitbucket.org/" rel="nofollow noreferrer" target="_blank">、Bitbucket</a><a class=" wrap external" href="https://www.sourcetreeapp.com/" rel="nofollow noreferrer" target="_blank">、Sourcetree</a><a class=" wrap external" href="https://www.zennaware.com/cornerstone/index.php" rel="nofollow noreferrer" target="_blank">、Cornerstone</a><a class=" wrap external" href="http://book.douban.com/subject/4813786/" rel="nofollow noreferrer" target="_blank">、版本控制之道</a><a class=" wrap external" href="http://iissnan.com/progit/" rel="nofollow noreferrer" target="_blank">、ProGit</a><a class=" wrap external" href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" rel="nofollow noreferrer" target="_blank">、廖雪峰的git教程</a><a class=" wrap external" href="http://tortoisesvn.net/index.zh.html" rel="nofollow noreferrer" target="_blank">、svn教程</a></p>
-<p>编辑器：<a class=" wrap external" href="http://www.sublimetext.com/" rel="nofollow noreferrer" target="_blank">Sublime Text</a><a class=" wrap external" href="https://atom.io/" rel="nofollow noreferrer" target="_blank">、Atom</a><a class=" wrap external" href="http://www.dcloud.io/index.html" rel="nofollow noreferrer" target="_blank">、HBuilder</a><a class=" wrap external" href="https://www.jetbrains.com/webstorm/" rel="nofollow noreferrer" target="_blank">、WebStorm</a><a class=" wrap external" href="http://macdown.uranusjr.com/" rel="nofollow noreferrer" target="_blank">、MacDown</a><a class=" wrap external" href="http://www.ultraedit.com/" rel="nofollow noreferrer" target="_blank">、UltraEdit</a><a class=" wrap external" href="https://github.com/ajaxorg/ace" rel="nofollow noreferrer" target="_blank">、ace</a><a class=" wrap external" href="http://brackets.io/" rel="nofollow noreferrer" target="_blank">、Brackets</a><a class=" wrap external" href="http://www.lighttable.com/" rel="nofollow noreferrer" target="_blank">、LightTable</a><a class=" wrap external" href="https://code.visualstudio.com/" rel="nofollow noreferrer" target="_blank">、Visual Studio Code</a></p>
-<p>在线编辑：<a class=" wrap external" href="http://jsfiddle.net/" rel="nofollow noreferrer" target="_blank">Jsfiddle</a><a class=" wrap external" href="http://codepen.io/" rel="nofollow noreferrer" target="_blank">、Codepen</a><a class=" wrap external" href="http://jsbin.com" rel="nofollow noreferrer" target="_blank">、Jsbin</a><a class=" wrap external" href="http://runjs.cn/" rel="nofollow noreferrer" target="_blank">、Runjs</a><a class=" wrap external" href="http://sassmeister.com/" rel="nofollow noreferrer" target="_blank">、sassmeister</a></p>
-<p>调试/测试：<a class=" wrap external" href="http://getfirebug.com/" rel="nofollow noreferrer" target="_blank">Firebug</a><a class=" wrap external" href="http://developer.yahoo.com/yslow/" rel="nofollow noreferrer" target="_blank">、YSlow</a><a class=" wrap external" href="http://www.microsoft.com/en-us/download/details.aspx%3Fid%3D18359" rel="nofollow noreferrer" target="_blank">、IEDeveloperToolbar</a><a class=" wrap external" href="http://www.fiddler2.com/fiddler2/" rel="nofollow noreferrer" target="_blank">、Fiddler</a><a class=" wrap external" href="https://developer.chrome.com/devtools" rel="nofollow noreferrer" target="_blank">、ChromeDevTools</a><a class=" wrap external" href="http://www.jslint.com/" rel="nofollow noreferrer" target="_blank">、JSLint</a><a class=" wrap external" href="http://www.jshint.com/" rel="nofollow noreferrer" target="_blank">、JSHint</a><a class=" wrap external" href="http://csslint.net/" rel="nofollow noreferrer" target="_blank">、CSSLint</a><a class=" wrap external" href="https://validator.whatwg.org/" rel="nofollow noreferrer" target="_blank">、HTML Validators</a><a class=" wrap external" href="http://unitjs.com/" rel="nofollow noreferrer" target="_blank">、UnitJS</a><a class=" wrap external" href="http://jasmine.github.io/" rel="nofollow noreferrer" target="_blank">、Jasmine</a><a class=" wrap external" href="http://www.browserstack.com/" rel="nofollow noreferrer" target="_blank">、BrowserStack</a><a class=" wrap external" href="https://github.com/airportyh/testem" rel="nofollow noreferrer" target="_blank">、Testem</a><a class=" wrap external" href="https://github.com/dalekjs" rel="nofollow noreferrer" target="_blank">、Dalekjs</a><a class=" wrap external" href="https://github.com/beatfactor/nightwatch" rel="nofollow noreferrer" target="_blank">、NightWatch</a><a class=" wrap external" href="https://github.com/thingsinjars/Hardy" rel="nofollow noreferrer" target="_blank">、Hardy</a></p>
-<p>部署流程：<a class=" wrap external" href="http://developer.yahoo.com/yui/compressor/" rel="nofollow noreferrer" target="_blank">YUI Compressor</a><a class=" wrap external" href="https://github.com/mishoo/UglifyJS" rel="nofollow noreferrer" target="_blank">、UglifyJs</a><a class=" wrap external" href="https://github.com/GoalSmashers/clean-css" rel="nofollow noreferrer" target="_blank">、CleanCss</a><a class=" wrap external" href="https://github.com/jsdoc3/jsdoc" rel="nofollow noreferrer" target="_blank">、JSDoc</a></p>
-<p>高效工具：<a class=" wrap external" href="https://kapeli.com/dash" rel="nofollow noreferrer" target="_blank">Dash</a><a class=" wrap external" href="https://www.wunderlist.com/zh/" rel="nofollow noreferrer" target="_blank">、奇妙清单</a><a class=" wrap external" href="https://www.omnigroup.com/omnigraffle/" rel="nofollow noreferrer" target="_blank">、Omnigraffle</a></p>
-<p>其它：<a class=" wrap external" href="http://unbug.github.io/codelf" rel="nofollow noreferrer" target="_blank">CodeIf</a><a class=" wrap external" href="https://tonytony.club/tool/h5viewer/index.html" rel="nofollow noreferrer" target="_blank">、H5Viewer</a><a class=" wrap external" href="http://anvilformac.com/" rel="nofollow noreferrer" target="_blank">、anvil</a><a class=" wrap external" href="https://github.com/wagerfield/cssmixins" rel="nofollow noreferrer" target="_blank">、cssmixins</a><a class=" wrap external" href="https://github.com/typicode/json-server" rel="nofollow noreferrer" target="_blank">、JSON Server</a><a class=" wrap external" href="https://ngrok.com/" rel="nofollow noreferrer" target="_blank">、ngrok</a><a class=" wrap external" href="https://glyphter.com/" rel="nofollow noreferrer" target="_blank">、Glyphter</a><a class=" wrap external" href="http://www.cssstats.com/" rel="nofollow noreferrer" target="_blank">、CSSStats</a><a class=" wrap external" href="http://spritegen.website-performance.org/" rel="nofollow noreferrer" target="_blank">、spritegen</a><a class=" wrap external" href="http://placehold.it/" rel="nofollow noreferrer" target="_blank">、placehold.it</a><a class=" wrap external" href="http://zh.mweb.im/" rel="nofollow noreferrer" target="_blank">、MWeb</a><a class=" wrap external" href="http://www.browsersync.io/" rel="nofollow noreferrer" target="_blank">、browsersync.io</a><a class=" wrap external" href="http://www.kjson.com/" rel="nofollow noreferrer" target="_blank">、kjson.com</a><a class=" wrap external" href="http://strut.io/editor/index.html" rel="nofollow noreferrer" target="_blank">、strut.io</a><a class=" wrap external" href="https://github.com/hakimel/reveal.js" rel="nofollow noreferrer" target="_blank">、Reveal.js</a><a class=" wrap external" href="https://iconverticons.com/online/" rel="nofollow noreferrer" target="_blank">、iconverticons.com</a><a class=" wrap external" href="http://zhitu.isux.us/" rel="nofollow noreferrer" target="_blank">、智图</a><a class=" wrap external" href="http://sandbox.juan-i.com/longshadows/" rel="nofollow noreferrer" target="_blank">、longshadows</a><a class=" wrap external" href="http://cubic-bezier.com/" rel="nofollow noreferrer" target="_blank">、cubic-bezier</a><a class=" wrap external" href="http://browserhacks.com/" rel="nofollow noreferrer" target="_blank">、browserhacks</a><a class=" wrap external" href="http://tool.oschina.net/commons" rel="nofollow noreferrer" target="_blank">、tool.oschina.net</a><a class=" wrap external" href="https://developers.google.com/speed/pagespeed/insights/" rel="nofollow noreferrer" target="_blank">、Pagespeed</a><a class=" wrap external" href="https://icomoon.io" rel="nofollow noreferrer" target="_blank">、icomoon.io</a><a class=" wrap external" href="http://sarasoueidan.com/tools/circulus/" rel="nofollow noreferrer" target="_blank">、circulus</a><a class=" wrap external" href="http://mockjs.com/" rel="nofollow noreferrer" target="_blank">、Mock.js</a></p>
-<h3>博客/社区/资讯</h3>
-<p>国内综合：<a class=" wrap external" href="http://www.w3ctech.com/" rel="nofollow noreferrer" target="_blank">w3ctech</a><a class=" wrap external" href="http://www.w3cplus.com/" rel="nofollow noreferrer" target="_blank">、w3cplus</a><a class=" wrap external" href="http://www.w3cfuns.com/" rel="nofollow noreferrer" target="_blank">、w3cfuns</a><a class=" wrap external" href="http://www.html-js.com/" rel="nofollow noreferrer" target="_blank">、前端乱炖</a><a class=" wrap external" href="http://www.qianduan.net/" rel="nofollow noreferrer" target="_blank">、前端观察</a><a class=" wrap external" href="http://segmentfault.com/" rel="nofollow noreferrer" target="_blank">、segmentfault</a><a class=" wrap external" href="http://www.html5tricks.com/" rel="nofollow noreferrer" target="_blank">、html5tricks</a><a class=" wrap external" href="http://isux.tencent.com/" rel="nofollow noreferrer" target="_blank">、腾讯ISUX</a><a class=" wrap external" href="http://efe.baidu.com/" rel="nofollow noreferrer" target="_blank">、百度EFE</a><a class=" wrap external" href="http://www.75team.com/" rel="nofollow noreferrer" target="_blank">、奇舞团</a><a class=" wrap external" href="http://ued.taobao.org/blog/" rel="nofollow noreferrer" target="_blank">、淘宝UED</a><a class=" wrap external" href="http://www.yyyweb.com/" rel="nofollow noreferrer" target="_blank">、前端里</a><a class=" wrap external" href="http://div.io" rel="nofollow noreferrer" target="_blank">、div.io</a><a class=" wrap external" href="http://www.imooc.com/" rel="nofollow noreferrer" target="_blank">、慕课网</a><a class=" wrap external" href="https://www.codecademy.com/zh/" rel="nofollow noreferrer" target="_blank">、Codecademy</a><a class=" wrap external" href="http://www.gbtags.com" rel="nofollow noreferrer" target="_blank">、极客标签</a><a class=" wrap external" href="http://www.infoq.com/cn" rel="nofollow noreferrer" target="_blank">、InfoQ中国</a><a class=" wrap external" href="http://www.css88.com/" rel="nofollow noreferrer" target="_blank">、WEB前端开发</a><a class=" wrap external" href="http://caibaojian.com/" rel="nofollow noreferrer" target="_blank">、前端开发博客</a><a class=" wrap external" href="http://wx.h5.vc/" rel="nofollow noreferrer" target="_blank">、爱奇舞——H5.vc</a><a class=" wrap external" href="http://www.kancloud.cn/explore" rel="nofollow noreferrer" target="_blank">、看云</a><a class=" wrap external" href="http://www.nohubwiz.com/" rel="nofollow noreferrer" target="_blank">、汇智网</a><a class=" wrap external" href="http://blog.jobbole.com/" rel="nofollow noreferrer" target="_blank">、伯乐在线</a></p>
-<p>国外综合：<a class=" wrap external" href="http://tutsplus.com/" rel="nofollow noreferrer" target="_blank">tutsplus</a><a class=" wrap external" href="https://cssanimation.rocks/" rel="nofollow noreferrer" target="_blank">、CSSAnimation</a><a class=" wrap external" href="https://teamtreehouse.com" rel="nofollow noreferrer" target="_blank">、TeamTreehouse</a><a class=" wrap external" href="http://www.smashingmagazine.com/" rel="nofollow noreferrer" target="_blank">、SmashingMagazine</a><a class=" wrap external" href="https://codyhouse.co" rel="nofollow noreferrer" target="_blank">、CodyHouse</a><a class=" wrap external" href="http://www.echojs.com/" rel="nofollow noreferrer" target="_blank">、Echojs</a><a class=" wrap external" href="https://www.codeschool.com/" rel="nofollow noreferrer" target="_blank">、Codeschool</a><a class=" wrap external" href="http://www.codewars.com/" rel="nofollow noreferrer" target="_blank">、codewars</a><a class=" wrap external" href="http://www.html5rocks.com/" rel="nofollow noreferrer" target="_blank">、Html5Rocks</a><a class=" wrap external" href="https://speakerdeck.com/" rel="nofollow noreferrer" target="_blank">、SpeakerDeck</a><a class=" wrap external" href="http://alistapart.com/" rel="nofollow noreferrer" target="_blank">、Alistapart</a><a class=" wrap external" href="http://www.lynda.com/" rel="nofollow noreferrer" target="_blank">、Lynda</a><a class=" wrap external" href="http://www.digitaltutors.com/" rel="nofollow noreferrer" target="_blank">、DigitalTutors</a><a class=" wrap external" href="http://tutorialzine.com/" rel="nofollow noreferrer" target="_blank">、Ponyfoo.com</a><a class=" wrap external" href="http://tutorialzine.com/" rel="nofollow noreferrer" target="_blank">、tutorialzine</a></p>
-<p>前端资讯：<a class=" wrap external" href="https://css-tricks.com/" rel="nofollow noreferrer" target="_blank">CSS-Tricks</a><a class=" wrap external" href="http://www.webdesignernews.com/" rel="nofollow noreferrer" target="_blank">、WebDesignerNews</a><a class=" wrap external" href="http://frontendfront.com/" rel="nofollow noreferrer" target="_blank">、FrontEndFont</a><a class=" wrap external" href="http://sidebar.io/" rel="nofollow noreferrer" target="_blank">、Sidebar.io</a><a class=" wrap external" href="https://www.designernews.co/" rel="nofollow noreferrer" target="_blank">、DesignerNews</a></p>
-<p>问答社区：<a class=" wrap external" href="http://stackoverflow.com/" rel="nofollow noreferrer" target="_blank">StackOverflow</a><a class=" wrap external" href="https://www.quora.com/" rel="nofollow noreferrer" target="_blank">、Quora</a><a class="internal" href="http://www.zhihu.com/">、知乎</a></p>
-<p>每日鲜：<a class=" wrap external" href="http://gold.xitu.io/" rel="nofollow noreferrer" target="_blank">稀土掘金</a><a class=" wrap external" href="http://toutiao.io/" rel="nofollow noreferrer" target="_blank">、开发者头条</a><a class=" wrap external" href="http://geek.csdn.net/" rel="nofollow noreferrer" target="_blank">、极客头条、</a><a class=" wrap external" href="http://www.devtoutiao.com/" rel="nofollow noreferrer" target="_blank">开发头条</a></p>
-<p>前端大牛：<a class=" wrap external" href="http://hugogiraudel.com/" rel="nofollow noreferrer" target="_blank">Hugo Giraudel</a><a class=" wrap external" href="http://philipwalton.com/" rel="nofollow noreferrer" target="_blank">、Philip Walton</a><a class=" wrap external" href="https://davidwalsh.name/" rel="nofollow noreferrer" target="_blank">、David Walsh</a><a class=" wrap external" href="http://sarasoueidan.com/" rel="nofollow noreferrer" target="_blank">、Sara Soueidan</a><a class=" wrap external" href="http://www.paulirish.com/" rel="nofollow noreferrer" target="_blank">、Paul Irish</a><a class=" wrap external" href="https://github.com/lifesinger" rel="nofollow noreferrer" target="_blank">、玉伯</a><a class=" wrap external" href="http://www.liaoxuefeng.com/" rel="nofollow noreferrer" target="_blank">、廖雪峰</a><a class=" wrap external" href="http://www.ruanyifeng.com/blog/" rel="nofollow noreferrer" target="_blank">、阮一峰</a><a class=" wrap external" href="http://jiongks.name/" rel="nofollow noreferrer" target="_blank">、勾三股四</a><a class=" wrap external" href="http://www.zhangxinxu.com/wordpress/" rel="nofollow noreferrer" target="_blank">、张鑫旭</a><a class=" wrap external" href="http://yuguo.us/weblog/" rel="nofollow noreferrer" target="_blank">、余果</a><a class=" wrap external" href="http://sofi.sh/" rel="nofollow noreferrer" target="_blank">、Sofish</a><a class=" wrap external" href="https://github.com/aui" rel="nofollow noreferrer" target="_blank">、糖饼</a><a class=" wrap external" href="http://evanyou.me/" rel="nofollow noreferrer" target="_blank">、Evan You</a><a class=" wrap external" href="http://www.cnblogs.com/Darren_code/" rel="nofollow noreferrer" target="_blank">、Darren_聂微东</a><a class=" wrap external" href="http://www.cnblogs.com/rubylouvre/" rel="nofollow noreferrer" target="_blank">、司徒正美</a><a class=" wrap external" href="https://github.com/cssmagic" rel="nofollow noreferrer" target="_blank">、CSS魔法</a></p>
-<h3>各类插件</h3>
-<p>滑动/视差：<a class=" wrap external" href="https://github.com/alvarotrigo/fullPage.js" rel="nofollow noreferrer" target="_blank">fullPage</a><a class=" wrap external" href="http://www.idangero.us/swiper/%23.VjdI0a4rKRs" rel="nofollow noreferrer" target="_blank">、swiper</a><a class=" wrap external" href="http://kenwheeler.github.io/slick/" rel="nofollow noreferrer" target="_blank">、Slick</a><a class=" wrap external" href="http://slidesjs.com/" rel="nofollow noreferrer" target="_blank">、sliderjs</a><a class=" wrap external" href="https://github.com/hammerjs/hammer.js" rel="nofollow noreferrer" target="_blank">、hammer.js</a><a class=" wrap external" href="https://github.com/idiot/unslider" rel="nofollow noreferrer" target="_blank">、unslider</a><a class=" wrap external" href="https://github.com/johnpolacek/superscrollorama" rel="nofollow noreferrer" target="_blank">、Superscrollorama</a><a class=" wrap external" href="https://github.com/janpaepke/ScrollMagic" rel="nofollow noreferrer" target="_blank">、ScrollMagic</a><a class=" wrap external" href="https://github.com/matthieua/WOW" rel="nofollow noreferrer" target="_blank">、WOW</a><a class=" wrap external" href="http://prinzhorn.github.io/skrollr/" rel="nofollow noreferrer" target="_blank">、skrollr</a><a class=" wrap external" href="https://github.com/markdalgleish/stellar.js" rel="nofollow noreferrer" target="_blank">、stellar.js</a><a class=" wrap external" href="https://github.com/alvarotrigo/multiscroll.js" rel="nofollow noreferrer" target="_blank">、multiscroll.js</a><a class=" wrap external" href="https://github.com/cubiq/iscroll" rel="nofollow noreferrer" target="_blank">、iscroll</a><a class=" wrap external" href="https://github.com/bevacqua/dragula" rel="nofollow noreferrer" target="_blank">、dragula</a><a class=" wrap external" href="https://github.com/imakewebthings/waypoints" rel="nofollow noreferrer" target="_blank">、waypoints</a></p>
-<p>动画/效果：<a class=" wrap external" href="https://github.com/Popmotion/popmotion" rel="nofollow noreferrer" target="_blank">popmotion</a><a class=" wrap external" href="https://github.com/julianshapiro/velocity" rel="nofollow noreferrer" target="_blank">、velocity</a><a class=" wrap external" href="https://github.com/greensock/GreenSock-JS" rel="nofollow noreferrer" target="_blank">、GreenSock-JS</a><a class=" wrap external" href="http://snapsvg.io/" rel="nofollow noreferrer" target="_blank">、Snapsvg</a><a class=" wrap external" href="http://soulwire.github.io/sketch.js/" rel="nofollow noreferrer" target="_blank">、sketch.js</a><a class=" wrap external" href="https://github.com/impress/impress.js" rel="nofollow noreferrer" target="_blank">、impress</a><a class=" wrap external" href="https://github.com/julianshapiro/blast" rel="nofollow noreferrer" target="_blank">、blast.js</a><a class=" wrap external" href="https://github.com/garand/sticky" rel="nofollow noreferrer" target="_blank">、sticky</a><a class=" wrap external" href="http://colorify.rocks/index.html" rel="nofollow noreferrer" target="_blank">、Colorify.js</a><a class=" wrap external" href="https://github.com/rstacruz/nprogress" rel="nofollow noreferrer" target="_blank">、nprogress</a><a class=" wrap external" href="https://github.com/legomushroom/mojs" rel="nofollow noreferrer" target="_blank">、Mojs</a><a class=" wrap external" href="https://github.com/Prinzhorn/skrollr" rel="nofollow noreferrer" target="_blank">、skrollr</a><a class=" wrap external" href="https://github.com/mattboldt/typed.js" rel="nofollow noreferrer" target="_blank">、typed.js</a><a class=" wrap external" href="https://github.com/h5bp/Effeckt.css" rel="nofollow noreferrer" target="_blank">、Effeckt.css</a><a class=" wrap external" href="http://ianlunn.github.io/Hover/" rel="nofollow noreferrer" target="_blank">、Hover.css</a><a class=" wrap external" href="http://leaverou.github.io/animatable/" rel="nofollow noreferrer" target="_blank">、Animatable</a><a class=" wrap external" href="https://daneden.github.io/animate.css/" rel="nofollow noreferrer" target="_blank">、Animate.css</a><a class=" wrap external" href="http://www.justinaguilar.com/animations/index.html" rel="nofollow noreferrer" target="_blank">、CSS3 Animation Cheat Sheet</a><a class=" wrap external" href="https://github.com/alvarotrigo/pagePiling.js" rel="nofollow noreferrer" target="_blank">、pagePiling.js</a><a class=" wrap external" href="https://github.com/WickyNilliams/headroom.js" rel="nofollow noreferrer" target="_blank">、headroom.js</a><a class=" wrap external" href="https://github.com/chinchang/hint.css" rel="nofollow noreferrer" target="_blank">、hint.css</a><a class=" wrap external" href="https://github.com/tobiasahlin/SpinKit" rel="nofollow noreferrer" target="_blank">、SpinKit</a><a class=" wrap external" href="https://github.com/codrops/CircularProgressButton" rel="nofollow noreferrer" target="_blank">、CircularProgressButton</a><a class=" wrap external" href="https://github.com/lukehaas/css-loaders" rel="nofollow noreferrer" target="_blank">、css-loaders</a><a class=" wrap external" href="https://github.com/HubSpot/pace" rel="nofollow noreferrer" target="_blank">、pace</a><a class=" wrap external" href="https://github.com/jonobr1/two.js" rel="nofollow noreferrer" target="_blank">、two.js</a><a class=" wrap external" href="https://github.com/IanLunn/Sequence" rel="nofollow noreferrer" target="_blank">、Sequence</a><a class=" wrap external" href="https://github.com/codrops/ElasticProgress" rel="nofollow noreferrer" target="_blank">、ElasticProgress</a><a class=" wrap external" href="http://una.im/CSSgram/" rel="nofollow noreferrer" target="_blank">、CSSgram</a></p>
-<p>兼容：<a class=" wrap external" href="https://github.com/Modernizr/Modernizr" rel="nofollow noreferrer" target="_blank">Modernizr</a><a class=" wrap external" href="https://github.com/ded/bowser" rel="nofollow noreferrer" target="_blank">、bowser</a><a class=" wrap external" href="https://github.com/imulus/retinajs" rel="nofollow noreferrer" target="_blank">、retinajs</a><a class=" wrap external" href="https://github.com/scottjehl/picturefill" rel="nofollow noreferrer" target="_blank">、picturefill</a><a class=" wrap external" href="https://github.com/necolas/normalize.css" rel="nofollow noreferrer" target="_blank">、Normalize.css</a><a class=" wrap external" href="https://github.com/scottjehl/Respond" rel="nofollow noreferrer" target="_blank">、Respond</a><a class=" wrap external" href="https://github.com/aFarkas/html5shiv" rel="nofollow noreferrer" target="_blank">、html5shiv</a><a class=" wrap external" href="https://github.com/Schepp/box-sizing-polyfill" rel="nofollow noreferrer" target="_blank">、box-sizing-polyfill</a><a class=" wrap external" href="https://github.com/tysonmatanich/elementQuery" rel="nofollow noreferrer" target="_blank">、elementQuery</a><a class=" wrap external" href="https://github.com/marcj/css-element-queries" rel="nofollow noreferrer" target="_blank">、css-element-queries</a></p>
-<p>Chrome：<a class=" wrap external" href="https://chrome.google.com/webstore/detail/clear-cache/cppjkneekbjaeellbfkmgnhonkkjfpdn" rel="nofollow noreferrer" target="_blank">clear-cache</a><a class=" wrap external" href="http://www.editthiscookie.com/" rel="nofollow noreferrer" target="_blank">、EditThisCookie</a><a class=" wrap external" href="https://chrome.google.com/webstore/detail/full-page-screen-capture/fdpohaocaechififmbbbbbknoalclacl" rel="nofollow noreferrer" target="_blank">、Full Page Screen Capture</a><a class=" wrap external" href="https://chrome.google.com/webstore/detail/html5-outliner/afoibpobokebhgfnknfndkgemglggomo" rel="nofollow noreferrer" target="_blank">、HTML5 Outliner</a><a class=" wrap external" href="https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc" rel="nofollow noreferrer" target="_blank">、JSONView</a><a class=" wrap external" href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop" rel="nofollow noreferrer" target="_blank">、Postman</a><a class=" wrap external" href="https://chrome.google.com/webstore/detail/user-agent-switcher-for-c/djflhoibgkdhkhhcedjiklpkjnoahfmg" rel="nofollow noreferrer" target="_blank">、User-Agent Switcher for Chrome</a><a class=" wrap external" href="https://chrome.google.com/webstore/detail/window-resizer/kkelicaakdanhinjdeammmilcgefonfh" rel="nofollow noreferrer" target="_blank">、Window Resizer</a><a class=" wrap external" href="https://chrome.google.com/webstore/detail/auto-refresh-page/edbmfligbmlgmfbbhoamolndhjffanka" rel="nofollow noreferrer" target="_blank">、页面自动刷新</a><a class=" wrap external" href="https://chrome.google.com/webstore/detail/chrome-sniffer-plus/fhhdlnnepfjhlhilgmeepgkhjmhhhjkh%3Fhl%3Dzh-CN" rel="nofollow noreferrer" target="_blank">、Chrome Sniffer Plus</a></p>
-<p>模板工具：<a class=" wrap external" href="https://github.com/wycats/handlebars.js/" rel="nofollow noreferrer" target="_blank">Handlebars</a><a class=" wrap external" href="https://github.com/janl/mustache.js/" rel="nofollow noreferrer" target="_blank">、Mustache</a><a class=" wrap external" href="https://github.com/aui/artTemplate" rel="nofollow noreferrer" target="_blank">、artTemplate</a><a class=" wrap external" href="https://github.com/mozilla/nunjucks" rel="nofollow noreferrer" target="_blank">、nunjucks</a><a class=" wrap external" href="https://github.com/leonidas/transparency" rel="nofollow noreferrer" target="_blank">、transparency</a><a class=" wrap external" href="https://github.com/olado/doT" rel="nofollow noreferrer" target="_blank">、doT</a></p>
-<p>其他：<a class=" wrap external" href="https://github.com/dropbox/zxcvbn" rel="nofollow noreferrer" target="_blank">zxcvbn</a><a class=" wrap external" href="http://jqueryvalidation.org/" rel="nofollow noreferrer" target="_blank">、Validation</a><a class=" wrap external" href="https://github.com/moment/moment" rel="nofollow noreferrer" target="_blank">、moment</a><a class=" wrap external" href="https://github.com/primer/primer" rel="nofollow noreferrer" target="_blank">、primer</a><a class=" wrap external" href="http://www.checkman.io/please/" rel="nofollow noreferrer" target="_blank">、Please.js</a><a class=" wrap external" href="https://github.com/davidshimjs/qrcodejs" rel="nofollow noreferrer" target="_blank">、qrcode</a><a class=" wrap external" href="https://github.com/michaelvillar/dynamics.js" rel="nofollow noreferrer" target="_blank">、dynamics.js</a><a class=" wrap external" href="https://github.com/jwagner/smartcrop.js" rel="nofollow noreferrer" target="_blank">、smartcrop.js</a><a class=" wrap external" href="https://github.com/tuupola/jquery_lazyload" rel="nofollow noreferrer" target="_blank">、lazyload</a><a class=" wrap external" href="https://github.com/desandro/imagesloaded" rel="nofollow noreferrer" target="_blank">、imagesloaded</a><a class=" wrap external" href="https://github.com/luis-almeida/unveil" rel="nofollow noreferrer" target="_blank">、unveil</a><a class=" wrap external" href="https://github.com/ftlabs/fastclick" rel="nofollow noreferrer" target="_blank">、fastclick</a><a class=" wrap external" href="https://github.com/malsup/form" rel="nofollow noreferrer" target="_blank">、jQuery Form Plugin</a><a class=" wrap external" href="https://github.com/blueimp/jQuery-File-Upload" rel="nofollow noreferrer" target="_blank">、jQuery-File-Upload</a><a class=" wrap external" href="https://github.com/t4t5/sweetalert" rel="nofollow noreferrer" target="_blank">、sweetalert</a><a class=" wrap external" href="https://github.com/paulkinzett/toolbar" rel="nofollow noreferrer" target="_blank">、toolbar</a><a class=" wrap external" href="https://github.com/iamceege/tooltipster" rel="nofollow noreferrer" target="_blank">、tooltipster</a><a class=" wrap external" href="https://github.com/videojs/video.js" rel="nofollow noreferrer" target="_blank">、video.js</a><a class=" wrap external" href="https://github.com/FortAwesome/Font-Awesome" rel="nofollow noreferrer" target="_blank">、Font-Awesome</a><a class=" wrap external" href="http://callmecavs.com/bricks.js/" rel="nofollow noreferrer" target="_blank">、minigrid</a><a class=" wrap external" href="http://callmecavs.com/bricks.js/" rel="nofollow noreferrer" target="_blank">、bricks.js</a></p>
-<h3>主流框架</h3>
-<p>综合：<a class=" wrap external" href="http://facebook.github.io/react/" rel="nofollow noreferrer" target="_blank">React</a><a class=" wrap external" href="http://getbootstrap.com/" rel="nofollow noreferrer" target="_blank">、Bootstrap</a><a class=" wrap external" href="http://foundation.zurb.com/" rel="nofollow noreferrer" target="_blank">、Foundation</a><a class=" wrap external" href="http://semantic-ui.com/" rel="nofollow noreferrer" target="_blank">、SemanticUI</a><a class=" wrap external" href="http://purecss.io/" rel="nofollow noreferrer" target="_blank">、Purecss</a><a class=" wrap external" href="http://getuikit.com/" rel="nofollow noreferrer" target="_blank">、UIKit</a><a class=" wrap external" href="http://meizi.io/" rel="nofollow noreferrer" target="_blank">、妹子 UI</a><a class=" wrap external" href="http://aliceui.org/" rel="nofollow noreferrer" target="_blank">、Alice</a><a class=" wrap external" href="https://github.com/Dogfalo/materialize" rel="nofollow noreferrer" target="_blank">、materialize</a><a class=" wrap external" href="https://github.com/google/material-design-lite" rel="nofollow noreferrer" target="_blank">、material-design-lite</a><a class=" wrap external" href="https://html5boilerplate.com/" rel="nofollow noreferrer" target="_blank">、Html5Boilerplate</a><a class=" wrap external" href="https://www.google.com/design/spec/material-design/introduction.html%23" rel="nofollow noreferrer" target="_blank">、Material design</a><a class=" wrap external" href="https://www.lightningdesignsystem.com/" rel="nofollow noreferrer" target="_blank">、Lightning Design System</a><a class=" wrap external" href="https://github.com/airyland/vux" rel="nofollow noreferrer" target="_blank">、Vux</a></p>
-<p>MVVM：<a class=" wrap external" href="https://angularjs.org/" rel="nofollow noreferrer" target="_blank">AngularJS</a><a class=" wrap external" href="http://vuejs.org/guide/" rel="nofollow noreferrer" target="_blank">、Vue.js</a><a class=" wrap external" href="http://backbonejs.org/" rel="nofollow noreferrer" target="_blank">、Backbone</a><a class=" wrap external" href="https://github.com/RubyLouvre/avalon" rel="nofollow noreferrer" target="_blank">、Avalon</a><a class=" wrap external" href="https://github.com/knockout/knockout" rel="nofollow noreferrer" target="_blank">、knockout</a></p>
-<p>模块化：<a class=" wrap external" href="https://github.com/jrburke/requirejs" rel="nofollow noreferrer" target="_blank">Require.js</a><a class=" wrap external" href="http://seajs.org/" rel="nofollow noreferrer" target="_blank">、Sea.js</a></p>
-<p>JavaScript：<a class=" wrap external" href="http://jquery.com/" rel="nofollow noreferrer" target="_blank">JQuery</a><a class=" wrap external" href="https://github.com/madrobby/zepto" rel="nofollow noreferrer" target="_blank">、Zepto</a><a class=" wrap external" href="http://prototypejs.org/" rel="nofollow noreferrer" target="_blank">、prototypejs</a><a class=" wrap external" href="http://emberjs.com/" rel="nofollow noreferrer" target="_blank">、emberjs</a><a class=" wrap external" href="http://mootools.net/" rel="nofollow noreferrer" target="_blank">、MooTools</a><a class=" wrap external" href="http://dojotoolkit.org/" rel="nofollow noreferrer" target="_blank">、Dojo</a><a class=" wrap external" href="https://www.meteor.com/" rel="nofollow noreferrer" target="_blank">、meteor</a><a class=" wrap external" href="https://github.com/taijiweb/domcom" rel="nofollow noreferrer" target="_blank">、Domcom</a></p>
-<p>Hybrid：<a class=" wrap external" href="http://facebook.github.io/react-native/" rel="nofollow noreferrer" target="_blank">React-Native</a><a class=" wrap external" href="https://www.nativescript.org/" rel="nofollow noreferrer" target="_blank">、Nativescript</a><a class=" wrap external" href="http://phonegap.com/" rel="nofollow noreferrer" target="_blank">、Phonegap</a><a class=" wrap external" href="http://ionicframework.com/" rel="nofollow noreferrer" target="_blank">、Ionic</a><a class=" wrap external" href="https://crosswalk-project.org/" rel="nofollow noreferrer" target="_blank">、Crosswalk</a><a class=" wrap external" href="https://github.com/meteor/meteor" rel="nofollow noreferrer" target="_blank">、Meteor</a><a class=" wrap external" href="https://github.com/atom/electron" rel="nofollow noreferrer" target="_blank">、Electron</a></p>
-<p>游戏：<a class=" wrap external" href="https://www.scirra.com/" rel="nofollow noreferrer" target="_blank">Construct 2</a><a class=" wrap external" href="http://impactjs.com/" rel="nofollow noreferrer" target="_blank">、ImpactJS</a><a class=" wrap external" href="http://createjs.com/" rel="nofollow noreferrer" target="_blank">、CreateJS</a><a class=" wrap external" href="http://threejs.org/" rel="nofollow noreferrer" target="_blank">、Three.js</a><a class=" wrap external" href="https://playcanvas.com/" rel="nofollow noreferrer" target="_blank">、PlayCanvas</a><a class=" wrap external" href="https://github.com/pixijs/pixi.js" rel="nofollow noreferrer" target="_blank">、Pixi</a><a class=" wrap external" href="https://github.com/hiloteam/hilo" rel="nofollow noreferrer" target="_blank">、Hilo</a></p>
-<h3>手册/书籍</h3>
-<p>书籍：<a class=" wrap external" href="https://book.douban.com/subject/10546125/" rel="nofollow noreferrer" target="_blank">《JavaScript高级程序设计（第3版）》</a><a class=" wrap external" href="http://www.amazon.cn/gp/product/B00NN8GJGA" rel="nofollow noreferrer" target="_blank">、《单页Web应用:JavaScript从前端到后端》</a><a class=" wrap external" href="http://book.douban.com/subject/3590768/" rel="nofollow noreferrer" target="_blank">、《JavaScript语言精粹》</a><a class=" wrap external" href="http://book.douban.com/subject/6038371/" rel="nofollow noreferrer" target="_blank">、《JavaScript DOM编程艺术 （第2版）》</a><a class=" wrap external" href="http://book.douban.com/subject/21792530/" rel="nofollow noreferrer" target="_blank">、《编写可维护的JavaScript》</a><a class=" wrap external" href="http://book.douban.com/subject/26598045/" rel="nofollow noreferrer" target="_blank">、《Web全栈工程师的自我修养》</a><a class=" wrap external" href="http://book.douban.com/subject/25768396/" rel="nofollow noreferrer" target="_blank">、《深入浅出Node.js》</a><a class=" wrap external" href="http://book.douban.com/subject/20390374/" rel="nofollow noreferrer" target="_blank">、《响应式Web设计》</a><a class=" wrap external" href="http://book.douban.com/subject/4736167/" rel="nofollow noreferrer" target="_blank">、《精通CSS》</a><a class=" wrap external" href="http://book.douban.com/subject/5362856/" rel="nofollow noreferrer" target="_blank">、《高性能JavaScript》</a><a class=" wrap external" href="https://github.com/getify/You-Dont-Know-JS" rel="nofollow noreferrer" target="_blank">、《You-Dont-Know-JS》</a></p>
-<p>快速入门：<a class=" wrap external" href="http://zh.learnlayout.com/index.html" rel="nofollow noreferrer" target="_blank">学习CSS布局</a><a class=" wrap external" href="http://learn.shayhowe.com/html-css/" rel="nofollow noreferrer" target="_blank">、Learn to Code HTML &amp; CSS</a><a class=" wrap external" href="http://learn.shayhowe.com/advanced-html-css/" rel="nofollow noreferrer" target="_blank">、Learn to Code AdvancedHTML &amp; CSS</a><a class=" wrap external" href="http://skill.phodal.com/" rel="nofollow noreferrer" target="_blank">、前端技能树</a></p>
-<p>精选文章：<a class=" wrap external" href="https://uptodate.frontendrescue.org/zh/" rel="nofollow noreferrer" target="_blank">如何跟上前端开发的最新前沿</a><a class=" wrap external" href="http://isux.tencent.com/h5-performance.html/" rel="nofollow noreferrer" target="_blank">、移动H5前端性能优化指南</a><a class=" wrap external" href="http://isux.tencent.com/great-mobile-h5-pages.html" rel="nofollow noreferrer" target="_blank">、那些过目不忘的H5页面</a><a class=" wrap external" href="http://www.tqtan.com/2015/01/31/play-with-h5/" rel="nofollow noreferrer" target="_blank">、玩转HTML5移动页面</a><a class=" wrap external" href="http://www.w3ctech.com/topic/979" rel="nofollow noreferrer" target="_blank">、MobileWeb 适配总结</a><a class=" wrap external" href="http://imweb.io/topic/5643850eed18cc424277050e" rel="nofollow noreferrer" target="_blank">、搞定这些疑难杂症，向css3动画说yes</a></p>
-<p>手册/规范：<a class=" wrap external" href="https://dwqs.gitbooks.io/frontenddevhandbook/content/index.html" rel="nofollow noreferrer" target="_blank">前端开发者手册</a><a class=" wrap external" href="https://li-xinyang.gitbooks.io/frontend-notebook/content/index.html" rel="nofollow noreferrer" target="_blank">、前端开发笔记本</a><a class=" wrap external" href="http://wiki.jikexueyuan.com/project/material-design/" rel="nofollow noreferrer" target="_blank">、Material Design 中文版</a><a class=" wrap external" href="http://cssguidelin.es/" rel="nofollow noreferrer" target="_blank">、CSS规范</a><a class=" wrap external" href="https://github.com/airbnb/javascript" rel="nofollow noreferrer" target="_blank">、JavaScript Style Guide</a><a class=" wrap external" href="http://sass-guidelin.es/" rel="nofollow noreferrer" target="_blank">、Sass规范</a><a class=" wrap external" href="http://www.ecma-international.org/publications/standards/Ecma-262.htm" rel="nofollow noreferrer" target="_blank">、ECMAScript3/5</a><a class=" wrap external" href="http://www.ecma-international.org/ecma-262/6.0/index.html" rel="nofollow noreferrer" target="_blank">、ECMAScript6</a><a class=" wrap external" href="http://www.w3.org/TR/" rel="nofollow noreferrer" target="_blank">、W3C</a><a class=" wrap external" href="http://wiki.commonjs.org/wiki/Modules/1.0" rel="nofollow noreferrer" target="_blank">、CommonJS Modules</a></p>
-<p>翻译文章：<a class=" wrap external" href="http://www.w3ctrain.com/2015/11/12/visual-guide-to-css3-flexbox-flexbox-playground/" rel="nofollow noreferrer" target="_blank">学习flexbox属性</a><a class=" wrap external" href="http://www.w3ctrain.com/2015/11/15/faster-ui-animations-with-velocity-js/" rel="nofollow noreferrer" target="_blank">、使用Velocity.js改善用户体验</a></p>
-<h3>设计/交互</h3>
-<p>灵感来源：<a class=" wrap external" href="https://dribbble.com/" rel="nofollow noreferrer" target="_blank">Dribbble</a><a class=" wrap external" href="http://www.siteinspire.com/" rel="nofollow noreferrer" target="_blank">、SiteInspire</a><a class=" wrap external" href="http://httpster.net/" rel="nofollow noreferrer" target="_blank">、Httpster</a><a class=" wrap external" href="http://www.shejidaren.com/" rel="nofollow noreferrer" target="_blank">、设计达人</a><a class=" wrap external" href="http://www.photoshoplady.com/" rel="nofollow noreferrer" target="_blank">、PhotoshopLady</a><a class=" wrap external" href="http://www.zcool.com.cn/" rel="nofollow noreferrer" target="_blank">、站酷</a><a class=" wrap external" href="http://www.ui.cn/" rel="nofollow noreferrer" target="_blank">、UI中国</a><a class=" wrap external" href="http://www.uiparade.com/" rel="nofollow noreferrer" target="_blank">、uiparade</a><a class=" wrap external" href="http://cn.365psd.com/" rel="nofollow noreferrer" target="_blank">、365psd</a><a class=" wrap external" href="https://www.behance.net/" rel="nofollow noreferrer" target="_blank">、Behance</a><a class=" wrap external" href="http://naldzgraphics.net/" rel="nofollow noreferrer" target="_blank">、Naldz Graphics</a><a class=" wrap external" href="http://www.mobile-patterns.com/" rel="nofollow noreferrer" target="_blank">、mobile-patterns</a><a class=" wrap external" href="http://www.huwayway.com/index.html" rel="nofollow noreferrer" target="_blank">、wa.design</a><a class=" wrap external" href="https://www.pinterest.com/categories/design/" rel="nofollow noreferrer" target="_blank">、pinterest</a><a class=" wrap external" href="http://huaban.com/cc" rel="nofollow noreferrer" target="_blank">、花瓣</a><a class=" wrap external" href="http://www.duitang.com/" rel="nofollow noreferrer" target="_blank">、堆糖</a><a class=" wrap external" href="https://www.meet-true.com" rel="nofollow noreferrer" target="_blank">、觅处</a><a class=" wrap external" href="http://shijue.me/home" rel="nofollow noreferrer" target="_blank">、视觉中国</a></p>
-<p>学点设计：<a class=" wrap external" href="http://design.tutsplus.com/" rel="nofollow noreferrer" target="_blank">TutsplusDesign</a><a class=" wrap external" href="http://www.uisdc.com/" rel="nofollow noreferrer" target="_blank">、优设网</a><a class=" wrap external" href="http://psd.fanextra.com/" rel="nofollow noreferrer" target="_blank">、PSDFAN</a><a class=" wrap external" href="http://design.tutsplus.com/" rel="nofollow noreferrer" target="_blank">、Envato</a><a class=" wrap external" href="http://abduzeedo.com/" rel="nofollow noreferrer" target="_blank">、abduzeedo</a><a class=" wrap external" href="http://www.kaikkonendesign.fi/typography/%23section/1" rel="nofollow noreferrer" target="_blank">、Interactive Guide to Blog Typography</a><a class=" wrap external" href="https://24ways.org/2015/" rel="nofollow noreferrer" target="_blank">、24Ways</a></p>
-<p>交互体验：<a class=" wrap external" href="http://navnav.co/" rel="nofollow noreferrer" target="_blank">Navnav</a><a class=" wrap external" href="https://codyhouse.co/library" rel="nofollow noreferrer" target="_blank">、Codyhouse</a><a class=" wrap external" href="http://isux.tencent.com/" rel="nofollow noreferrer" target="_blank">、腾讯ISUX</a><a class=" wrap external" href="http://ued.taobao.com/" rel="nofollow noreferrer" target="_blank">、淘宝UED</a><a class=" wrap external" href="http://www.aliued.cn/" rel="nofollow noreferrer" target="_blank">、阿里巴巴中文站</a><a class=" wrap external" href="http://www.aliued.com/" rel="nofollow noreferrer" target="_blank">、阿里巴巴国际站</a><a class=" wrap external" href="http://ued.alimama.com/" rel="nofollow noreferrer" target="_blank">、阿里妈妈UED</a><a class=" wrap external" href="http://mux.baidu.com/" rel="nofollow noreferrer" target="_blank">、百度移动用户体验部</a><a class=" wrap external" href="http://ued.baidu.com/" rel="nofollow noreferrer" target="_blank">、百度搜索用户体验中心</a><a class=" wrap external" href="http://tgideas.qq.com/" rel="nofollow noreferrer" target="_blank">、腾讯TGideas</a><a class=" wrap external" href="http://mxd.tencent.com/" rel="nofollow noreferrer" target="_blank">、腾讯MXD</a><a class=" wrap external" href="http://ued.qq.com/" rel="nofollow noreferrer" target="_blank">、腾讯UED</a><a class=" wrap external" href="http://cdc.tencent.com/" rel="nofollow noreferrer" target="_blank">、腾讯CDC</a><a class=" wrap external" href="http://udc.weibo.com/" rel="nofollow noreferrer" target="_blank">、新浪UDC</a><a class=" wrap external" href="http://cued.xunlei.com/" rel="nofollow noreferrer" target="_blank">、迅雷CUED</a><a class=" wrap external" href="http://www.uxbooth.com/articles/" rel="nofollow noreferrer" target="_blank">、uxbooth</a><a class=" wrap external" href="http://tympanus.net/codrops/" rel="nofollow noreferrer" target="_blank">、tympanus</a></p>
-<p>配色工具：<a class=" wrap external" href="https://color.adobe.com/zh/create/color-wheel/" rel="nofollow noreferrer" target="_blank">Adobe color</a><a class=" wrap external" href="http://flatuicolors.com/" rel="nofollow noreferrer" target="_blank">、FLATUI</a><a class=" wrap external" href="http://www.thedayscolor.com/" rel="nofollow noreferrer" target="_blank">、Thedayscolor</a><a class=" wrap external" href="http://colrd.com/" rel="nofollow noreferrer" target="_blank">、colrd</a><a class=" wrap external" href="http://nipponcolors.com/" rel="nofollow noreferrer" target="_blank">、Nipponcolors</a><a class=" wrap external" href="http://www.colourlovers.com/" rel="nofollow noreferrer" target="_blank">、Nolourlovers</a><a class=" wrap external" href="http://color.uisdc.com/" rel="nofollow noreferrer" target="_blank">、中国传统色</a><a class=" wrap external" href="http://www.birthdaycolors.jp/" rel="nofollow noreferrer" target="_blank">、日本传统色</a><a class=" wrap external" href="http://www.fashiontrendsetter.com/" rel="nofollow noreferrer" target="_blank">、Fashiontrendsetter</a><iframe id="iframe_0.91130290104359" src="data:text/html;charset=utf8,%3Cstyle%3Ebody%7Bmargin:0;padding:0%7D%3C/style%3E%3Cimg%20id=%22img%22%20src=%22https://pic3.zhimg.com/f7397c8dda83fac77e34e61ed15b41f6_b.jpg?_=5832279%22%20style=%22border:none;max-width:848px%22%3E%3Cscript%3Ewindow.onload%20=%20function%20()%20%7Bvar%20img%20=%20document.getElementById('img');%20window.parent.postMessage(%7BiframeId:'iframe_0.91130290104359',width:img.width,height:img.height%7D,%20'http://www.cnblogs.com');%7D%3C/script%3E" style="border: none; width: 600px; height: 60px;" frameborder="0" scrolling="no"></iframe></p>
-<p>第二篇：<a class=" wrap external" href="https://segmentfault.com/a/1190000002804472%23articleHeader7" rel="nofollow noreferrer" target="_blank">github上值得关注的前端项目</a>  以及他们的github地址，欢迎关注：<a class=" wrap external" href="https://github.com/hawx1993/github-FE-project" rel="nofollow noreferrer" target="_blank">GitHub - hawx1993/github-FE-project: A collection about github front-end project</a></p>
-<p>一小部分目录</p>
-<h2>综合/资源</h2>
-<p><a class=" wrap external" href="https://github.com/dypsilon/frontend-dev-bookmarks" rel="nofollow noreferrer" target="_blank">frontend-dev-bookmarks</a> 一个巨大的前端开发资源清单。star:15000 </p>
-<p><a class=" wrap external" href="https://github.com/foru17/front-end-collect" rel="nofollow noreferrer" target="_blank">front-end-collect</a> 分享自己长期关注的前端开发相关的优秀网站、博客、以及活跃开发者。star:860 </p>
-<p><a class=" wrap external" href="https://github.com/hawx1993/Front-end-Interview-questions" rel="nofollow noreferrer" target="_blank">Front-end-Interview-questions</a>   史上最全前端开发面试问题及答案 </p>
-<p><a class=" wrap external" href="https://github.com/lvwzhen/f2e-hub" rel="nofollow noreferrer" target="_blank">f2e-hub</a> 包含Animation，UI，dialog，Carousels，color，image，workflow等。star:100 </p>
-<p><a class=" wrap external" href="https://github.com/sorrycc/awesome-javascript" rel="nofollow noreferrer" target="_blank">awesome-javascript</a> 一系列很棒的javascript 库，资源。star:3100 </p>
-<p><a class=" wrap external" href="https://github.com/JacksonTian/fks" rel="nofollow noreferrer" target="_blank">fks</a>  前端技能汇总，包含前端知识架构，后端知识，linux，书籍推荐等。star:4000  </p>
-<p><a class=" wrap external" href="https://github.com/youyudehexie/node123" rel="nofollow noreferrer" target="_blank">node123</a> node.js中文资料导航。star:1200 </p>
-<p><a class=" wrap external" href="https://github.com/hoosin/mobile-web-favorites" rel="nofollow noreferrer" target="_blank">mobile-web-favorites</a> 移动端web开发收藏夹。star:200 </p>
-<p><a class=" wrap external" href="https://github.com/nimojs/gulp-book" rel="nofollow noreferrer" target="_blank">gulp-book</a> Gulp 入门指南 </p>
-<p><a class=" wrap external" href="https://github.com/AutumnsWind/Front-end-tutorial" rel="nofollow noreferrer" target="_blank">Front-end-tutorial</a> 最全的资源教程-前端涉及的所有知识体系。（12.25更新）</p>
-<h2> canvas/数据可视化</h2>
-<p><a class=" wrap external" href="https://github.com/ecomfe/echarts" rel="nofollow noreferrer" target="_blank">echarts</a> 基于Canvas，纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。star:6900</p>
-<p><a class=" wrap external" href="https://github.com/nnnick/Chart.js" rel="nofollow noreferrer" target="_blank">Chart.js</a> 使用&lt;canvas&gt;标签的简易HTML5图表。star:14600</p>
-<p><a class=" wrap external" href="https://github.com/soulwire/sketch.js" rel="nofollow noreferrer" target="_blank">sketch.js</a> 跨平台JavaScript创意编码框架，gzip压缩后仅有2kb。star:1500</p>
-<p><a class=" wrap external" href="https://github.com/mbostock/d3" rel="nofollow noreferrer" target="_blank">d3</a> 一个基于数据操作文档的js数据可视化框架，最流行的可视化库之一。star:38000</p>
-<p><a class=" wrap external" href="https://github.com/ecomfe/zrender" rel="nofollow noreferrer" target="_blank">zrender</a> 一个轻量级的Canvas类库，MVC封装，数据驱动，提供类DOM事件模型，让canvas绘图大不同！star:850</p>
-<p><a class=" wrap external" href="https://github.com/masayuki0812/c3" rel="nofollow noreferrer" target="_blank">c3</a> 一个基于 D3.js 的可重用 JavaScript 图表库。几乎零学习曲线。star:4.5K（6.28更新）</p>
-<p><a class=" wrap external" href="https://github.com/javierbyte/img2css" rel="nofollow noreferrer" target="_blank">img2css</a> 将图片转为纯css代码。（11.3更新）<iframe id="iframe_0.02328652462416736" src="data:text/html;charset=utf8,%3Cstyle%3Ebody%7Bmargin:0;padding:0%7D%3C/style%3E%3Cimg%20id=%22img%22%20src=%22https://pic1.zhimg.com/09f8a8c300d32bf3a1b903e300766364_b.jpg?_=5832279%22%20style=%22border:none;max-width:848px%22%3E%3Cscript%3Ewindow.onload%20=%20function%20()%20%7Bvar%20img%20=%20document.getElementById('img');%20window.parent.postMessage(%7BiframeId:'iframe_0.02328652462416736',width:img.width,height:img.height%7D,%20'http://www.cnblogs.com');%7D%3C/script%3E" style="border: none; width: 600px; height: 60px;" frameborder="0" scrolling="no"></iframe></p>
-<p>第三篇：网站：<a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/" rel="nofollow noreferrer" target="_blank">『引』最全前端资源汇集</a>（更新网址），github地址：<a class=" wrap external" href="https://github.com/JacksonTian/fks" rel="nofollow noreferrer" target="_blank">GitHub - JacksonTian/fks: 前端技能汇总 Frontend Knowledge Structure</a>  （github地址），号称<strong>最全的资源教程</strong>－前端涉及的所有知识体系。</p>
-<p>部分目录（此处所有目录链接到主页），详细信息请访问具体网址和github</p>
-<p><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">1 · 综合类</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">2 · 入门类</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">3 · 工具类</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">4 · 综合效果搜索平台</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">5 · 团队Blog|周报类</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">6 · 开发中心</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">7 · Nodejs</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">8 · 综合API</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">9 · Ecmascript</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">10 · Js template</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">11 · HTML5(HTML)</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">12 · CSS3(CSS)</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">13 · Angularjs</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">14 · React</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">15 · vue</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">16 · 移动端API</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">17 · jQuery</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">18 · D3</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">19 · Requriejs</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">20 · Seajs</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">21 · Less,sass</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">22 · Markdown</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">23 · 兼容性</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">24 · UI相关</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">25 · 其它API</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">26 · 图表类</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">27 · 正则</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">28 · 前端规范</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">29 · PHP</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">30 · 各大公司开源项目</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">31 · 常用</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">32 · 算法</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">33 · 移动端</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">34 · JSON</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">35 · 焦点图</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">36 · Ext, EasyUI, J-UI 及其它各种UI方案</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">37 · 页面 社会化 分享功能</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">38 · 富文本编辑器</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">39 · 前端概述</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">40 · Gulp</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">41 · Grunt</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">42 · Fis</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">43 · pc图轮</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">44 · 移动端图轮</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">45 · 文件上传</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">46 · 模拟select</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">47 · 取色插件</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">48 · 城市联动</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">49 · 剪贴板</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">50 · 简繁转换</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">51 · 表格 Grid</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">52 · 在线演示</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">53 · 常规优化</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">54 · 优化工具</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">55 · 在线工具</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">56 · 前端架构</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">57 · 推荐作品</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">58 · 简历模板</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">59 · 面试题</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">60 · iconfont</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">61 · Fiddler</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">62 · Chrome</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">63 · Firebug</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">64 · 移动,微信调试</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">65 · iOS Simulator</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">66 · Image</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">67 · 浏览器同步</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">68 · 在线PPT制作</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">69 · 前端导航网站</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">70 · 常用CDN</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">71 · Git</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">72 · 各种日期日历</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">73 · Date library</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">74 · 其它</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">75 · 效果类</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">76 · 弹出层</a><br><a class=" wrap external" href="http://www.jeffjade.com/2016/03/30/104-front-end-tutorial/%23" rel="nofollow noreferrer" target="_blank">77 · 优秀JavaScript项目</a><iframe id="iframe_0.2995079737197104" src="data:text/html;charset=utf8,%3Cstyle%3Ebody%7Bmargin:0;padding:0%7D%3C/style%3E%3Cimg%20id=%22img%22%20src=%22https://pic1.zhimg.com/bd8a12e1bf003950d3badb1a07a0c850_b.jpg?_=5832279%22%20style=%22border:none;max-width:848px%22%3E%3Cscript%3Ewindow.onload%20=%20function%20()%20%7Bvar%20img%20=%20document.getElementById('img');%20window.parent.postMessage(%7BiframeId:'iframe_0.2995079737197104',width:img.width,height:img.height%7D,%20'http://www.cnblogs.com');%7D%3C/script%3E" style="border: none; width: 600px; height: 60px;" frameborder="0" scrolling="no"></iframe></p>
-<p>第四篇： 网站<a class=" wrap external" href="https://segmentfault.com/a/1190000003510001" rel="nofollow noreferrer" target="_blank">Github资源收集</a> ，此篇没有找到github地址，作者整理了自己在Github中的starred项目可以直接在此网站进行访问。</p>
-<p>部分目录：</p>
-<p><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader0" rel="nofollow noreferrer" target="_blank">Github资源收集  --  HTML/CSS</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader1" rel="nofollow noreferrer" target="_blank">Github资源收集 -- Shim/Polyfill</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader2" rel="nofollow noreferrer" target="_blank">Github资源收集  --  可能是常用的工具库</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader3" rel="nofollow noreferrer" target="_blank">Github资源收集  --  代码处理工具 </a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader4" rel="nofollow noreferrer" target="_blank">Github资源收集  --  移动端</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader5" rel="nofollow noreferrer" target="_blank">Github资源收集  --  测试框架和断言库</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader6" rel="nofollow noreferrer" target="_blank">Github资源收集  --  Node.js</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader7" rel="nofollow noreferrer" target="_blank">Github资源收集  --  模板引擎</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader8" rel="nofollow noreferrer" target="_blank">Github资源收集  --  数据可视化</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader9" rel="nofollow noreferrer" target="_blank">Github资源收集  --  React及相关库</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader10" rel="nofollow noreferrer" target="_blank">Github资源收集  --  Angular.js</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader11" rel="nofollow noreferrer" target="_blank">Github资源收集  --  其他优秀js框架</a><br><a class=" wrap external" href="https://segmentfault.com/a/1190000003510001%23articleHeader12" rel="nofollow noreferrer" target="_blank">Github资源收集  --  函数式编程相关</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[你有必要知道的 25 个 JavaScript 面试题]]></title>
-        <id>https://itliuwk.github.io/post/ni-you-bi-yao-zhi-dao-de-25-ge-javascript-mian-shi-ti</id>
-        <link href="https://itliuwk.github.io/post/ni-you-bi-yao-zhi-dao-de-25-ge-javascript-mian-shi-ti">
-        </link>
-        <updated>2018-06-13T04:02:14.000Z</updated>
-        <summary type="html"><![CDATA[<p>1、使用 typeof bar === &quot;object&quot; 判断 bar 是不是一个对象有神马潜在的弊端？如何避免这种弊端？...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>1、使用 typeof bar === &quot;object&quot; 判断 bar 是不是一个对象有神马潜在的弊端？如何避免这种弊端？...</p>
-<!--more-->
-<p>使用 typeof 的弊端是显而易见的(这种弊端同使用 instanceof)：</p>
-<pre><code>let obj = {};
-let arr = [];
-
-console.log(typeof obj === 'object');  //true
-console.log(typeof arr === 'object');  //true
-console.log(typeof null === 'object');  //true
-</code></pre>
-<p>从上面的输出结果可知，typeof bar === &quot;object&quot; 并不能准确判断 bar 就是一个 Object。可以通过Object.prototype.toString.call(bar) === &quot;[object Object]&quot; 来避免这种弊端：</p>
-<pre><code>let obj = {};
-let arr = [];
-
-console.log(Object.prototype.toString.call(obj));  //[object Object]
-console.log(Object.prototype.toString.call(arr));  //[object Array]
-console.log(Object.prototype.toString.call(null));  //[object Null]
-</code></pre>
-<p>而 [ ] === false 是返回 false 的。
-2、下面的代码会在 console 输出神马？为什么？</p>
-<pre><code class="language-(function(){">  var a = b = 3;
-})();
-
-console.log(&quot;a defined? &quot; + (typeof a !== 'undefined'));   
-console.log(&quot;b defined? &quot; + (typeof b !== 'undefined'));
-这跟变量作用域有关，输出换成下面的：
-
-console.log(b); //3
-console,log(typeof a); //undefined
-拆解一下自执行函数中的变量赋值：
-
-b = 3;
-var a = b;
-所以 b 成了全局变量，而 a 是自执行函数的一个局部变量。
-</code></pre>
-<p>3、下面的代码会在 console 输出神马？为什么？</p>
-<pre><code>var myObject = {
-    foo: &quot;bar&quot;,
-    func: function() {
-        var self = this;
-        console.log(&quot;outer func:  this.foo = &quot; + this.foo);
-        console.log(&quot;outer func:  self.foo = &quot; + self.foo);
-        (function() {
-            console.log(&quot;inner func:  this.foo = &quot; + this.foo);
-            console.log(&quot;inner func:  self.foo = &quot; + self.foo);
-        }());
-    }
-};
-myObject.func();
-第一个和第二个的输出不难判断，在 ES6 之前，JavaScript 只有函数作用域，所以 func 中的 IIFE 有自己的独立作用域，并且它能访问到外部作用域中的 self，所以第三个输出会报错，因为 this 在可访问到的作用域内是 undefined，第四个输出是 bar。如果你知道闭包，也很容易解决的：
-
-(function(test) {
-            console.log(&quot;inner func:  this.foo = &quot; + test.foo);  //'bar'
-            console.log(&quot;inner func:  self.foo = &quot; + self.foo);
-}(self));
-如果对闭包不熟悉，可以戳此：从作用域链谈闭包
-</code></pre>
-<p>4、将 JavaScript 代码包含在一个函数块中有神马意思呢？为什么要这么做？</p>
-<pre><code>
-换句话说，为什么要用立即执行函数表达式（Immediately-Invoked Function Expression）。
-
-IIFE 有两个比较经典的使用场景，一是类似于在循环中定时输出数据项，二是类似于 JQuery/Node 的插件和模块开发。
-
-for(var i = 0; i &lt; 5; i++) {
-    setTimeout(function() {
-        console.log(i);  
-    }, 1000);
-}
-上面的输出并不是你以为的0，1，2，3，4，而输出的全部是5，这时 IIFE 就能有用了：
-
-for(var i = 0; i &lt; 5; i++) {
-    (function(i) {
-      setTimeout(function() {
-        console.log(i);  
-      }, 1000);
-    })(i)
-}
-而在 JQuery/Node 的插件和模块开发中，为避免变量污染，也是一个大大的 IIFE：
-
-(function($) { 
-        //代码
- } )(jQuery);
-</code></pre>
-<p>5、在严格模式('use strict')下进行 JavaScript 开发有神马好处？</p>
-<pre><code>消除Javascript语法的一些不合理、不严谨之处，减少一些怪异行为;
-消除代码运行的一些不安全之处，保证代码运行的安全；
-提高编译器效率，增加运行速度；
-为未来新版本的Javascript做好铺垫。
-</code></pre>
-<p>6、下面两个函数的返回值是一样的吗？为什么？</p>
-<pre><code>function foo1()
-{
-  return {
-      bar: &quot;hello&quot;
-  };
-}
-
-function foo2()
-{
-  return
-  {
-      bar: &quot;hello&quot;
-  };
-}
-在编程语言中，基本都是使用分号（;）将语句分隔开，这可以增加代码的可读性和整洁性。而在JS中，如若语句各占独立一行，通常可以省略语句间的分号（;），JS 解析器会根据能否正常编译来决定是否自动填充分号：
-
-var test = 1 + 
-2
-console.log(test);  //3
-在上述情况下，为了正确解析代码，就不会自动填充分号了，但是对于 return 、break、continue 等语句，如果后面紧跟换行，解析器一定会自动在后面填充分号(;)，所以上面的第二个函数就变成了这样：
-
-function foo2()
-{
-  return;
-  {
-      bar: &quot;hello&quot;
-  };
-}
-所以第二个函数是返回 undefined。
-</code></pre>
-<p>7、神马是 NaN，它的类型是神马？怎么测试一个值是否等于 NaN?</p>
-<pre><code>NaN 是 Not a Number 的缩写，JavaScript 的一种特殊数值，其类型是 Number，可以通过 isNaN(param)来判断一个值是否是 NaN：
-
-console.log(isNaN(NaN)); //true
-console.log(isNaN(23)); //false
-console.log(isNaN('ds')); //true
-console.log(isNaN('32131sdasd')); //true
-console.log(NaN === NaN); //false
-console.log(NaN === undefined); //false
-console.log(undefined === undefined); //false
-console.log(typeof NaN); //number
-console.log(Object.prototype.toString.call(NaN)); //[object Number]
-ES6 中，isNaN() 成为了 Number 的静态方法：Number.isNaN().
-</code></pre>
-<p>8、解释一下下面代码的输出</p>
-<pre><code>console.log(0.1 + 0.2);   //0.30000000000000004
-console.log(0.1 + 0.2 == 0.3);  //false
-JavaScript 中的 number 类型就是浮点型，JavaScript 中的浮点数采用IEEE-754 格式的规定，这是一种二进制表示法，可以精确地表示分数，比如1/2，1/8，1/1024，每个浮点数占64位。但是，二进制浮点数表示法并不能精确的表示类似0.1这样 的简单的数字，会有舍入误差。
-
-由于采用二进制，JavaScript 也不能有限表示 1/10、1/2 等这样的分数。在二进制中，1/10(0.1)被表示为0.00110011001100110011…… 注意 0011 是无限重复的，这是舍入误差造成的，所以对于 0.1 + 0.2 这样的运算，操作数会先被转成二进制，然后再计算：
-
-0.1 =&gt; 0.0001 1001 1001 1001…（无限循环）
-0.2 =&gt; 0.0011 0011 0011 0011…（无限循环）
-双精度浮点数的小数部分最多支持 52 位，所以两者相加之后得到这么一串 0.0100110011001100110011001100110011001100...因浮点数小数位的限制而截断的二进制数字，这时候，再把它转换为十进制，就成了 0.30000000000000004。
-
-对于保证浮点数计算的正确性，有两种常见方式。
-
-一是先升幂再降幂：
-
-function add(num1, num2){
-  let r1, r2, m;
-  r1 = (''+num1).split('.')[1].length;
-  r2 = (''+num2).split('.')[1].length;
-
-  m = Math.pow(10,Math.max(r1,r2));
-  return (num1 * m + num2 * m) / m;
-}
-console.log(add(0.1,0.2));   //0.3
-console.log(add(0.15,0.2256)); //0.3756
-二是是使用内置的 toPrecision() 和 toFixed() 方法，注意，方法的返回值字符串。
-
-function add(x, y) {
-    return x.toPrecision() + y.toPrecision()
-}
-console.log(add(0.1,0.2));  //&quot;0.10.2&quot;
-</code></pre>
-<p>9、实现函数 isInteger(x) 来判断 x 是否是整数</p>
-<pre><code>
-可以将 x 转换成10进制，判断和本身是不是相等即可：
-
-function isInteger(x) { 
-    return parseInt(x, 10) === x; 
-}
-ES6 对数值进行了扩展，提供了静态方法 isInteger() 来判断参数是否是整数：
-
-Number.isInteger(25) // true
-Number.isInteger(25.0) // true
-Number.isInteger(25.1) // false
-Number.isInteger(&quot;15&quot;) // false
-Number.isInteger(true) // false
-JavaScript能够准确表示的整数范围在 -2^53 到 2^53 之间（不含两个端点），超过这个范围，无法精确表示这个值。ES6 引入了Number.MAX_SAFE_INTEGER 和 Number.MIN_SAFE_INTEGER这两个常量，用来表示这个范围的上下限，并提供了 Number.isSafeInteger() 来判断整数是否是安全型整数。
-</code></pre>
-<p>10、在下面的代码中，数字 1-4 会以什么顺序输出？为什么会这样输出？</p>
-<pre><code>(function() {
-    console.log(1); 
-    setTimeout(function(){console.log(2)}, 1000); 
-    setTimeout(function(){console.log(3)}, 0); 
-    console.log(4);
-})();
-这个就不多解释了，主要是 JavaScript 的定时机制和时间循环，不要忘了，JavaScript 是单线程的。详解可以参考 从setTimeout谈JavaScript运行机制。
-</code></pre>
-<p>11、写一个少于 80 字符的函数，判断一个字符串是不是回文字符串</p>
-<pre><code>function isPalindrome(str) {
-    str = str.replace(/\W/g, '').toLowerCase();
-    return (str == str.split('').reverse().join(''));
-}
-这个题我在 codewars 上碰到过，并收录了一些不错的解决方式，可以戳这里：Palindrome For Your Dome
-</code></pre>
-<p>12、写一个按照下面方式调用都能正常工作的 sum 方法</p>
-<pre><code>console.log(sum(2,3));   // Outputs 5
-console.log(sum(2)(3));  // Outputs 5
-针对这个题，可以判断参数个数来实现：
-
-function sum() {
-  var fir = arguments[0];
-  if(arguments.length === 2) {
-    return arguments[0] + arguments[1]
-  } else {
-    return function(sec) {
-       return fir + sec;
-    }
-  }
-
-}
-</code></pre>
-<p>13、根据下面的代码片段回答后面的问题</p>
-<pre><code>for (var i = 0; i &lt; 5; i++) {
-  var btn = document.createElement('button');
-  btn.appendChild(document.createTextNode('Button ' + i));
-  btn.addEventListener('click', function(){ console.log(i); });
-  document.body.appendChild(btn);
-}
-1、点击 Button 4，会在控制台输出什么？
-2、给出一种符合预期的实现方式
-
-1、点击5个按钮中的任意一个，都是输出5
-2、参考 IIFE。
-</code></pre>
-<p>14、下面的代码会输出什么？为什么？</p>
-<pre><code>var arr1 = &quot;john&quot;.split(''); j o h n
-var arr2 = arr1.reverse(); n h o j
-var arr3 = &quot;jones&quot;.split(''); j o n e s
-arr2.push(arr3);
-console.log(&quot;array 1: length=&quot; + arr1.length + &quot; last=&quot; + arr1.slice(-1));
-console.log(&quot;array 2: length=&quot; + arr2.length + &quot; last=&quot; + arr2.slice(-1));
-会输出什么呢？你运行下就知道了，可能会在你的意料之外。
-
-MDN 上对于 reverse() 的描述是酱紫的：
-
-Description
-The reverse method transposes the elements of the calling array object in place, mutating the array, and returning a reference to the array.
-reverse() 会改变数组本身，并返回原数组的引用。
-
-slice 的用法请参考：slice
-</code></pre>
-<p>15、下面的代码会输出什么？为什么？</p>
-<pre><code>console.log(1 +  &quot;2&quot; + &quot;2&quot;);
-console.log(1 +  +&quot;2&quot; + &quot;2&quot;);
-console.log(1 +  -&quot;1&quot; + &quot;2&quot;);
-console.log(+&quot;1&quot; +  &quot;1&quot; + &quot;2&quot;);
-console.log( &quot;A&quot; - &quot;B&quot; + &quot;2&quot;);
-console.log( &quot;A&quot; - &quot;B&quot; + 2);
-输出什么，自己去运行吧，需要注意三个点：
-多个数字和数字字符串混合运算时，跟操作数的位置有关
-console.log(2 + 1 + '3'); / /‘33’
-console.log('3' + 2 + 1); //'321'
-数字字符串之前存在数字中的正负号(+/-)时，会被转换成数字
-console.log(typeof '3');   // string
-console.log(typeof +'3');  //number
-同样，可以在数字前添加 ''，将数字转为字符串
-console.log(typeof 3);   // number
-console.log(typeof (''+3));  //string
-对于运算结果不能转换成数字的，将返回 NaN
-console.log('a' * 'sd');   //NaN
-console.log('A' - 'B');  // NaN
-这张图是运算转换的规则
-</code></pre>
-<p>16、如果 list 很大，下面的这段递归代码会造成堆栈溢出。如果在不改变递归模式的前提下修善这段代码？</p>
-<pre><code>var list = readHugeList();
-
-var nextListItem = function() {
-    var item = list.pop();
-
-    if (item) {
-        // process the list item...
-        nextListItem();
-    }
-};
-原文上的解决方式是加个定时器：
-
-var list = readHugeList();
-
-var nextListItem = function() {
-    var item = list.pop();
-
-    if (item) {
-        // process the list item...
-        setTimeout( nextListItem, 0);
-    }
-};
-解决方式的原理请参考第10题。
-
-</code></pre>
-<p>17、什么是闭包？举例说明</p>
-<pre><code>可以参考此篇：从作用域链谈闭包
-</code></pre>
-<p>18、下面的代码会输出什么？为啥？</p>
-<pre><code>for (var i = 0; i &lt; 5; i++) {
-  setTimeout(function() { console.log(i); }, i * 1000 );
-}
-请往前面翻，参考第4题，解决方式已经在上面了
-</code></pre>
-<p>19、解释下列代码的输出</p>
-<pre><code>console.log(&quot;0 || 1 = &quot;+(0 || 1));
-console.log(&quot;1 || 2 = &quot;+(1 || 2));
-console.log(&quot;0 &amp;&amp; 1 = &quot;+(0 &amp;&amp; 1));
-console.log(&quot;1 &amp;&amp; 2 = &quot;+(1 &amp;&amp; 2));
-逻辑与和逻辑或运算符会返回一个值，并且二者都是短路运算符：
-
-逻辑与返回第一个是 false 的操作数 或者 最后一个是 true的操作数
-console.log(1 &amp;&amp; 2 &amp;&amp; 0);  //0
-console.log(1 &amp;&amp; 0 &amp;&amp; 1);  //0
-console.log(1 &amp;&amp; 2 &amp;&amp; 3);  //3
-如果某个操作数为 false，则该操作数之后的操作数都不会被计算
-
-逻辑或返回第一个是 true 的操作数 或者 最后一个是 false的操作数
-console.log(1 || 2 || 0); //1
-console.log(0 || 2 || 1); //2
-console.log(0 || 0 || false); //false
-如果某个操作数为 true，则该操作数之后的操作数都不会被计算
-
-如果逻辑与和逻辑或作混合运算，则逻辑与的优先级高：
-
-console.log(1 &amp;&amp; 2 || 0); //2
-console.log(0 || 2 &amp;&amp; 1); //1
-console.log(0 &amp;&amp; 2 || 1); //1
-在 JavaScript，常见的 false 值：
-
-0, '0', +0, -0, false, '',null,undefined,null,NaN
-要注意空数组([])和空对象({}):
-
-console.log([] == false) //true
-console.log({} == false) //false
-console.log(Boolean([])) //true
-console.log(Boolean({})) //true
-所以在 if 中，[] 和 {} 都表现为 true：
-</code></pre>
-<p>20、解释下面代码的输出</p>
-<pre><code>console.log(false == '0')
-console.log(false === '0')
-请参考前面第14题运算符转换规则的图。
-</code></pre>
-<p>21、解释下面代码的输出</p>
-<pre><code>var a={},
-    b={key:'b'},
-    c={key:'c'};
-
-a[b]=123;
-a[c]=456;
-
-console.log(a[b]);
-输出是 456，参考原文的解释：
-
-The reason for this is as follows: When setting an object property, JavaScript will implicitly stringify the parameter value. In this case, since b and c are both objects, they will both be converted to &quot;[object Object]&quot;. As a result, a[b] anda[c] are both equivalent to a[&quot;[object Object]&quot;] and can be used interchangeably. Therefore, setting or referencing a[c] is precisely the same as setting or referencing a[b].
-</code></pre>
-<p>22、解释下面代码的输出</p>
-<pre><code>console.log((function f(n){return ((n &gt; 1) ? n * f(n-1) : n)})(10));
-结果是10的阶乘。这是一个递归调用，为了简化，我初始化 n=5，则调用链和返回链如下：
-</code></pre>
-<p>23、解释下面代码的输出</p>
-<pre><code>(function(x) {
-    return (function(y) {
-        console.log(x);
-    })(2)
-})(1);
-输出1，闭包能够访问外部作用域的变量或参数。
-</code></pre>
-<p>24、解释下面代码的输出，并修复存在的问题</p>
-<pre><code>var hero = {
-    _name: 'John Doe',
-    getSecretIdentity: function (){
-        return this._name;
-    }
-};
-
-var stoleSecretIdentity = hero.getSecretIdentity;
-
-console.log(stoleSecretIdentity());
-console.log(hero.getSecretIdentity());
-将 getSecretIdentity 赋给 stoleSecretIdentity，等价于定义了 stoleSecretIdentity 函数：
-
-var stoleSecretIdentity =  function (){
-        return this._name;
-}
-stoleSecretIdentity 的上下文是全局环境，所以第一个输出 undefined。若要输出 John Doe，则要通过 call 、apply 和 bind 等方式改变 stoleSecretIdentity 的this 指向(hero)。
-
-第二个是调用对象的方法，输出 John Doe。
-</code></pre>
-<p>25、给你一个 DOM 元素，创建一个能访问该元素所有子元素的函数，并且要将每个子元素传递给指定的回调函数。</p>
-<pre><code>函数接受两个参数：
-
-DOM
-指定的回调函数
-原文利用 深度优先搜索(Depth-First-Search) 给了一个实现：
-
-function Traverse(p_element,p_callback) {
-   p_callback(p_element);
-   var list = p_element.children;
-   for (var i = 0; i &lt; list.length; i++) {
-       Traverse(list[i],p_callback);  // recursive call
-   }
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[详解Javascript中的Object对象]]></title>
-        <id>https://itliuwk.github.io/post/xiang-jie-javascript-zhong-de-object-dui-xiang</id>
-        <link href="https://itliuwk.github.io/post/xiang-jie-javascript-zhong-de-object-dui-xiang">
-        </link>
-        <updated>2018-04-08T03:20:35.000Z</updated>
-        <summary type="html"><![CDATA[<p>Object是在javascript中一个被我们经常使用的类型，而且JS中的所有对象都是继承自Object对象的...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>Object是在javascript中一个被我们经常使用的类型，而且JS中的所有对象都是继承自Object对象的...</p>
-<!--more-->
-<p>虽说我们平时只是简单地使用了Object对象来存储数据，并没有使用到太多其他功能，但是Object对象其实包含了很多很有用的属性和方法，尤其是ES5增加的方法，因此，本文将从最基本的介绍开始，详细说明了Object的常用方法和应用。</p>
-<h3 id="基础介绍">基础介绍</h3>
-<h4 id="创建对象">创建对象</h4>
-<p>首先我们都知道，对象就是一组相似数据和功能的集合，我们就是用它来模拟我们现实世界中的对象的。那在Javascript中，创建对象的方式通常有两种方式：构造函数和对象字面量。</p>
-<h5 id="new构造函数法">new构造函数法</h5>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var person = <span class="keyword">new <span class="built_in">Object();<br><span class="line">person.name = <span class="string">"狼狼的蓝胖子";<br><span class="line">person.age = <span class="number">25;<br></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>这种方式使用new关键字，接着跟上Object构造函数，再来给对象实例动态添加上不同的属性。这种方式相对来说比较繁琐，一般推荐使用对象字面量来创建对象。</p>
-<h5 id="对象字面量">对象字面量</h5>
-<p>对象字面量很好理解，使用key/value的形式直接创建对象，简洁方便。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="variable"><span class="keyword">var person = {<br><span class="line">    name: “狼狼的蓝胖子”,<br><span class="line">    age: <span class="number">25<br><span class="line">};<br></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>这种方式直接通过花括号将对象的属性包起来，使用key/value的方式创建对象属性，每个属性之间用逗号隔开。<br>注意：如果是最后一个属性，后面就不要加逗号，因为在一些旧的浏览器下会报错。</p>
-<h4 id="对象实例的属性和方法">对象实例的属性和方法</h4>
-<p>不管通过哪种方式创建了对象实例后，该实例都会拥有下面的属性和方法，下面将会一一说明。</p>
-<h5 id="constructor属性">constructor属性</h5>
-<p>constructor属性是保存当前对象的构造函数，前面的例子中，constructor保存的就是Object方法。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var obj1 = <span class="keyword">new <span class="built_in">Object();<br><span class="line">obj1.id = <span class="string">"obj1";<br><span class="line"><span class="keyword">var obj2 = {<br><span class="line">    <span class="string">"id": <span class="string">"obj2"<br><span class="line">};<br><span class="line"> <br><span class="line"><span class="built_in">console.log(obj1.constructor);<span class="comment">//function Object(){}<br><span class="line"><span class="built_in">console.log(obj2.constructor);<span class="comment">//function Object(){}<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<h5 id="hasOwnProperty(propertyName)方法">hasOwnProperty(propertyName)方法</h5>
-<p>hasOwnProperty方法接收一个字符串参数，该参数表示属性名称，用来判断该属性是否在当前对象实例中，而不是在对象的原型链中。我们来看看下面这个例子：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var arr = [];        <br><span class="line"><span class="built_in">console.log(arr.hasOwnProperty(<span class="string">"length"));<span class="comment">//true<br><span class="line"><span class="built_in">console.log(arr.hasOwnProperty(<span class="string">"hasOwnProperty"));<span class="comment">//false<br></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>在这个例子中，首先通过定义了一个数组对象的实例arr，我们知道数组对象实际是通过原型链继承了Object对象，然后拥有自己的一些属性，我们通过hasOwnProperty方法判断length是arr自己的属性，而hasOwnProperty是在原型链上的属性。<br>hasOwnProperty方法可以和for..in结合起来获取对象自己的key。</p>
-<h5 id="isPrototypeOf(Object)方法">isPrototypeOf(Object)方法</h5>
-<p>isPrototype方法接收一个对象，用来判断当前对象是否在传入的参数对象的原型链上，说起来有点抽象，我们来看看代码。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">MyObject(<span class="params">) {}<br><span class="line"><span class="keyword">var obj = <span class="keyword">new MyObject();<br><span class="line"><span class="built_in">console.log(<span class="built_in">Object.prototype.isPrototypeOf(obj));<br></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>我们知道MyObject是继承自Object对象的，而在JS中，继承是通过prototype来实现的，所以Object的prototype必定在MyObject对象实例的原型链上。</p>
-<h5 id="propertyIsEnumerable(prototypeName)方法">propertyIsEnumerable(prototypeName)方法</h5>
-<p>prototypeIsEnumerable用来判断给定的属性是否可以被for..in语句给枚举出来。看下面代码：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var obj = {<br><span class="line">    name: <span class="string">"objName"<br><span class="line">}  <br><span class="line"><span class="keyword">for (<span class="keyword">var i <span class="keyword">in obj) {<br><span class="line">    <span class="built_in">console.log(i);<br><span class="line">}<br></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>执行这段代码输出字符串“name”，这就说明通过for…in语句可以得到obj的name这个属性，但是我们知道，obj的属性还有很多，比如constructor，比如hasOwnPrototype等等，但是它们没有被输出，说明这些属性不能被for…in给枚举出来，可以通过propertyIsEnumerable方法来得到。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="built_in">console.log(obj.propertyIsEnumerable(<span class="string">"constructor"));<span class="regexp">//<span class="literal">false<br></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>判断“constructor”是否可以被枚举，输出false说明无法被枚举出来。</p>
-<h5 id="toLocaleString()方法">toLocaleString()方法</h5>
-<p>toLocalString方法返回对象的字符串表示，和代码的执行环境有关。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="built_in">var obj = {};<br><span class="line">console<span class="built_in">.<span class="keyword">log(obj<span class="built_in">.toLocaleString());<span class="comment">//[object Object]  <br><span class="line"><br><span class="line"><span class="built_in">var <span class="built_in">date = <span class="literal">new <span class="built_in">Date();<br><span class="line">console<span class="built_in">.<span class="keyword">log(<span class="built_in">date<span class="built_in">.toLocaleString());<span class="comment">//2016/2/28 下午1:39:27<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<h5 id="toString()方法">toString()方法</h5>
-<p>toString用来返回对象的字符串表示。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="built_in">var obj = {};<br><span class="line">console<span class="built_in">.<span class="keyword">log(obj<span class="built_in">.toString());<span class="comment">//[object Object]<br><span class="line">        <br><span class="line"><span class="built_in">var <span class="built_in">date = <span class="literal">new <span class="built_in">Date();<br><span class="line">console<span class="built_in">.<span class="keyword">log(<span class="built_in">date<span class="built_in">.toString());<span class="comment">//Sun Feb 28 2016 13:40:36 GMT+0800 (中国标准时间)<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<h5 id="valueOf()方法">valueOf()方法</h5>
-<p>valueOf方法返回对象的原始值，可能是字符串、数值或bool值等，看具体的对象。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"> <span class="keyword">var obj = {<br><span class="line">    name: <span class="string">"obj"<br><span class="line">};<br><span class="line"><span class="built_in">console.log(obj.valueOf());<span class="comment">//Object {name: "obj"}<br><span class="line"><br><span class="line"><span class="keyword">var arr = [<span class="number">1];<br><span class="line"><span class="built_in">console.log(arr.valueOf());<span class="comment">//[1]<br><span class="line"><br><span class="line"><span class="keyword">var date = <span class="keyword">new <span class="built_in">Date();<br><span class="line"><span class="built_in">console.log(date.valueOf());<span class="comment">//1456638436303<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>如代码所示，三个不同的对象实例调用valueOf返回不同的数据。</p>
-<h4 id="属性的类型">属性的类型</h4>
-<p>在Javascript中，属性有两种类型，分别是数据属性和访问器属性，我们来看看这两种属性具体是什么东西。</p>
-<h5 id="数据属性">数据属性</h5>
-<p>数据属性我们可以理解为我们平时定义对象时赋予的属性，它可以进行读和写。但是，ES5中定义了一些特性，这些特性是用来描述属性的各种特征，特性是内部值，不能直接访问到。特性通过用两对方括号表示，比如[[Enumerable]]。属性的特性会有一些默认值，要修改特性的默认值，必须使用ES5定义的新方法Object.defineProperty方法来修改。<br>数据属性有4个描述其特征的特性，下面将依次说明每一个特性：<br>（1）[[Configurable]]：该特性表示是否可以通过delete操作符来删除属性，默认值是true。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var obj = {};<br><span class="line">obj.name = <span class="string">"myname";<br><span class="line">        <br><span class="line"><span class="keyword">delete obj.name;<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//undefined<br></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>这段代码很明显，通过delete删除了obj的name属性后，我们再访问name属性就访问不到了。<br>我们通过Object.defineProperty方法来修改[[Configurable]]特性。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var obj = {};<br><span class="line">obj.name = <span class="string">"myname";<br><span class="line"><span class="built_in">Object.defineProperty(obj, <span class="string">"name", {<br><span class="line">    configurable: <span class="literal">false<br><span class="line">})                <br><span class="line"><br><span class="line"><span class="keyword">delete obj.name;<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//myname<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>通过将configurable特性设置成false之后，delete就无法删除name属性了，如果在严格模式下，使用delete去删除就会报错。</p>
-<p>（2）[[Enumerable]]：表示是否能够通过for…in语句来枚举出属性，默认是true<br>我们来看看前面的例子：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var obj = {<br><span class="line">    name: <span class="string">"objName"<br><span class="line">}  <br><span class="line"><span class="keyword">for (<span class="keyword">var i <span class="keyword">in obj) {<br><span class="line">    <span class="built_in">console.log(i);<span class="comment">//name<br><span class="line">}<br></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>这段代码只输出了name属性，我们来将constructor属性的[[Enumerable]]设置为true试试。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"> <span class="keyword">var obj = {<br><span class="line">        name: <span class="string">"objName"<br><span class="line">}<br><span class="line"><span class="built_in">Object.defineProperty(obj, <span class="string">"constructor", {<br><span class="line">    enumerable: <span class="literal">true<br><span class="line">})<br><span class="line"><br><span class="line"><span class="keyword">for (<span class="keyword">var i <span class="keyword">in obj) {<br><span class="line">    <span class="built_in">console.log(i);<span class="comment">//name,constructor<br><span class="line">}<br><span class="line"><span class="built_in">console.log(obj.propertyIsEnumerable(<span class="string">"constructor"));<span class="comment">//true<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>这段代码中，for…in循环得到了name和constructor两个属性，而通过propertyIsEnumerable方法来判断constructor也返回了true。</p>
-<p>（3）[[Writable]]：表示属性值是否可以修改，默认为true<br>如果[[Writable]]被设置成false，尝试修改时将没有效果，在严格模式下会报错</p>
-<p>（4）[[Value]]：表示属性的值，默认为undefined</p>
-<p>我们通过一个简单的例子来看看这两个特性：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var obj = {<br><span class="line">    name: <span class="string">"name"<br><span class="line">};<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//name        <br><span class="line"><br><span class="line"><span class="built_in">Object.defineProperty(obj, <span class="string">"name", {<br><span class="line">    value: <span class="string">"newValue",<br><span class="line">    writable: <span class="literal">false<br><span class="line">})<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//newValue<br><span class="line"><br><span class="line">obj.name = <span class="string">"oldValue";<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//newValue<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>我们首先定义了obj对象的name属性值为“name”，然后通过defineProperty方法来修改值，并且将其设置为不可修改的。接着我们再修改name属性的值，可以发现修改无效。<br>如果我们通过defineProperty来修改name属性的值，是否可以修改呢？答案是可以的：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="tag">Object<span class="class">.defineProperty(obj, <span class="string">"name", {<br><span class="line">    <span class="attribute">value: <span class="string">"oldValue"<br><span class="line">})<br><span class="line"><span class="tag">console<span class="class">.log(obj.name); <span class="comment">//oldValue<br></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<h5 id="访问器属性">访问器属性</h5>
-<p>访问器属性有点类似于C#中的属性，和数据属性的区别在于，它没有数据属性的[[Writable]]和[[Value]]两个特性，而是拥有一对getter和setter函数。<br>[[Get]]：读取属性时调用的函数，默认是undefined<br>[[Set]]：设置属性时调用的函数，默认是undefined<br>getter和setter是一个很有用的东西，假设有两个属性，其中第二个属性值会随着第一个属性值的变化而变化。这种场景在我们平时的编码中起始是非常常见的。在之前的做法中，我们往往要去手动修改第二个属性的值，那现在我们就可以通过get和set函数来解决这个问题。看下面这个例子：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br><span class="line">15<br><span class="line">16<br><span class="line">17<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var person = {<br><span class="line">    age: <span class="number">10<br><span class="line">}<br><span class="line"><br><span class="line"><span class="built_in">Object.defineProperty(person, <span class="string">"type", {<br><span class="line">    get: <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">        <span class="keyword">if (person.age &gt; <span class="number">17) {<br><span class="line">            <span class="keyword">return <span class="string">"成人";<br><span class="line">        }<br><span class="line">        <span class="keyword">return <span class="string">"小孩";<br><span class="line">    }<br><span class="line">})<br><span class="line"><br><span class="line"><span class="built_in">console.log(person.type);<span class="comment">//小孩<br><span class="line"><br><span class="line">person.age = <span class="number">18;<br><span class="line"><span class="built_in">console.log(person.type);<span class="comment">//成人<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>通过修改age的值，type的值也会相应的修改，这样我们就不用再手动的去修改type的值了。<br>下面这种方式也是可以实现同样的效果：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br><span class="line">15<br><span class="line">16<br><span class="line">17<br><span class="line">18<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var person = {<br><span class="line">    _age: <span class="number">10,<br><span class="line">    type: <span class="string">"小孩"<br><span class="line">} <br><span class="line"><br><span class="line"><span class="built_in">Object.defineProperty(person, <span class="string">"age", {<br><span class="line">    get: <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">        <span class="keyword">return <span class="keyword">this._age;<br><span class="line">    },<br><span class="line">    set: <span class="function"><span class="keyword">function (<span class="params">newValue) {<br><span class="line">        <span class="keyword">this._age = newValue;<br><span class="line">        <span class="keyword">this.type = newValue &gt; <span class="number">17 ? <span class="string">"成人" : <span class="string">"小孩";<br><span class="line">    }<br><span class="line">})<br><span class="line"><span class="built_in">console.log(person.type);<br><span class="line"><br><span class="line">person.age = <span class="number">18;<br><span class="line"><span class="built_in">console.log(person.type);<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>关于访问器属性，有几点要注意：<br>1、严格模式下，必须同时设置get和set<br>2、非严格模式下，可以只设置其中一个，如果只设置get，则属性是只读的，如果只设置set，属性则无法读取<br>3、Object.defineProperty是ES5中的新方法，IE9（IE8部分实现，只有dom对象才支持）以下浏览器不支持，一些旧的浏览器可以通过非标准方法<strong>defineGetter</strong>()和<strong>defineSetter</strong>()来设置，这里就不说明了，有兴趣的同学可以查找相关资料。</p>
-<h5 id="特性操作的相关方法">特性操作的相关方法</h5>
-<p>ES5提供了一些读取或操作属性特性的方法，前面用到的Object.defineProperty就是其中之一。我总结了一些比较常用的方法如下：</p>
-<p>（1）Object.defineProperty<br>定义一个对象的属性，这个方法前面我们已经用到多次，简单说说其用法。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="tag">Object<span class="class">.defineProperty(<span class="tag">obj,<span class="tag">propName,<span class="tag">descriptor);<br></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>defineProperty有点类似于定于在Object上的静态方法，通过Object直接调用，它接收3个参数：<br>obj：需要定义属性的对象<br>propNane：需要被定义的属性名称<br>defineProperty：属性描述符，包含一些属性的特性定义<br>例子如下：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var obj = {};<br><span class="line">Object.defineProperty(obj, <span class="string">"name", {<br><span class="line">    <span class="keyword">value: <span class="string">"name",<br><span class="line">    configurable: <span class="keyword">true,<br><span class="line">    writable: <span class="keyword">true,<br><span class="line">    enumerable: <span class="keyword">true<br><span class="line">});<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>（2）Object.defineProperties<br>和defineProperty类似，是用来定义对象属性的，不同的是它可以用来同时定义多个属性，我们通过命名也可以看出来，用法如下：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var obj = {};<br><span class="line">Object.defineProperty(obj, {<br><span class="line">    <span class="string">"name": {<br><span class="line">        <span class="keyword">value: <span class="string">"name",<br><span class="line">        configurable: <span class="keyword">true,<br><span class="line">        writable: <span class="keyword">true,<br><span class="line">        enumerable: <span class="keyword">true<br><span class="line">    },<br><span class="line">    <span class="string">"age": {<br><span class="line">        <span class="keyword">value: <span class="number">20 <br><span class="line">    }<br><span class="line">});<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>（3）Object.getOwnPropertyDescriptor<br>ES5中还提供了一个读取特性值的方法，该方法接收对象及其属性名作为两个参数，返回一个对象，根据属性类型的不同，返回对象会包含不同的值。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br><span class="line">15<br><span class="line">16<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line">var person = {<br><span class="line">    _age: <span class="number">10,<br><span class="line">    <span class="built_in">type: <span class="string">"小孩"<br><span class="line">}<br><span class="line">Object.defineProperty(person, <span class="string">"age", {<br><span class="line">    get: <span class="function"><span class="keyword">function <span class="params">() {<br><span class="line">        <span class="keyword">return this._age;<br><span class="line">    },<br><span class="line">    set: <span class="function"><span class="keyword">function <span class="params">(newValue) {<br><span class="line">        this._age = newValue;<br><span class="line">        this.<span class="built_in">type = newValue &gt; <span class="number">17 ? <span class="string">"成人" : <span class="string">"小孩";<br><span class="line">    }<br><span class="line">})<br><span class="line"><br><span class="line">console.log(Object.getOwnPropertyDescriptor(person, <span class="string">"type"));//Object {value: <span class="string">"成人", writable: <span class="keyword">true, enumerable: <span class="keyword">true, configurable: <span class="keyword">true}<br><span class="line">console.log(Object.getOwnPropertyDescriptor(person, <span class="string">"age")); //Object {enumerable: <span class="keyword">false, configurable: <span class="keyword">false, get: <span class="function"><span class="keyword">function<span class="params">(),set: <span class="function"><span class="keyword">function <span class="params">()}<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<h3 id="Object的方法">Object的方法</h3>
-<p>在ES5中，Object对象上新增了一批方法，这些方法可以直接通过Object进行访问，前面用到的defineProperty就是新增的方法之一。除此之外还有很多方法，我将其总结归纳如下：</p>
-<h4 id="对象创建型方法">对象创建型方法</h4>
-<h5 id="Object-create(proto,_[propertiesObject])">Object.create(proto, [propertiesObject])</h5>
-<p>在前面我们提到，创建一个对象有两种方法：构造函数和对象字面量。<br>这两种方法有一个缺点就是：如果要创建多个对象，写起来很繁琐，所以后来就有了一种创建自定义构造函数的方法来创建对象，如下所示：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Person<span class="params">(name, age) {<br><span class="line">    <span class="keyword">this.name = name;<br><span class="line">    <span class="keyword">this.age = age;<br><span class="line">}<br><span class="line"><br><span class="line"><span class="keyword">var person = <span class="keyword">new Person(<span class="string">"Jack", <span class="number">15);<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>这种方式可以很方便的创建多个同样的对象，也是目前比较常用的方法。</p>
-<p>ES5提供的Object.create方法也是一个创建对象的方法，这个方法允许为创建的对象选择原型对象，不需要定义一个构造函数。用法如下：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="keyword">var obj = <span class="built_in">Object.create(<span class="built_in">Object.prototype, { <br><span class="line">    name: {<br><span class="line">        value: <span class="string">"Jack"<br><span class="line">    }<br><span class="line">})<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//Jack<br></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>这个方法接收的第一个参数作为被创建对象的原型，第二个参数是对象的属性。注意：在这个例子中，name属性是无法被修改的，因为它没有设置writable特性，默认则为false。<br>个人看法：Object.create这种创建对象的方式略显繁琐，除非是需要修改属性的特性，否则不建议使用这种方式创建对象。</p>
-<h4 id="属性获取型方法">属性获取型方法</h4>
-<h5 id="Object-keys">Object.keys</h5>
-<p>Object.keys是用来获取给定对象的所有可枚举的自身属性的属性名，它返回一个数组。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Parent(<span class="params">) {<br><span class="line">    <span class="keyword">this.lastName = <span class="string">"Black"<br><span class="line">}<br><span class="line"><span class="function"><span class="keyword">function <span class="title">Child(<span class="params">firstName) {<br><span class="line">    <span class="keyword">this.firstName = firstName;<br><span class="line">}<br><span class="line">Child.prototype = <span class="keyword">new Parent();<br><span class="line"><br><span class="line"><span class="keyword">var son = <span class="keyword">new Child(<span class="string">"Jack");<br><span class="line"><span class="built_in">console.log(<span class="built_in">Object.keys(son));<span class="comment">//["firstName"]<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>代码中返回了firstName，并没有返回从prototype继承而来的lastName和不可枚举的相关属性。<br>在一些旧的浏览器中，我们可以使用hasOwnProperty和for…in来达到类似的效果。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="built_in">Object.keys = <span class="built_in">Object.keys ||<br><span class="line">    <span class="function"><span class="keyword">function (<span class="params">obj) {<br><span class="line">        <span class="keyword">var keys = [];<br><span class="line">        <span class="keyword">for (<span class="keyword">var key <span class="keyword">in obj) {<br><span class="line">            <span class="keyword">if (obj.hasOwnProperty(key)) {<br><span class="line">                keys.push(key);<br><span class="line">            }<br><span class="line">        }<br><span class="line">        <span class="keyword">return keys;<br><span class="line">    }<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<h5 id="Object-getOwnPropertyNames()">Object.getOwnPropertyNames()</h5>
-<p>getOwnPropertyNames用来获取对象自身的所有属性，包括可枚举和不可枚举的所有属性，如下所示：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Parent(<span class="params">) {<br><span class="line">    <span class="keyword">this.lastName = <span class="string">"Black"<br><span class="line">}<br><span class="line"><span class="function"><span class="keyword">function <span class="title">Child(<span class="params">firstName) {<br><span class="line">    <span class="keyword">this.firstName = firstName;<br><span class="line">}<br><span class="line">Child.prototype = <span class="keyword">new Parent();<br><span class="line"><br><span class="line"><span class="keyword">var son = <span class="keyword">new Child(<span class="string">"Jack");<br><span class="line"><span class="built_in">Object.defineProperty(son, <span class="string">"age", {<br><span class="line">    enumerable: <span class="literal">false<br><span class="line">})<br><span class="line"><span class="built_in">console.log(<span class="built_in">Object.keys(son));<span class="comment">//["firstName"]  <br><span class="line"><span class="built_in">console.log(<span class="built_in">Object.getOwnPropertyNames(son));<span class="comment">//["firstName", "age"]<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>我们定义给son对象定义了一个不可枚举的属性age，然后通过keys和getOwnPropertyNames两个方法来获取属性列表，能明显看出了两者区别。</p>
-<h4 id="属性特性型方法">属性特性型方法</h4>
-<p>这个主要是前面提到的三个方法：defineProperty，defineProperties和getOwnPropertyDescriptor三个方法</p>
-<h4 id="对象限制型方法">对象限制型方法</h4>
-<p>ES5中提供了一系列限制对象被修改的方法，用来防止被某些对象被无意间修改导致的错误。每种限制类型包含一个判断方法和一个设置方法。</p>
-<h5 id="阻止对象扩展">阻止对象扩展</h5>
-<p>Object.preventExtensions()用来限制对象的扩展，设置之后，对象将无法添加新属性，用法如下：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="tag">Object<span class="class">.preventExtensions(<span class="tag">obj);<br></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>该方法接收一个要被设置成无法扩展的对象作为参数，需要注意两点：<br>1、对象的属性不可用扩展，但是已存在的属性可以被删除<br>2、无法添加新属性指的是无法在自身上添加属性，如果是在对象的原型上，还是可以添加属性的。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Person(<span class="params">name) {<br><span class="line">    <span class="keyword">this.name = name;<br><span class="line">}<br><span class="line"><span class="keyword">var person = <span class="keyword">new Person(<span class="string">"Jack");<br><span class="line"><span class="built_in">Object.preventExtensions(person);<br><span class="line"><br><span class="line"><span class="keyword">delete person.name;<br><span class="line"><span class="built_in">console.log(person.name);<span class="comment">//undefined<br><span class="line"><br><span class="line">Person.prototype.age = <span class="number">15;<br><span class="line"><span class="built_in">console.log(person.age);<span class="comment">//15<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>Object.isExtensible方法用来判断一个对象是否可扩展，默认情况是true</p>
-<h5 id="将对象密封">将对象密封</h5>
-<p>Object.seal可以密封一个对象并返回被密封的对象。<br>密封对象无法添加或删除已有属性，也无法修改属性的enumerable，writable，configurable，但是可以修改属性值。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Person(<span class="params">name) {<br><span class="line">    <span class="keyword">this.name = name;<br><span class="line">}<br><span class="line"><span class="keyword">var person = <span class="keyword">new Person(<span class="string">"Jack");<br><span class="line"><span class="built_in">Object.seal(person);<br><span class="line"><span class="keyword">delete person.name;<br><span class="line"><span class="built_in">console.log(person.name);<span class="comment">//Jack<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>将对象密封后，使用delete删除对象属性，还是可以访问得到属性。</p>
-<p>通过Object.isSealed可以用来判断一个对象是否被密封了。</p>
-<h5 id="冻结对象">冻结对象</h5>
-<p>Object.freeze方法用来冻结一个对象，被冻结的对象将无法添加，修改，删除属性值，也无法修改属性的特性值，即这个对象无法被修改。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Person(<span class="params">name) {<br><span class="line">    <span class="keyword">this.name = name;<br><span class="line">}<br><span class="line"><span class="keyword">var person = <span class="keyword">new Person(<span class="string">"Jack");<br><span class="line"><span class="built_in">Object.freeze(person);<br><span class="line"><br><span class="line"><span class="keyword">delete person.name;<br><span class="line"><span class="built_in">console.log(person.name);<span class="comment">//Jack<br><span class="line"><br><span class="line">Person.prototype.age = <span class="number">15;<br><span class="line"><span class="built_in">console.log(person.age);<span class="comment">//15<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>分析上面的代码我们可以发现，被冻结的对象无法删除自身的属性，但是通过其原型对象还是可以新增属性的。</p>
-<p>通过Object.isFrozen可以用来判断一个对象是否被冻结了。</p>
-<p>可以发现：这三个限制对象的方法的限制程度是依次上升的。</p>
-<h3 id="总结">总结</h3>
-<p>Object虽说是一个我们平时开发中最经常用到的对象，但是它的很多功能还没有被我们挖掘出来。本文首先介绍了Object的基本使用，接着介绍了一些比较少使用到的属性特性，最后分析了一些比较常用的方法，尤其是ES5中提供的新方法。欢迎大家交流！！</p></div>]]></content>
     </entry>
 </feed>

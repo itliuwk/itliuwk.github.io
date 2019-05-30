@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>七牛云 | 刘伟坤</title>
+<title>centOS6.8安装nginx | 刘伟坤</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,6 +13,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://itliuwk.github.io/styles/main.css">
 
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -91,51 +97,78 @@
 
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
-          <h2 class="current-tag">标签: 七牛云</h2>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/vue-ji-yu-qi-niu-yun-shang-chuan-tu-pian-shi-pin">
-                  <h2 class="post-title">vue基于七牛云 上传图片、视频</h2>
-                </a>
-                <div class="post-date">
-                  2019-05-13 10:50:23
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/fu-wen-ben-vue-quill-editor-zheng-he-qi-niu-yun-shang-chuan-tu-pian">
-                  <h2 class="post-title">富文本vue-quill-editor整合七牛云上传图片</h2>
-                </a>
-                <div class="post-date">
-                  2019-04-17 15:19:26
-                </div>
-                <div class="post-abstract">
-                  <p>1.概述
-实现前提:</p>
-<p>Element UI:上传使用的是Element 的el-upload组件,
-可以参考 <a href="http://element.eleme.io/#/zh-CN/component/upload" target="_blank">http://element.eleme.io/#/zh-CN/component/upload</a>
-quill-editor:富文本处理，可以参考文档
-<a href=" https://surmon-china.github.io/vue-quill-editor/" target="_blank">https://surmon-china.github.io/vue-quill-editor/</a></p>
-<p>参考文章大神的文章 <a href=" https://github.com/NextBoy/skill/issues/2" target="_blank">https://github.com/NextBoy/skill/issues/2</a>
-这里主要讲解的是如何使用Element和quill-editor还有七牛云整合的思路</p>
+          <div class="post-detail">
+            <h2 class="post-title">centOS6.8安装nginx</h2>
+            <div class="post-date">2019-05-30 15:53:22</div>
+            
+            <div class="post-content">
+              <p>1.安装nginx所需环境：
+yum install gcc
+yum install pcre-devel
+yum install zlib zlib-devel
+yum install openssl openssl-devel
+或者一键安装：yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel</p>
+<!-- more --> 
+<p>2.下载nginx压缩包：
+wget <a href="http://nginx.org/download/nginx-1.15.7.tar.gz" > http://nginx.org/download/nginx-1.15.7.tar.gz</a></p>
+<p>下载在当前目录</p>
+<p>3.解压缩：tar -zxvf nginx-1.15.7.tar.gz</p>
+<p>4.进入nginx-1.10.2目录：cd nginx-1.15.7</p>
+<ol start="5">
+<li>
+<p>执行 ./configure</p>
+</li>
+<li>
+<p>执行make</p>
+</li>
+<li>
+<p>执行make install</p>
+</li>
+<li>
+<p>查找nginx安装目录：whereis nginx</p>
+</li>
+</ol>
+<p>9.进入niginx安装目录,默认在 cd /usr/local/nginx/sbin</p>
+<ol start="10">
+<li>执行 ./nginx</li>
+</ol>
+<p>11.打开浏览器，输入ip地址，看到welcome to nginx！即安装成功</p>
+<p>如不行 在 sbin目录下执行下面步骤</p>
+<p>fuser -k 80/tcp 强制停止80端口</p>
+<p>./nginx -s reload 重载 nginx</p>
+<p>./nginx -t 启动</p>
+<p>./nginx 启动</p>
 
-                </div>
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://itliuwk.github.io/tag/nginx" class="tag">
+                    nginx
+                  </a>
+                
               </div>
-              
-            </article>
-          
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi">
+                  <h3 class="post-title">
+                    前端 nginx 跨域访问配置
+                  </h3>
+                </a>
+              </div>
+            
 
-          <div class="pagination-container">
-  
-  
-</div>
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
 
         </div>
       </div>
@@ -157,6 +190,29 @@ var app = new Vue({
 })
 
 </script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'e2ff37019fc675e134bc',
+        clientSecret: '257d9f0deba52afa019fadb594d2f7c357af79bf',
+        repo: 'itliuwk.github.io',
+        owner: 'itliuwk',
+        admin: ['itliuwk'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
 
 
 
