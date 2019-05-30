@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>详解Javascript中的Object对象 | 刘伟坤</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://itliuwk.github.io/favicon.ico?v=1559198281386">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://itliuwk.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://itliuwk.github.io">
+        <img src="https://itliuwk.github.io/images/avatar.png?v=1559198281386" class="site-logo">
+        <h1 class="site-title">刘伟坤</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://itliuwk.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">详解Javascript中的Object对象</h2>
+            <div class="post-date">2018-04-08 11:20:35</div>
+            
+            <div class="post-content">
+              <p>Object是在javascript中一个被我们经常使用的类型，而且JS中的所有对象都是继承自Object对象的...</p>
+<!--more-->
+<p>虽说我们平时只是简单地使用了Object对象来存储数据，并没有使用到太多其他功能，但是Object对象其实包含了很多很有用的属性和方法，尤其是ES5增加的方法，因此，本文将从最基本的介绍开始，详细说明了Object的常用方法和应用。</p>
+<h3 id="基础介绍">基础介绍</h3>
+<h4 id="创建对象">创建对象</h4>
+<p>首先我们都知道，对象就是一组相似数据和功能的集合，我们就是用它来模拟我们现实世界中的对象的。那在Javascript中，创建对象的方式通常有两种方式：构造函数和对象字面量。</p>
+<h5 id="new构造函数法">new构造函数法</h5>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var person = <span class="keyword">new <span class="built_in">Object();<br><span class="line">person.name = <span class="string">"狼狼的蓝胖子";<br><span class="line">person.age = <span class="number">25;<br></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>这种方式使用new关键字，接着跟上Object构造函数，再来给对象实例动态添加上不同的属性。这种方式相对来说比较繁琐，一般推荐使用对象字面量来创建对象。</p>
+<h5 id="对象字面量">对象字面量</h5>
+<p>对象字面量很好理解，使用key/value的形式直接创建对象，简洁方便。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="variable"><span class="keyword">var person = {<br><span class="line">    name: “狼狼的蓝胖子”,<br><span class="line">    age: <span class="number">25<br><span class="line">};<br></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>这种方式直接通过花括号将对象的属性包起来，使用key/value的方式创建对象属性，每个属性之间用逗号隔开。<br>注意：如果是最后一个属性，后面就不要加逗号，因为在一些旧的浏览器下会报错。</p>
+<h4 id="对象实例的属性和方法">对象实例的属性和方法</h4>
+<p>不管通过哪种方式创建了对象实例后，该实例都会拥有下面的属性和方法，下面将会一一说明。</p>
+<h5 id="constructor属性">constructor属性</h5>
+<p>constructor属性是保存当前对象的构造函数，前面的例子中，constructor保存的就是Object方法。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var obj1 = <span class="keyword">new <span class="built_in">Object();<br><span class="line">obj1.id = <span class="string">"obj1";<br><span class="line"><span class="keyword">var obj2 = {<br><span class="line">    <span class="string">"id": <span class="string">"obj2"<br><span class="line">};<br><span class="line"> <br><span class="line"><span class="built_in">console.log(obj1.constructor);<span class="comment">//function Object(){}<br><span class="line"><span class="built_in">console.log(obj2.constructor);<span class="comment">//function Object(){}<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h5 id="hasOwnProperty(propertyName)方法">hasOwnProperty(propertyName)方法</h5>
+<p>hasOwnProperty方法接收一个字符串参数，该参数表示属性名称，用来判断该属性是否在当前对象实例中，而不是在对象的原型链中。我们来看看下面这个例子：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var arr = [];        <br><span class="line"><span class="built_in">console.log(arr.hasOwnProperty(<span class="string">"length"));<span class="comment">//true<br><span class="line"><span class="built_in">console.log(arr.hasOwnProperty(<span class="string">"hasOwnProperty"));<span class="comment">//false<br></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>在这个例子中，首先通过定义了一个数组对象的实例arr，我们知道数组对象实际是通过原型链继承了Object对象，然后拥有自己的一些属性，我们通过hasOwnProperty方法判断length是arr自己的属性，而hasOwnProperty是在原型链上的属性。<br>hasOwnProperty方法可以和for..in结合起来获取对象自己的key。</p>
+<h5 id="isPrototypeOf(Object)方法">isPrototypeOf(Object)方法</h5>
+<p>isPrototype方法接收一个对象，用来判断当前对象是否在传入的参数对象的原型链上，说起来有点抽象，我们来看看代码。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">MyObject(<span class="params">) {}<br><span class="line"><span class="keyword">var obj = <span class="keyword">new MyObject();<br><span class="line"><span class="built_in">console.log(<span class="built_in">Object.prototype.isPrototypeOf(obj));<br></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>我们知道MyObject是继承自Object对象的，而在JS中，继承是通过prototype来实现的，所以Object的prototype必定在MyObject对象实例的原型链上。</p>
+<h5 id="propertyIsEnumerable(prototypeName)方法">propertyIsEnumerable(prototypeName)方法</h5>
+<p>prototypeIsEnumerable用来判断给定的属性是否可以被for..in语句给枚举出来。看下面代码：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var obj = {<br><span class="line">    name: <span class="string">"objName"<br><span class="line">}  <br><span class="line"><span class="keyword">for (<span class="keyword">var i <span class="keyword">in obj) {<br><span class="line">    <span class="built_in">console.log(i);<br><span class="line">}<br></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>执行这段代码输出字符串“name”，这就说明通过for…in语句可以得到obj的name这个属性，但是我们知道，obj的属性还有很多，比如constructor，比如hasOwnPrototype等等，但是它们没有被输出，说明这些属性不能被for…in给枚举出来，可以通过propertyIsEnumerable方法来得到。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="built_in">console.log(obj.propertyIsEnumerable(<span class="string">"constructor"));<span class="regexp">//<span class="literal">false<br></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>判断“constructor”是否可以被枚举，输出false说明无法被枚举出来。</p>
+<h5 id="toLocaleString()方法">toLocaleString()方法</h5>
+<p>toLocalString方法返回对象的字符串表示，和代码的执行环境有关。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="built_in">var obj = {};<br><span class="line">console<span class="built_in">.<span class="keyword">log(obj<span class="built_in">.toLocaleString());<span class="comment">//[object Object]  <br><span class="line"><br><span class="line"><span class="built_in">var <span class="built_in">date = <span class="literal">new <span class="built_in">Date();<br><span class="line">console<span class="built_in">.<span class="keyword">log(<span class="built_in">date<span class="built_in">.toLocaleString());<span class="comment">//2016/2/28 下午1:39:27<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h5 id="toString()方法">toString()方法</h5>
+<p>toString用来返回对象的字符串表示。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="built_in">var obj = {};<br><span class="line">console<span class="built_in">.<span class="keyword">log(obj<span class="built_in">.toString());<span class="comment">//[object Object]<br><span class="line">        <br><span class="line"><span class="built_in">var <span class="built_in">date = <span class="literal">new <span class="built_in">Date();<br><span class="line">console<span class="built_in">.<span class="keyword">log(<span class="built_in">date<span class="built_in">.toString());<span class="comment">//Sun Feb 28 2016 13:40:36 GMT+0800 (中国标准时间)<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h5 id="valueOf()方法">valueOf()方法</h5>
+<p>valueOf方法返回对象的原始值，可能是字符串、数值或bool值等，看具体的对象。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"> <span class="keyword">var obj = {<br><span class="line">    name: <span class="string">"obj"<br><span class="line">};<br><span class="line"><span class="built_in">console.log(obj.valueOf());<span class="comment">//Object {name: "obj"}<br><span class="line"><br><span class="line"><span class="keyword">var arr = [<span class="number">1];<br><span class="line"><span class="built_in">console.log(arr.valueOf());<span class="comment">//[1]<br><span class="line"><br><span class="line"><span class="keyword">var date = <span class="keyword">new <span class="built_in">Date();<br><span class="line"><span class="built_in">console.log(date.valueOf());<span class="comment">//1456638436303<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>如代码所示，三个不同的对象实例调用valueOf返回不同的数据。</p>
+<h4 id="属性的类型">属性的类型</h4>
+<p>在Javascript中，属性有两种类型，分别是数据属性和访问器属性，我们来看看这两种属性具体是什么东西。</p>
+<h5 id="数据属性">数据属性</h5>
+<p>数据属性我们可以理解为我们平时定义对象时赋予的属性，它可以进行读和写。但是，ES5中定义了一些特性，这些特性是用来描述属性的各种特征，特性是内部值，不能直接访问到。特性通过用两对方括号表示，比如[[Enumerable]]。属性的特性会有一些默认值，要修改特性的默认值，必须使用ES5定义的新方法Object.defineProperty方法来修改。<br>数据属性有4个描述其特征的特性，下面将依次说明每一个特性：<br>（1）[[Configurable]]：该特性表示是否可以通过delete操作符来删除属性，默认值是true。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var obj = {};<br><span class="line">obj.name = <span class="string">"myname";<br><span class="line">        <br><span class="line"><span class="keyword">delete obj.name;<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//undefined<br></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>这段代码很明显，通过delete删除了obj的name属性后，我们再访问name属性就访问不到了。<br>我们通过Object.defineProperty方法来修改[[Configurable]]特性。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var obj = {};<br><span class="line">obj.name = <span class="string">"myname";<br><span class="line"><span class="built_in">Object.defineProperty(obj, <span class="string">"name", {<br><span class="line">    configurable: <span class="literal">false<br><span class="line">})                <br><span class="line"><br><span class="line"><span class="keyword">delete obj.name;<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//myname<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>通过将configurable特性设置成false之后，delete就无法删除name属性了，如果在严格模式下，使用delete去删除就会报错。</p>
+<p>（2）[[Enumerable]]：表示是否能够通过for…in语句来枚举出属性，默认是true<br>我们来看看前面的例子：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var obj = {<br><span class="line">    name: <span class="string">"objName"<br><span class="line">}  <br><span class="line"><span class="keyword">for (<span class="keyword">var i <span class="keyword">in obj) {<br><span class="line">    <span class="built_in">console.log(i);<span class="comment">//name<br><span class="line">}<br></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>这段代码只输出了name属性，我们来将constructor属性的[[Enumerable]]设置为true试试。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"> <span class="keyword">var obj = {<br><span class="line">        name: <span class="string">"objName"<br><span class="line">}<br><span class="line"><span class="built_in">Object.defineProperty(obj, <span class="string">"constructor", {<br><span class="line">    enumerable: <span class="literal">true<br><span class="line">})<br><span class="line"><br><span class="line"><span class="keyword">for (<span class="keyword">var i <span class="keyword">in obj) {<br><span class="line">    <span class="built_in">console.log(i);<span class="comment">//name,constructor<br><span class="line">}<br><span class="line"><span class="built_in">console.log(obj.propertyIsEnumerable(<span class="string">"constructor"));<span class="comment">//true<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>这段代码中，for…in循环得到了name和constructor两个属性，而通过propertyIsEnumerable方法来判断constructor也返回了true。</p>
+<p>（3）[[Writable]]：表示属性值是否可以修改，默认为true<br>如果[[Writable]]被设置成false，尝试修改时将没有效果，在严格模式下会报错</p>
+<p>（4）[[Value]]：表示属性的值，默认为undefined</p>
+<p>我们通过一个简单的例子来看看这两个特性：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var obj = {<br><span class="line">    name: <span class="string">"name"<br><span class="line">};<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//name        <br><span class="line"><br><span class="line"><span class="built_in">Object.defineProperty(obj, <span class="string">"name", {<br><span class="line">    value: <span class="string">"newValue",<br><span class="line">    writable: <span class="literal">false<br><span class="line">})<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//newValue<br><span class="line"><br><span class="line">obj.name = <span class="string">"oldValue";<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//newValue<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>我们首先定义了obj对象的name属性值为“name”，然后通过defineProperty方法来修改值，并且将其设置为不可修改的。接着我们再修改name属性的值，可以发现修改无效。<br>如果我们通过defineProperty来修改name属性的值，是否可以修改呢？答案是可以的：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="tag">Object<span class="class">.defineProperty(obj, <span class="string">"name", {<br><span class="line">    <span class="attribute">value: <span class="string">"oldValue"<br><span class="line">})<br><span class="line"><span class="tag">console<span class="class">.log(obj.name); <span class="comment">//oldValue<br></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h5 id="访问器属性">访问器属性</h5>
+<p>访问器属性有点类似于C#中的属性，和数据属性的区别在于，它没有数据属性的[[Writable]]和[[Value]]两个特性，而是拥有一对getter和setter函数。<br>[[Get]]：读取属性时调用的函数，默认是undefined<br>[[Set]]：设置属性时调用的函数，默认是undefined<br>getter和setter是一个很有用的东西，假设有两个属性，其中第二个属性值会随着第一个属性值的变化而变化。这种场景在我们平时的编码中起始是非常常见的。在之前的做法中，我们往往要去手动修改第二个属性的值，那现在我们就可以通过get和set函数来解决这个问题。看下面这个例子：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br><span class="line">15<br><span class="line">16<br><span class="line">17<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var person = {<br><span class="line">    age: <span class="number">10<br><span class="line">}<br><span class="line"><br><span class="line"><span class="built_in">Object.defineProperty(person, <span class="string">"type", {<br><span class="line">    get: <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">        <span class="keyword">if (person.age &gt; <span class="number">17) {<br><span class="line">            <span class="keyword">return <span class="string">"成人";<br><span class="line">        }<br><span class="line">        <span class="keyword">return <span class="string">"小孩";<br><span class="line">    }<br><span class="line">})<br><span class="line"><br><span class="line"><span class="built_in">console.log(person.type);<span class="comment">//小孩<br><span class="line"><br><span class="line">person.age = <span class="number">18;<br><span class="line"><span class="built_in">console.log(person.type);<span class="comment">//成人<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>通过修改age的值，type的值也会相应的修改，这样我们就不用再手动的去修改type的值了。<br>下面这种方式也是可以实现同样的效果：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br><span class="line">15<br><span class="line">16<br><span class="line">17<br><span class="line">18<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var person = {<br><span class="line">    _age: <span class="number">10,<br><span class="line">    type: <span class="string">"小孩"<br><span class="line">} <br><span class="line"><br><span class="line"><span class="built_in">Object.defineProperty(person, <span class="string">"age", {<br><span class="line">    get: <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">        <span class="keyword">return <span class="keyword">this._age;<br><span class="line">    },<br><span class="line">    set: <span class="function"><span class="keyword">function (<span class="params">newValue) {<br><span class="line">        <span class="keyword">this._age = newValue;<br><span class="line">        <span class="keyword">this.type = newValue &gt; <span class="number">17 ? <span class="string">"成人" : <span class="string">"小孩";<br><span class="line">    }<br><span class="line">})<br><span class="line"><span class="built_in">console.log(person.type);<br><span class="line"><br><span class="line">person.age = <span class="number">18;<br><span class="line"><span class="built_in">console.log(person.type);<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>关于访问器属性，有几点要注意：<br>1、严格模式下，必须同时设置get和set<br>2、非严格模式下，可以只设置其中一个，如果只设置get，则属性是只读的，如果只设置set，属性则无法读取<br>3、Object.defineProperty是ES5中的新方法，IE9（IE8部分实现，只有dom对象才支持）以下浏览器不支持，一些旧的浏览器可以通过非标准方法<strong>defineGetter</strong>()和<strong>defineSetter</strong>()来设置，这里就不说明了，有兴趣的同学可以查找相关资料。</p>
+<h5 id="特性操作的相关方法">特性操作的相关方法</h5>
+<p>ES5提供了一些读取或操作属性特性的方法，前面用到的Object.defineProperty就是其中之一。我总结了一些比较常用的方法如下：</p>
+<p>（1）Object.defineProperty<br>定义一个对象的属性，这个方法前面我们已经用到多次，简单说说其用法。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="tag">Object<span class="class">.defineProperty(<span class="tag">obj,<span class="tag">propName,<span class="tag">descriptor);<br></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>defineProperty有点类似于定于在Object上的静态方法，通过Object直接调用，它接收3个参数：<br>obj：需要定义属性的对象<br>propNane：需要被定义的属性名称<br>defineProperty：属性描述符，包含一些属性的特性定义<br>例子如下：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var obj = {};<br><span class="line">Object.defineProperty(obj, <span class="string">"name", {<br><span class="line">    <span class="keyword">value: <span class="string">"name",<br><span class="line">    configurable: <span class="keyword">true,<br><span class="line">    writable: <span class="keyword">true,<br><span class="line">    enumerable: <span class="keyword">true<br><span class="line">});<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>（2）Object.defineProperties<br>和defineProperty类似，是用来定义对象属性的，不同的是它可以用来同时定义多个属性，我们通过命名也可以看出来，用法如下：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var obj = {};<br><span class="line">Object.defineProperty(obj, {<br><span class="line">    <span class="string">"name": {<br><span class="line">        <span class="keyword">value: <span class="string">"name",<br><span class="line">        configurable: <span class="keyword">true,<br><span class="line">        writable: <span class="keyword">true,<br><span class="line">        enumerable: <span class="keyword">true<br><span class="line">    },<br><span class="line">    <span class="string">"age": {<br><span class="line">        <span class="keyword">value: <span class="number">20 <br><span class="line">    }<br><span class="line">});<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>（3）Object.getOwnPropertyDescriptor<br>ES5中还提供了一个读取特性值的方法，该方法接收对象及其属性名作为两个参数，返回一个对象，根据属性类型的不同，返回对象会包含不同的值。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br><span class="line">15<br><span class="line">16<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line">var person = {<br><span class="line">    _age: <span class="number">10,<br><span class="line">    <span class="built_in">type: <span class="string">"小孩"<br><span class="line">}<br><span class="line">Object.defineProperty(person, <span class="string">"age", {<br><span class="line">    get: <span class="function"><span class="keyword">function <span class="params">() {<br><span class="line">        <span class="keyword">return this._age;<br><span class="line">    },<br><span class="line">    set: <span class="function"><span class="keyword">function <span class="params">(newValue) {<br><span class="line">        this._age = newValue;<br><span class="line">        this.<span class="built_in">type = newValue &gt; <span class="number">17 ? <span class="string">"成人" : <span class="string">"小孩";<br><span class="line">    }<br><span class="line">})<br><span class="line"><br><span class="line">console.log(Object.getOwnPropertyDescriptor(person, <span class="string">"type"));//Object {value: <span class="string">"成人", writable: <span class="keyword">true, enumerable: <span class="keyword">true, configurable: <span class="keyword">true}<br><span class="line">console.log(Object.getOwnPropertyDescriptor(person, <span class="string">"age")); //Object {enumerable: <span class="keyword">false, configurable: <span class="keyword">false, get: <span class="function"><span class="keyword">function<span class="params">(),set: <span class="function"><span class="keyword">function <span class="params">()}<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h3 id="Object的方法">Object的方法</h3>
+<p>在ES5中，Object对象上新增了一批方法，这些方法可以直接通过Object进行访问，前面用到的defineProperty就是新增的方法之一。除此之外还有很多方法，我将其总结归纳如下：</p>
+<h4 id="对象创建型方法">对象创建型方法</h4>
+<h5 id="Object-create(proto,_[propertiesObject])">Object.create(proto, [propertiesObject])</h5>
+<p>在前面我们提到，创建一个对象有两种方法：构造函数和对象字面量。<br>这两种方法有一个缺点就是：如果要创建多个对象，写起来很繁琐，所以后来就有了一种创建自定义构造函数的方法来创建对象，如下所示：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Person<span class="params">(name, age) {<br><span class="line">    <span class="keyword">this.name = name;<br><span class="line">    <span class="keyword">this.age = age;<br><span class="line">}<br><span class="line"><br><span class="line"><span class="keyword">var person = <span class="keyword">new Person(<span class="string">"Jack", <span class="number">15);<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>这种方式可以很方便的创建多个同样的对象，也是目前比较常用的方法。</p>
+<p>ES5提供的Object.create方法也是一个创建对象的方法，这个方法允许为创建的对象选择原型对象，不需要定义一个构造函数。用法如下：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="keyword">var obj = <span class="built_in">Object.create(<span class="built_in">Object.prototype, { <br><span class="line">    name: {<br><span class="line">        value: <span class="string">"Jack"<br><span class="line">    }<br><span class="line">})<br><span class="line"><span class="built_in">console.log(obj.name);<span class="comment">//Jack<br></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>这个方法接收的第一个参数作为被创建对象的原型，第二个参数是对象的属性。注意：在这个例子中，name属性是无法被修改的，因为它没有设置writable特性，默认则为false。<br>个人看法：Object.create这种创建对象的方式略显繁琐，除非是需要修改属性的特性，否则不建议使用这种方式创建对象。</p>
+<h4 id="属性获取型方法">属性获取型方法</h4>
+<h5 id="Object-keys">Object.keys</h5>
+<p>Object.keys是用来获取给定对象的所有可枚举的自身属性的属性名，它返回一个数组。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Parent(<span class="params">) {<br><span class="line">    <span class="keyword">this.lastName = <span class="string">"Black"<br><span class="line">}<br><span class="line"><span class="function"><span class="keyword">function <span class="title">Child(<span class="params">firstName) {<br><span class="line">    <span class="keyword">this.firstName = firstName;<br><span class="line">}<br><span class="line">Child.prototype = <span class="keyword">new Parent();<br><span class="line"><br><span class="line"><span class="keyword">var son = <span class="keyword">new Child(<span class="string">"Jack");<br><span class="line"><span class="built_in">console.log(<span class="built_in">Object.keys(son));<span class="comment">//["firstName"]<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>代码中返回了firstName，并没有返回从prototype继承而来的lastName和不可枚举的相关属性。<br>在一些旧的浏览器中，我们可以使用hasOwnProperty和for…in来达到类似的效果。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="built_in">Object.keys = <span class="built_in">Object.keys ||<br><span class="line">    <span class="function"><span class="keyword">function (<span class="params">obj) {<br><span class="line">        <span class="keyword">var keys = [];<br><span class="line">        <span class="keyword">for (<span class="keyword">var key <span class="keyword">in obj) {<br><span class="line">            <span class="keyword">if (obj.hasOwnProperty(key)) {<br><span class="line">                keys.push(key);<br><span class="line">            }<br><span class="line">        }<br><span class="line">        <span class="keyword">return keys;<br><span class="line">    }<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h5 id="Object-getOwnPropertyNames()">Object.getOwnPropertyNames()</h5>
+<p>getOwnPropertyNames用来获取对象自身的所有属性，包括可枚举和不可枚举的所有属性，如下所示：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Parent(<span class="params">) {<br><span class="line">    <span class="keyword">this.lastName = <span class="string">"Black"<br><span class="line">}<br><span class="line"><span class="function"><span class="keyword">function <span class="title">Child(<span class="params">firstName) {<br><span class="line">    <span class="keyword">this.firstName = firstName;<br><span class="line">}<br><span class="line">Child.prototype = <span class="keyword">new Parent();<br><span class="line"><br><span class="line"><span class="keyword">var son = <span class="keyword">new Child(<span class="string">"Jack");<br><span class="line"><span class="built_in">Object.defineProperty(son, <span class="string">"age", {<br><span class="line">    enumerable: <span class="literal">false<br><span class="line">})<br><span class="line"><span class="built_in">console.log(<span class="built_in">Object.keys(son));<span class="comment">//["firstName"]  <br><span class="line"><span class="built_in">console.log(<span class="built_in">Object.getOwnPropertyNames(son));<span class="comment">//["firstName", "age"]<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>我们定义给son对象定义了一个不可枚举的属性age，然后通过keys和getOwnPropertyNames两个方法来获取属性列表，能明显看出了两者区别。</p>
+<h4 id="属性特性型方法">属性特性型方法</h4>
+<p>这个主要是前面提到的三个方法：defineProperty，defineProperties和getOwnPropertyDescriptor三个方法</p>
+<h4 id="对象限制型方法">对象限制型方法</h4>
+<p>ES5中提供了一系列限制对象被修改的方法，用来防止被某些对象被无意间修改导致的错误。每种限制类型包含一个判断方法和一个设置方法。</p>
+<h5 id="阻止对象扩展">阻止对象扩展</h5>
+<p>Object.preventExtensions()用来限制对象的扩展，设置之后，对象将无法添加新属性，用法如下：</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="tag">Object<span class="class">.preventExtensions(<span class="tag">obj);<br></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>该方法接收一个要被设置成无法扩展的对象作为参数，需要注意两点：<br>1、对象的属性不可用扩展，但是已存在的属性可以被删除<br>2、无法添加新属性指的是无法在自身上添加属性，如果是在对象的原型上，还是可以添加属性的。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Person(<span class="params">name) {<br><span class="line">    <span class="keyword">this.name = name;<br><span class="line">}<br><span class="line"><span class="keyword">var person = <span class="keyword">new Person(<span class="string">"Jack");<br><span class="line"><span class="built_in">Object.preventExtensions(person);<br><span class="line"><br><span class="line"><span class="keyword">delete person.name;<br><span class="line"><span class="built_in">console.log(person.name);<span class="comment">//undefined<br><span class="line"><br><span class="line">Person.prototype.age = <span class="number">15;<br><span class="line"><span class="built_in">console.log(person.age);<span class="comment">//15<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>Object.isExtensible方法用来判断一个对象是否可扩展，默认情况是true</p>
+<h5 id="将对象密封">将对象密封</h5>
+<p>Object.seal可以密封一个对象并返回被密封的对象。<br>密封对象无法添加或删除已有属性，也无法修改属性的enumerable，writable，configurable，但是可以修改属性值。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Person(<span class="params">name) {<br><span class="line">    <span class="keyword">this.name = name;<br><span class="line">}<br><span class="line"><span class="keyword">var person = <span class="keyword">new Person(<span class="string">"Jack");<br><span class="line"><span class="built_in">Object.seal(person);<br><span class="line"><span class="keyword">delete person.name;<br><span class="line"><span class="built_in">console.log(person.name);<span class="comment">//Jack<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>将对象密封后，使用delete删除对象属性，还是可以访问得到属性。</p>
+<p>通过Object.isSealed可以用来判断一个对象是否被密封了。</p>
+<h5 id="冻结对象">冻结对象</h5>
+<p>Object.freeze方法用来冻结一个对象，被冻结的对象将无法添加，修改，删除属性值，也无法修改属性的特性值，即这个对象无法被修改。</p>
+<table>
+<tbody>
+<tr>
+<td class="gutter">
+<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+<td class="code">
+<pre><span class="line"><span class="function"><span class="keyword">function <span class="title">Person(<span class="params">name) {<br><span class="line">    <span class="keyword">this.name = name;<br><span class="line">}<br><span class="line"><span class="keyword">var person = <span class="keyword">new Person(<span class="string">"Jack");<br><span class="line"><span class="built_in">Object.freeze(person);<br><span class="line"><br><span class="line"><span class="keyword">delete person.name;<br><span class="line"><span class="built_in">console.log(person.name);<span class="comment">//Jack<br><span class="line"><br><span class="line">Person.prototype.age = <span class="number">15;<br><span class="line"><span class="built_in">console.log(person.age);<span class="comment">//15<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>分析上面的代码我们可以发现，被冻结的对象无法删除自身的属性，但是通过其原型对象还是可以新增属性的。</p>
+<p>通过Object.isFrozen可以用来判断一个对象是否被冻结了。</p>
+<p>可以发现：这三个限制对象的方法的限制程度是依次上升的。</p>
+<h3 id="总结">总结</h3>
+<p>Object虽说是一个我们平时开发中最经常用到的对象，但是它的很多功能还没有被我们挖掘出来。本文首先介绍了Object的基本使用，接着介绍了一些比较少使用到的属性特性，最后分析了一些比较常用的方法，尤其是ES5中提供的新方法。欢迎大家交流！！</p></div>
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://itliuwk.github.io/post/xiang-jie-javascript-zhong-de-array-dui-xiang">
+                  <h3 class="post-title">
+                    详解Javascript中的Array对象
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'e2ff37019fc675e134bc',
+        clientSecret: '257d9f0deba52afa019fadb594d2f7c357af79bf',
+        repo: 'itliuwk.github.io',
+        owner: 'itliuwk',
+        admin: ['itliuwk'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

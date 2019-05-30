@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>同步回调函数与异步回调函数示例 | 刘伟坤</title>
+<meta name="description" content="">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://itliuwk.github.io/favicon.ico?v=1559198281386">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://itliuwk.github.io/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://itliuwk.github.io">
+        <img src="https://itliuwk.github.io/images/avatar.png?v=1559198281386" class="site-logo">
+        <h1 class="site-title">刘伟坤</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://itliuwk.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">同步回调函数与异步回调函数示例</h2>
+            <div class="post-date">2017-04-20 14:25:42</div>
+            
+            <div class="post-content">
+              <p>同步回调函数与异步回调函数示例</p>
+<!--more-->
+<h5>JS中的回调函数一共有两种</h5>
+<ol><ol>
+<li>同步回调函数（即普通的回调函数）。</li>
+<li>异步回调函数<br>注：JS中的同步异步和现实生活的正好相反。
+<h6>其中同步回调函数是要等到回调函数都执行完成后才能进行接下来的操作，也就是说是阻塞式运行</h6>
+</li>
+</ol></ol>
+<p>
+<p>同步回调函数示例</p></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">function</span><span style="color: #000000;"> waitFive(callback){ 
+      </span><span style="color: #0000ff;">var</span> currentDate = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Date(), 
+           pus </span>= 0<span style="color: #000000;">; 
+      </span><span style="color: #0000ff;">while</span>(pus&lt;1000<span style="color: #000000;">){ 
+          </span><span style="color: #0000ff;">var</span> date = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Date(); 
+          pus </span>= date -<span style="color: #000000;"> currentDate; 
+      } 
+      callback(</span>"回调执行完成"<span style="color: #000000;">); 
+      pus </span>= 2000<span style="color: #000000;">;
+} 
+waitFive(
+          </span><span style="color: #0000ff;">function</span>(msg){              <span style="color: #008000;">//</span><span style="color: #008000;">这里就是callback回调函数</span>
+<span style="color: #000000;">               console.log(msg);
+          }
+);
+console.log(</span>"进行第二步操作；"<span style="color: #000000;">);
+ </span>*****执行结果为：*****<span style="color: #000000;">
+        回调执行完成 
+        进行第二步操作</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div></div>
+<p>异步回调函数示例:</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">function</span><span style="color: #000000;"> waitFive(callback){ 
+      setTimeout(</span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){   
+            callback(</span>'回调执行完成'<span style="color: #000000;">);
+      },</span>2000<span style="color: #000000;">); 
+}
+waitFive( 
+      </span><span style="color: #0000ff;">function</span>(msg){           <span style="color: #008000;">//</span><span style="color: #008000;">这里就是callback回调函数 </span>
+<span style="color: #000000;">              console.log(msg); 
+      }
+);
+console.log(</span>"进行第二步操作；"<span style="color: #000000;">); 
+<p></span><em><strong><strong>执行结果为：</strong></strong></em><span style="color: #000000;"><br>
+进行第二步操作
+回调执行完成</span></pre></p>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div></div>
+<p>&nbsp;</p></div>
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://itliuwk.github.io/post/jquery-ji-ben-cao-zuo-bi-ji">
+                  <h3 class="post-title">
+                    jquery基本操作笔记
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'e2ff37019fc675e134bc',
+        clientSecret: '257d9f0deba52afa019fadb594d2f7c357af79bf',
+        repo: 'itliuwk.github.io',
+        owner: 'itliuwk',
+        admin: ['itliuwk'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
