@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>同步回调函数与异步回调函数示例 | 刘伟坤</title>
+<title>在Linux系统安装Nodejs 最简单步骤 | 刘伟坤</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -98,67 +98,36 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">同步回调函数与异步回调函数示例</h2>
-            <div class="post-date">2017-04-20 14:25:42</div>
+            <h2 class="post-title">在Linux系统安装Nodejs 最简单步骤</h2>
+            <div class="post-date">2018-12-13 14:48:39</div>
             
             <div class="post-content">
-              <p>同步回调函数与异步回调函数示例</p>
-<!--more-->
-<h5>JS中的回调函数一共有两种</h5>
-<ol><ol>
-<li>同步回调函数（即普通的回调函数）。</li>
-<li>异步回调函数<br>注：JS中的同步异步和现实生活的正好相反。
-<h6>其中同步回调函数是要等到回调函数都执行完成后才能进行接下来的操作，也就是说是阻塞式运行</h6>
-</li>
-</ol></ol>
-<p>
-<p>同步回调函数示例</p></p>
-<p>&nbsp;</p>
-<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div>
-<pre><span style="color: #0000ff;">function</span><span style="color: #000000;"> waitFive(callback){ 
-      </span><span style="color: #0000ff;">var</span> currentDate = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Date(), 
-           pus </span>= 0<span style="color: #000000;">; 
-      </span><span style="color: #0000ff;">while</span>(pus&lt;1000<span style="color: #000000;">){ 
-          </span><span style="color: #0000ff;">var</span> date = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Date(); 
-          pus </span>= date -<span style="color: #000000;"> currentDate; 
-      } 
-      callback(</span>"回调执行完成"<span style="color: #000000;">); 
-      pus </span>= 2000<span style="color: #000000;">;
-} 
-waitFive(
-          </span><span style="color: #0000ff;">function</span>(msg){              <span style="color: #008000;">//</span><span style="color: #008000;">这里就是callback回调函数</span>
-<span style="color: #000000;">               console.log(msg);
-          }
-);
-console.log(</span>"进行第二步操作；"<span style="color: #000000;">);
- </span>*****执行结果为：*****<span style="color: #000000;">
-        回调执行完成 
-        进行第二步操作</span></pre>
-<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div></div>
-<p>异步回调函数示例:</p>
-<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div>
-<pre><span style="color: #0000ff;">function</span><span style="color: #000000;"> waitFive(callback){ 
-      setTimeout(</span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){   
-            callback(</span>'回调执行完成'<span style="color: #000000;">);
-      },</span>2000<span style="color: #000000;">); 
-}
-waitFive( 
-      </span><span style="color: #0000ff;">function</span>(msg){           <span style="color: #008000;">//</span><span style="color: #008000;">这里就是callback回调函数 </span>
-<span style="color: #000000;">              console.log(msg); 
-      }
-);
-console.log(</span>"进行第二步操作；"<span style="color: #000000;">); 
-<p></span><em><strong><strong>执行结果为：</strong></strong></em><span style="color: #000000;"><br>
-进行第二步操作
-回调执行完成</span></pre></p>
-<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div></div>
-<p>&nbsp;</p></div>
+              <p>1、 去官网下载和自己系统匹配的文件：</p>
+<!-- more -->
+<p>英文网址：<a href="https://nodejs.org/en/download/" rel="nofollow" target="_blank">https://nodejs.org/en/download/</a></p>
+<p>中文网址：<a href="http://nodejs.cn/download/" rel="nofollow" target="_blank">http://nodejs.cn/download/</a></p>
+<p>通过 uname -a 命令查看到我的Linux系统位数是64位（备注：x86_64表示64位系统， i686 i386表示32位系统），如图
+<img src="https://images2015.cnblogs.com/blog/625378/201703/625378-20170301104556454-1441797328.png" alt="在这里插入图片描述"></p>
+<p>故下载一下红色框中文件 ，版本为v6.10.0</p>
+<img src="https://images2015.cnblogs.com/blog/625378/201703/625378-20170301103915345-1771725166.png" alt="在这里插入图片描述">
+<p>2、 下载下来的tar文件上传到服务器并且解压，然后通过建立软连接变为全局；</p>
+<p>1）上传服务器可以是自己任意路径，目前我的放置路径为 cd /app/software/</p>
+<p>2）解压上传（解压后的文件我这边将名字改为了nodejs，这个地方自己随意，只要在建立软连接的时候写正确就可以）</p>
+<p>① tar -xvf node-v6.10.0-linux-x64.tar.xz</p>
+<p>② mv node-v6.10.0-linux-x64 nodejs</p>
+<p>③ 确认一下nodejs下bin目录是否有node 和npm文件，如果有执行软连接，如果没有重新下载执行上边步骤；</p>
+<p>3）建立软连接，变为全局</p>
+<p>① ln -s /app/software/nodejs/bin/npm /usr/local/bin/</p>
+<p>② ln -s /app/software/nodejs/bin/node /usr/local/bin/
+4）最后一步检验nodejs是否已变为全局</p>
+<p>在Linux命令行node -v 命令会显示nodejs版本，如图所示为大功告成</p>
+<img src="https://images2015.cnblogs.com/blog/625378/201703/625378-20170301111018532-950176454.png" alt="在这里插入图片描述">
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://itliuwk.github.io/tag/js" class="tag">
-                    js
+                  <a href="https://itliuwk.github.io/tag/linux" class="tag">
+                    linux
                   </a>
                 
               </div>
@@ -166,9 +135,9 @@ console.log(</span>"进行第二步操作；"<span style="color: #000000;">);
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://itliuwk.github.io/post/jquery-ji-ben-cao-zuo-bi-ji">
+                <a href="https://itliuwk.github.io/post/zui-quan-de-javascript-zhi-shi-zong-jie">
                   <h3 class="post-title">
-                    jquery基本操作笔记
+                    最全的 JavaScript 知识总结
                   </h3>
                 </a>
               </div>
