@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>浅谈js中子页面父页面方法 变量相互调用 | 刘伟坤</title>
+<title>linux安装git方法 | 刘伟坤</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -98,50 +98,78 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">浅谈js中子页面父页面方法 变量相互调用</h2>
-            <div class="post-date">2018-08-23 16:07:32</div>
+            <h2 class="post-title">linux安装git方法</h2>
+            <div class="post-date">2018-08-14 11:55:46</div>
             
             <div class="post-content">
-              <p><strong>(1）子页面调用父页面的方法或者变量：</strong></p>
-<p>window.parent.方法()或者变量名
-window.parent相当于定位到父页面 之后的操作和在父页面中写代码一样写</p>
-<!-- more -->
-<pre><code>window.parent.aa();//调取aa函数
-window.parent.bb;//调取bb变量
-
-例如：想在子页面中得到id为aaa的文本框的值
-
-window.parent.$(&quot;#aaa&quot;).val();//这种写法的前提是引用了jquery 
-
-window.parent.getElementById(&quot;aaa&quot;).value; //js的写法
-</code></pre>
-<p>**（2）父页面调取子页面 **</p>
-<p>主要是通过contentWindow定位到子页面</p>
-<pre><code>document.getElementById(&quot;childframe&quot;).contentWindow.childtest();
-//调取子页面中的childtest方法 js的写法
-
-var childWindow = $(&quot;#addFrame&quot;)[0].contentWindow;//获取子窗体中的对象
-childWindow.formSubmit();//调取子页面的formSubmit方法 jquery的写法
-//注释：其中 childframe和addFrame 都时iframe的id
+              <p>1、用git --version命令检查是否已经安装</p>
+ <!-- more --> 
+ <img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141233117-40107158.png" alt="在这里插入图片描述">
+<p>2、在CentOS5的版本，由于yum源中没有git，所以需要预先安装一系列的依赖包。在CentOS6的yum源中已经有git的版本了，可以直接使用yum源进行安装。
+<img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141258461-446609606.png" alt="在这里插入图片描述"></p>
+<p>3、
+<code>yum -y install git</code>
+但是yum源中安装的git版本是1.7.1，Github等需要的Git版本最低都不能低于1.7.2 。所以我们一般不用上面的方法，而是下载git源码编译安装</p>
+<img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141329242-593425978.png" alt="在这里插入图片描述">
+<img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141359648-443683871.png" alt="在这里插入图片描述">
+<p>END</p>
+<p><strong>编译安装git</strong></p>
+<img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141728226-820977346.png" alt="在这里插入图片描述">
+<p>1、首先更新系统</p>
+<pre><code>yum  -y update
 
 </code></pre>
+<p>更新完成之后有6.5变成6.7了</p>
+<p>2、安装依赖的包</p>
+<pre><code>yum -y install curl-devel expat-devel gettext-devel openssl-devel zlib-devel gcc perl-ExtUtils-MakeMaker
 
+</code></pre>
+<p>3、下载git源码并解压</p>
+<pre><code>$ wget https://github.com/git/git/archive/v2.3.0.zip
+
+$ unzip v2.3.0.zip
+
+$ cd git-2.3.0
+
+</code></pre>
+<p>4、编译安装：</p>
+<p>将其安装在“/usr/local/git”目录下。</p>
+<pre><code>make prefix=/usr/local/git all
+
+make prefix=/usr/local/git install
+
+</code></pre>
+<p>因为服务器时间不对编译的过程中报错如下图，使用ntpdate自动校正系统时间。报错“Writing perl.mak for Git make[2]: *** [perl.mak] Error 1”，请重启apache服务，service httpd restart。</p>
+<img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141916664-2135602158.png" alt="在这里插入图片描述">
+<p>5、编译完成之后使用git --version 查看git版本，居然还是1.7.1，这是因为它默认使用了&quot;/usr/bin&quot;下的git。</p>
+<p>你可以用下面的命令查看git所在的路径：</p>
+<pre><code>$ whereis git
+
+git: /usr/bin/git /usr/local/git /usr/share/man/man1/git.1.gz
+
+</code></pre>
+<img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141816133-979409184.png" alt="在这里插入图片描述">
+<img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141816133-979409184.png" alt="在这里插入图片描述">
+<p>6、我们要把编译安装的git路径放到环境变量里，让它替换&quot;/usr/bin&quot;下的git。为此我们可以修改“/etc/profile”文件（或者/etc/bashrc文件）。</p>
+<pre><code>vim /etc/profile
+
+</code></pre>
+<p>然后在文件的最后一行，添加下面的内容，然后保存退出。</p>
+<img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141837445-945021371.png" alt="在这里插入图片描述">
+<p>7、不想重启系统，使用source命令立即生效</p>
+<pre><code>source /etc/profile
+
+</code></pre>
+<p>8、然后再次使用 <code>git --version</code> 查看git版本，发现输出2.3.0，表明安装成功。</p>
+<img src="https://images2017.cnblogs.com/blog/1006797/201710/1006797-20171026141847648-256182599.png" alt="在这里插入图片描述">
             </div>
-            
-              <div class="tag-container">
-                
-                  <a href="https://itliuwk.github.io/tag/js" class="tag">
-                    js
-                  </a>
-                
-              </div>
             
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://itliuwk.github.io/post/js-shang-chuan-duo-ge-wen-jian-ke-yi-sui-yi-shan-chu-mou-ge-wen-jian">
+                <a href="https://itliuwk.github.io/post/zui-quan-de-javascript-zhi-shi-zong-jie">
                   <h3 class="post-title">
-                    js 上传多个文件 可以随意删除某个文件
+                    最全的 JavaScript 知识总结
                   </h3>
                 </a>
               </div>
