@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://itliuwk.github.io/favicon.ico?v=1559176752936">
+<link rel="shortcut icon" href="https://itliuwk.github.io/favicon.ico?v=1559176891008">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://itliuwk.github.io/styles/main.css">
 
@@ -36,7 +36,7 @@
   <div class="top-container" data-aos="fade-right">
     <div class="top-header-container">
       <a class="site-title-container" href="https://itliuwk.github.io">
-        <img src="https://itliuwk.github.io/images/avatar.png?v=1559176752936" class="site-logo">
+        <img src="https://itliuwk.github.io/images/avatar.png?v=1559176891008" class="site-logo">
         <h1 class="site-title">刘伟坤</h1>
       </a>
       <div class="menu-btn" @click="menuVisible = !menuVisible">
@@ -102,199 +102,69 @@
             <div class="post-date">2016-09-26 20:15:43</div>
             
             <div class="post-content">
-              <ol>
-<li></li>
-<li>
-<div class="article-entry" itemprop="articleBody">
-</li>
-<li></li>
-<li>
+              <div class="article-entry" itemprop="articleBody">
 <pre><code>    &lt;p&gt;&lt;strong&gt; ajax简单教程：&lt;/strong&gt; &lt;excerpt in=&quot;&quot; index=&quot;&quot; |=&quot;&quot; 首页摘要=&quot;&quot;&gt;&lt;br&gt;    ajax常用的 方法，一些容易出错的地方&lt;br&gt;&lt;!--more--&gt;
 </code></pre>
-</li>
-<li></li>
-<li>
 <h2 id="ajax原 理"><a href="#ajax原理" class="headerlink"></a>ajax 原理</h2><p>Ajax的原理简单来说通过XmlHttpRequest对象来向服务器发异步请求,,从服务器获得数据，然后用javascript来操作DOM而更新页面。这其中最关键的一步就是从服务器获得请求数据。要清楚这个过程和原理，我们必须对 XMLHttpRequest有所了解。<br>XMLHttpRequest是ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是javascript可以及时向服务器提出请求和处理响应，而不阻塞用户。达到无刷新的效果。<br>所以我们先从XMLHttpRequest讲起，来看看它的工作原理。首先，我们先来看看XMLHttpRequest这个对象的属性。<br>它的属性有：</p>
-</li>
-<li>
 <table>
-</li>
-<li>
 <thead>
-</li>
-<li>
 <tr>
-</li>
-<li>
 <th style="text-align:left">onreadystatechange</th>
-</li>
-<li>
 <th style="text-align:left">responseText</th>
-</li>
-<li>
 </tr>
-</li>
-<li>
 </thead>
-</li>
-<li>
 <tbody>
-</li>
-<li>
 <tr>
-</li>
-<li>
 <td style="text-align:left">每次_状态改变所触发事件的事件处理程序</td>
-</li>
-<li>
 <td style="text-align:left">从服务器进程返回数据的字符串形式</td>
-</li>
-<li>
 </tr>
-</li>
-<li>
 </tbody>
-</li>
-<li>
 </table>
-</li>
-<li>
 <table>
-</li>
-<li>
 <thead>
-</li>
-<li>
 <tr>
-</li>
-<li>
 <th style="text-align:left">responseXML</th>
-</li>
-<li>
 <th style="text-align:left">status</th>
-</li>
-<li>
 </tr>
-</li>
-<li>
 </thead>
-</li>
-<li>
 <tbody>
-</li>
-<li>
 <tr>
-</li>
-<li>
 <td style="text-align:left">从服务器进程返回的DOM兼容的文档数据对象</td>
-</li>
-<li>
 <td style="text-align:left">从服务器返回的数字代码，比如常见的404</td>
-</li>
-<li>
 </tr>
-</li>
-<li>
 </tbody>
-</li>
-<li>
 </table>
-</li>
-<li>
 <table>
-</li>
-<li>
 <thead>
-</li>
-<li>
 <tr>
-</li>
-<li>
 <th style="text-align:left">status Text</th>
-</li>
-<li>
 <th style="text-align:left">readyState</th>
-</li>
-<li>
 </tr>
-</li>
-<li>
 </thead>
-</li>
-<li>
 <tbody>
-</li>
-<li>
 <tr>
-</li>
-<li>
 <td style="text-align:left">伴随状态码的字符串信息</td>
-</li>
-<li>
 <td style="text-align:left">对象状态值</td>
-</li>
-<li>
 </tr>
-</li>
-<li>
 </tbody>
-</li>
-<li>
 </table>
-</li>
-<li>
 <p>readyState 对象状态值</p>
-</li>
-<li>
 <ul>
-</li>
-<li>
 <li>0 (未初始化) 对象已建立，但是尚未初始化（尚未调用open方法）</li>
-</li>
-<li>
 <li>1 (初始化) 对象已建立，尚未调用send方法</li>
-</li>
-<li>
 <li>2 (发送数据) send方法已调用，但是当前的状态及http头未知</li>
-</li>
-<li>
 <li>3 (数据传送中) 已接收部分数据，因为响应及http头不全，这时通过responseBody和responseText获取部分数据会出现错误，</li>
-</li>
-<li>
 <li>4 (完成) 数据接收完毕,此时可以通过通过responseXml和responseText获取完整的回应数据</li>
-</li>
-<li>
 </ul>
-</li>
-<li>
 <h2 id="ajax的使用"><a href="#ajax的使用" class="headerlink"></a>ajax的使用</h2><ol>
-</li>
-<li>
 <li>原生的ajax</li>
-</li>
-<li>
 </ol>
-</li>
-<li>
 <figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">CreateXmlHttp</span>(<span class="params"></span>) </span>{</div><div class="line">    <span class="comment">//非IE浏览器创建XmlHttpRequest对象</span></div><div class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.XmlHttpRequest) {</div><div class="line">        xmlhttp = <span class="keyword">new</span> XmlHttpRequest();</div><div class="line">    }</div><div class="line">    <span class="comment">//IE浏览器创建XmlHttpRequest对象</span></div><div class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.ActiveXObject) {</div><div class="line">        <span class="keyword">try</span> {</div><div class="line">            xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</div><div class="line">        }</div><div class="line">        <span class="keyword">catch</span> (e) {</div><div class="line">            <span class="keyword">try</span> {</div><div class="line">                xmlhttp = <span class="keyword">new</span> ActiveXObject(<span class="string">"msxml2.XMLHTTP"</span>);</div><div class="line">            }</div><div class="line">            <span class="keyword">catch</span> (ex) { }</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Ustbwuyi</span>(<span class="params"></span>) </span>{</div><div class="line">    <span class="keyword">var</span> data = <span class="built_in">document</span>.getElementById(<span class="string">"username"</span>).value;</div><div class="line">    CreateXmlHttp();</div><div class="line">    <span class="keyword">if</span> (!xmlhttp) {</div><div class="line">        alert(<span class="string">"创建xmlhttp对象异常！"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">    }</div><div class="line">    xmlhttp.open(<span class="string">"POST"</span>, url, <span class="literal">false</span>);</div><div class="line">    xmlhttp.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{</div><div class="line">        <span class="keyword">if</span> (xmlhttp.readyState == <span class="number">4</span>) {</div><div class="line">            <span class="built_in">document</span>.getElementById(<span class="string">"user1"</span>).innerHTML = <span class="string">"数据正在加载..."</span>;</div><div class="line">            <span class="keyword">if</span> (xmlhttp.status == <span class="number">200</span>) {</div><div class="line">                <span class="built_in">document</span>.write(xmlhttp.responseText);</div><div class="line">            }</div><div class="line">        }</div><div class="line">    }</div><div class="line">    xmlhttp.send();</div><div class="line">}</div></pre></td></tr></tbody></table></figure>
-</li>
-<li>
 <ol>
-</li>
-<li>
 <li>jquery调用ajax</li>
-</li>
-<li>
 </ol>
-</li>
-<li>
 <figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$.ajax({</div><div class="line">    type: <span class="string">"get"</span>,</div><div class="line">    url: <span class="string">"http://www.cnblogs.com/rss"</span>,</div><div class="line">    beforeSend: <span class="function"><span class="keyword">function</span>(<span class="params">XMLHttpRequest</span>)</span>{</div><div class="line">    <span class="comment">//ShowLoading();</span></div><div class="line">    },</div><div class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">data, textStatus</span>)</span>{</div><div class="line">        $(<span class="string">".ajax.ajaxResult"</span>).html(<span class="string">""</span>);</div><div class="line">        $(<span class="string">"item"</span>,data).each(<span class="function"><span class="keyword">function</span>(<span class="params">i, domEle</span>)</span>{</div><div class="line">        $(<span class="string">".ajax.ajaxResult"</span>).append(<span class="string">"&lt;li&gt;"</span>+$(domEle).children(<span class="string">"title"</span>).text()+<span class="string">"&lt;/li&gt;"</span>);</div><div class="line">        });</div><div class="line"></div><div class="line">    },</div><div class="line">    complete: <span class="function"><span class="keyword">function</span>(<span class="params">XMLHttpRequest, textStatus</span>)</span>{</div><div class="line">    <span class="comment">//HideLoading();</span></div><div class="line">    },</div><div class="line">    error: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</div><div class="line">    <span class="comment">//请求出错处理</span></div><div class="line">    }</div><div class="line">});</div></pre></td></tr></tbody></table></figure>
-</li>
-<li></li>
-<li>
 <pre><code>&lt;/the&gt;&lt;/div&gt;</code></pre>
-</li>
-</ol>
 
             </div>
             
