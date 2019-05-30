@@ -2,13 +2,107 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://itliuwk.github.io</id>
     <title>刘伟坤</title>
-    <updated>2019-05-30T06:43:34.335Z</updated>
+    <updated>2019-05-30T07:16:28.387Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://itliuwk.github.io"/>
     <link rel="self" href="https://itliuwk.github.io/atom.xml"/>
     <logo>https://itliuwk.github.io/images/avatar.png</logo>
     <icon>https://itliuwk.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 刘伟坤</rights>
+    <entry>
+        <title type="html"><![CDATA[vue基于七牛云 上传图片、视频]]></title>
+        <id>https://itliuwk.github.io/post/vue-ji-yu-qi-niu-yun-shang-chuan-tu-pian-shi-pin</id>
+        <link href="https://itliuwk.github.io/post/vue-ji-yu-qi-niu-yun-shang-chuan-tu-pian-shi-pin">
+        </link>
+        <updated>2019-05-13T02:50:23.000Z</updated>
+        <content type="html"><![CDATA[ <!-- more -->
+<p><strong>引入依赖</strong></p>
+<pre><code>import request from './request'   //这是基于 axios封装的请求
+var qiniu = require('qiniu-js')  //引入 qiniu
+import { getTimeForQiniu } from './date'   //这个  只是为了生成时间戳路径
+
+</code></pre>
+<p><strong>先根据后台获取token</strong></p>
+<pre><code>
+
+ 
+export function getQiniuToken() {
+    return request({
+        url: '    ',    //  对应后台token 请求接口 
+        method: 'post',
+        // params
+    }).then(res =&gt; res.data.data).catch(e =&gt; {
+        console.error(&quot;获取七牛云token失败&quot;, e)
+    })
+}
+
+
+</code></pre>
+<p><strong>七牛云方法</strong></p>
+<pre><code>export async function uploadQinuImage(file) {
+    var token = await getQiniuToken()
+    var key = getTimeForQiniu() + file.name
+    var config = {
+        // useCdnDomain: true,
+        region: qiniu.region.z2,
+        uptoken: token,
+        domain: '  ',     //配置好的七牛云域名  如   https://cdn.qniyun.com/
+        unique_names: true,
+    };
+    var putExtra = {
+        // fname: file.name,
+        // params: {},
+        // mimeType: [] || null
+        ...config,
+    }
+    var observable = qiniu.upload(file, key, token, putExtra, config)
+    return new Promise((resolve, reject) =&gt; {
+        var subscription = observable.subscribe({
+            error(err) {
+                reject(data)
+            },
+            complete(data) {
+                data.path = `  `  //拼上七牛云域名  如   https://cdn.qniyun.com/ ${data.key}
+                resolve(data)
+            }
+        }) // 上传开始
+    })
+
+}
+
+</code></pre>
+<p><strong>导出方法</strong></p>
+<pre><code>export default function uploadImage(file) {
+    return uploadQinuImage(file)
+}
+
+</code></pre>
+<p><strong>七牛云组件引用</strong></p>
+<pre><code>    import upload from &quot;@/utils/upload&quot;;
+</code></pre>
+<p><strong>传上 files流</strong></p>
+<pre><code>         uploadImg(e) {
+                let that = this;
+                let files = e.target.files[0];
+                upload(files).then(res =&gt; {
+                    let obj = {
+                        url: res.path,
+                        type: 'IMAGE',
+                        size: res.fsize,
+                        key: res.key,
+                        thumb: res.path
+                    };
+                    POST_RESOURCES(obj).then(res =&gt; {
+                        Alert.success('上传成功');
+                        this.getList();
+                    });
+
+                });
+            }
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[最全的 JavaScript 知识总结]]></title>
         <id>https://itliuwk.github.io/post/zui-quan-de-javascript-zhi-shi-zong-jie</id>
@@ -5436,99 +5530,5 @@ console.log(</span>"进行第二步操作；"<span style="color: #000000;">);
 <li>jquery调用ajax</li>
 </ol>
 <figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$.ajax({</div><div class="line">    type: <span class="string">"get"</span>,</div><div class="line">    url: <span class="string">"http://www.cnblogs.com/rss"</span>,</div><div class="line">    beforeSend: <span class="function"><span class="keyword">function</span>(<span class="params">XMLHttpRequest</span>)</span>{</div><div class="line">    <span class="comment">//ShowLoading();</span></div><div class="line">    },</div><div class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">data, textStatus</span>)</span>{</div><div class="line">        $(<span class="string">".ajax.ajaxResult"</span>).html(<span class="string">""</span>);</div><div class="line">        $(<span class="string">"item"</span>,data).each(<span class="function"><span class="keyword">function</span>(<span class="params">i, domEle</span>)</span>{</div><div class="line">        $(<span class="string">".ajax.ajaxResult"</span>).append(<span class="string">"&lt;li&gt;"</span>+$(domEle).children(<span class="string">"title"</span>).text()+<span class="string">"&lt;/li&gt;"</span>);</div><div class="line">        });</div><div class="line"></div><div class="line">    },</div><div class="line">    complete: <span class="function"><span class="keyword">function</span>(<span class="params">XMLHttpRequest, textStatus</span>)</span>{</div><div class="line">    <span class="comment">//HideLoading();</span></div><div class="line">    },</div><div class="line">    error: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</div><div class="line">    <span class="comment">//请求出错处理</span></div><div class="line">    }</div><div class="line">});</div></pre></td></tr></tbody></table></figure> </the></div>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Git学习笔记]]></title>
-        <id>https://itliuwk.github.io/post/git-xue-xi-bi-ji</id>
-        <link href="https://itliuwk.github.io/post/git-xue-xi-bi-ji">
-        </link>
-        <updated>2016-08-14T02:16:43.000Z</updated>
-        <summary type="html"><![CDATA[<p>git的常用操作，高级技巧都要哦</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>git的常用操作，高级技巧都要哦</p>
-<!--more-->
-<div class="article-entry" itemprop="articleBody">
->
-<h2 id="安装git"><a href="#安装git" class="headerlink"></a>安装git</h2><ol>
-<li>下载安装包 ?下载地址?</li>
-<li>安装git</li>
-<li>进入命令行,输入git看看是否成功</li>
-</ol>
-<h2 id="配置git"><a href="#配置git" class="headerlink"></a>配置git</h2><ol>
-<li>配置全局用户名和密码<br> `git config –global user.name "liuwk" <br> git config –global user.email   "1834183435@qq.com"<br> `</li>
-<li>配置ssh公钥<br> <code>cd ~/.ssh</code> 然后<code>ls</code><br> 如果没有,直接生成,一路点击enter<br> ```<br> ssh-keygen<br> cat ~/.ssh/id_rsa.pub<br> ```<br> 把公钥配置到github的个人设置</li>
-</ol>
-<h2 id="常用的命令"><a href="#常用的命令" class="headerlink"></a>常用的命令</h2><ol>
-<li><p>repository操作</p>
-<ul>
-<li>检出（clone）仓库代码：<code>git clone repository-url</code> / <code>git clone repository-url local-directoryname</code><ul>
-<li>例如，clone jquery 仓库到本地： <code>git clone git://github.com/jquery/jquery.git</code></li>
-<li>clone jquery 仓库到本地，并且重命名为 my-jquery ：<code>git clone git://github.com/jquery/jquery.git my-jquery</code></li>
-</ul>
-</li>
-<li>查看远程仓库：<code>git remote -v</code></li>
-<li>添加远程仓库：<code>git remote add [name] [repository-url]</code></li>
-<li>删除远程仓库：<code>git remote rm [name]</code></li>
-<li>修改远程仓库地址：<code>git remote set-url origin new-repository-url</code></li>
-<li>拉取远程仓库： <code>git pull [remoteName] [localBranchName]</code></li>
-<li>推送远程仓库： <code>git push [remoteName] [localBranchName]</code></li>
-</ul>
-</li>
-<li><p>提交/拉取/合并/删除</p>
-<ul>
-<li>添加文件到暂存区（staged）：<code>git add filename</code> / <code>git stage filename</code></li>
-<li>将所有修改文件添加到暂存区（staged）： <code>git add --all</code> / <code>git add -A</code></li>
-<li>提交修改到暂存区（staged）：<code>git commit -m 'commit message'</code> / <code>git commit -a -m 'commit message'</code> 注意理解 -a 参数的意义</li>
-<li>从Git仓库中删除文件：<code>git rm filename</code></li>
-<li>从Git仓库中删除文件，但本地文件保留：<code>git rm --cached filename</code></li>
-<li><p>重命名某个文件：<code>git mv filename newfilename</code> 或者直接修改完毕文件名 ，进行<code>git add -A &amp;&amp; git commit -m 'commit message'</code> Git会自动识别是重命名了文件</p>
-</li>
-<li><p>获取远程最新代码到本地：<code>git pull (origin branchname)</code> 可以指定分支名，也可以忽略。pull 命令自动 fetch 远程代码并且 merge，如果有冲突，会显示在状态栏，需要手动处理。更推荐使用：<code>git fetch</code> 之后 <code>git merge --no-ff origin branchname</code> 拉取最新的代码到本地仓库，并手动 merge 。</p>
-</li>
-</ul>
-</li>
-<li><p>日志查看</p>
-<ul>
-<li>查看日志：<code>git log</code></li>
-<li>查看日志，并查看每次的修改内容：<code>git log -p</code></li>
-<li>查看日志，并查看每次文件的简单修改状态：<code>git log --stat</code></li>
-<li>一行显示日志：<code>git log --pretty=oneline</code> / <code>git log --pretty='format:"%h - %an, %ar : %s'</code></li>
-<li>查看日志范围：<ul>
-<li>查看最近10条日志：<code>git log -10</code></li>
-<li>查看2周前：<code>git log --until=2week</code> 或者指定2周的明确日期，比如：<code>git log --until=2015-08-12</code></li>
-<li>查看最近2周内：<code>git log --since=2week</code> 或者指定2周明确日志，比如：<code>git log --since=2015-08-12</code></li>
-<li>只查看某个用户的提交：<code>git log --committer=user.name</code> / <code>git log --author=user.name</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>取消操作</p>
-<ul>
-<li>上次提交msg错误/有未提交的文件应该同上一次一起提交，需要重新提交备注：<code>git commit --amend -m 'new msg'</code></li>
-<li>一次<code>git add -A</code>后，需要将某个文件撤回到工作区，即：某个文件不应该在本次commit中：<code>git reset HEAD filename</code></li>
-<li>撤销某些文件的修改内容：<code>git checkout -- filename</code> 注意：一旦执行，所有的改动都没有了，谨慎！谨慎！谨慎！</li>
-<li>将工作区内容回退到远端的某个版本：<code>git reset --hard &lt;sha1-of-commit&gt;</code><ul>
-<li><code>--hard</code>：reset stage and working directory ,<commitid> 以来所有的变更全部丢弃，并将 HEAD 指向<commitid></commitid></commitid></li>
-<li><code>--soft</code>：nothing changed to stage and working directory ,仅仅将HEAD指向<commitid> ，所有变更显示在”changed to be committed”中</commitid></li>
-<li><code>--mixed</code>：default,reset stage ,nothing to working directory ，这也就是第二个例子的原因</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>比较差异</p>
-<ul>
-<li>查看工作区（working directory）和暂存区（staged）之间差异：<code>git diff</code></li>
-<li>查看工作区（working directory）与当前仓库版本（repository）HEAD版本差异：<code>git diff HEAD</code></li>
-<li>查看暂存区（staged）与当前仓库版本（repository）差异：<code>git diff --cached</code> / <code>git diff --staged</code></li>
-</ul>
-</li>
-<li><p>合并操作</p>
-<ul>
-<li>解决冲突后/获取远程最新代码后合并代码：<code>git merge branchname</code></li>
-<li>保留该存在版本合并log：<code>git merge --no-ff branchname</code> 参数<code>--no-ff</code>防止 fast-forward 的提交</li>
-</ul>
-</li>
-</ol>
- </the></div>]]></content>
     </entry>
 </feed>

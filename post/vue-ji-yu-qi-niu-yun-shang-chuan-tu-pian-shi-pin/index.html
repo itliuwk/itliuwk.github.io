@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>同步回调函数与异步回调函数示例 | 刘伟坤</title>
+<title>vue基于七牛云 上传图片、视频 | 刘伟坤</title>
 <meta name="description" content="">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -98,67 +98,103 @@
       <div class="main-container">
         <div class="content-container" data-aos="fade-up">
           <div class="post-detail">
-            <h2 class="post-title">同步回调函数与异步回调函数示例</h2>
-            <div class="post-date">2017-04-20 14:25:42</div>
+            <h2 class="post-title">vue基于七牛云 上传图片、视频</h2>
+            <div class="post-date">2019-05-13 10:50:23</div>
             
             <div class="post-content">
-              <p>同步回调函数与异步回调函数示例</p>
-<!--more-->
-<h5>JS中的回调函数一共有两种</h5>
-<ol><ol>
-<li>同步回调函数（即普通的回调函数）。</li>
-<li>异步回调函数<br>注：JS中的同步异步和现实生活的正好相反。
-<h6>其中同步回调函数是要等到回调函数都执行完成后才能进行接下来的操作，也就是说是阻塞式运行</h6>
-</li>
-</ol></ol>
-<p>
-<p>同步回调函数示例</p></p>
-<p>&nbsp;</p>
-<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div>
-<pre><span style="color: #0000ff;">function</span><span style="color: #000000;"> waitFive(callback){ 
-      </span><span style="color: #0000ff;">var</span> currentDate = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Date(), 
-           pus </span>= 0<span style="color: #000000;">; 
-      </span><span style="color: #0000ff;">while</span>(pus&lt;1000<span style="color: #000000;">){ 
-          </span><span style="color: #0000ff;">var</span> date = <span style="color: #0000ff;">new</span><span style="color: #000000;"> Date(); 
-          pus </span>= date -<span style="color: #000000;"> currentDate; 
-      } 
-      callback(</span>"回调执行完成"<span style="color: #000000;">); 
-      pus </span>= 2000<span style="color: #000000;">;
-} 
-waitFive(
-          </span><span style="color: #0000ff;">function</span>(msg){              <span style="color: #008000;">//</span><span style="color: #008000;">这里就是callback回调函数</span>
-<span style="color: #000000;">               console.log(msg);
-          }
-);
-console.log(</span>"进行第二步操作；"<span style="color: #000000;">);
- </span>*****执行结果为：*****<span style="color: #000000;">
-        回调执行完成 
-        进行第二步操作</span></pre>
-<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div></div>
-<p>异步回调函数示例:</p>
-<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div>
-<pre><span style="color: #0000ff;">function</span><span style="color: #000000;"> waitFive(callback){ 
-      setTimeout(</span><span style="color: #0000ff;">function</span><span style="color: #000000;">(){   
-            callback(</span>'回调执行完成'<span style="color: #000000;">);
-      },</span>2000<span style="color: #000000;">); 
+               <!-- more -->
+<p><strong>引入依赖</strong></p>
+<pre><code>import request from './request'   //这是基于 axios封装的请求
+var qiniu = require('qiniu-js')  //引入 qiniu
+import { getTimeForQiniu } from './date'   //这个  只是为了生成时间戳路径
+
+</code></pre>
+<p><strong>先根据后台获取token</strong></p>
+<pre><code>
+
+ 
+export function getQiniuToken() {
+    return request({
+        url: '    ',    //  对应后台token 请求接口 
+        method: 'post',
+        // params
+    }).then(res =&gt; res.data.data).catch(e =&gt; {
+        console.error(&quot;获取七牛云token失败&quot;, e)
+    })
 }
-waitFive( 
-      </span><span style="color: #0000ff;">function</span>(msg){           <span style="color: #008000;">//</span><span style="color: #008000;">这里就是callback回调函数 </span>
-<span style="color: #000000;">              console.log(msg); 
-      }
-);
-console.log(</span>"进行第二步操作；"<span style="color: #000000;">); 
-<p></span><em><strong><strong>执行结果为：</strong></strong></em><span style="color: #000000;"><br>
-进行第二步操作
-回调执行完成</span></pre></p>
-<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"></a></span></div></div>
-<p>&nbsp;</p></div>
+
+
+</code></pre>
+<p><strong>七牛云方法</strong></p>
+<pre><code>export async function uploadQinuImage(file) {
+    var token = await getQiniuToken()
+    var key = getTimeForQiniu() + file.name
+    var config = {
+        // useCdnDomain: true,
+        region: qiniu.region.z2,
+        uptoken: token,
+        domain: '  ',     //配置好的七牛云域名  如   https://cdn.qniyun.com/
+        unique_names: true,
+    };
+    var putExtra = {
+        // fname: file.name,
+        // params: {},
+        // mimeType: [] || null
+        ...config,
+    }
+    var observable = qiniu.upload(file, key, token, putExtra, config)
+    return new Promise((resolve, reject) =&gt; {
+        var subscription = observable.subscribe({
+            error(err) {
+                reject(data)
+            },
+            complete(data) {
+                data.path = `  `  //拼上七牛云域名  如   https://cdn.qniyun.com/ ${data.key}
+                resolve(data)
+            }
+        }) // 上传开始
+    })
+
+}
+
+</code></pre>
+<p><strong>导出方法</strong></p>
+<pre><code>export default function uploadImage(file) {
+    return uploadQinuImage(file)
+}
+
+</code></pre>
+<p><strong>七牛云组件引用</strong></p>
+<pre><code>    import upload from &quot;@/utils/upload&quot;;
+</code></pre>
+<p><strong>传上 files流</strong></p>
+<pre><code>         uploadImg(e) {
+                let that = this;
+                let files = e.target.files[0];
+                upload(files).then(res =&gt; {
+                    let obj = {
+                        url: res.path,
+                        type: 'IMAGE',
+                        size: res.fsize,
+                        key: res.key,
+                        thumb: res.path
+                    };
+                    POST_RESOURCES(obj).then(res =&gt; {
+                        Alert.success('上传成功');
+                        this.getList();
+                    });
+
+                });
+            }
+
+</code></pre>
+
             </div>
             
               <div class="tag-container">
                 
-                  <a href="https://itliuwk.github.io/tag/js" class="tag">
-                    js
+                  <a href="https://itliuwk.github.io/tag/vue" class="tag">
+                    vue
                   </a>
                 
               </div>
@@ -166,9 +202,9 @@ console.log(</span>"进行第二步操作；"<span style="color: #000000;">);
             
               <div class="next-post">
                 <div class="next">下一篇</div>
-                <a href="https://itliuwk.github.io/post/jquery-ji-ben-cao-zuo-bi-ji">
+                <a href="https://itliuwk.github.io/post/zui-quan-de-javascript-zhi-shi-zong-jie">
                   <h3 class="post-title">
-                    jquery基本操作笔记
+                    最全的 JavaScript 知识总结
                   </h3>
                 </a>
               </div>
