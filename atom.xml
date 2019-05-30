@@ -2,197 +2,13 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://itliuwk.github.io</id>
     <title>刘伟坤</title>
-    <updated>2019-05-30T00:51:16.307Z</updated>
+    <updated>2019-05-30T01:06:02.619Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://itliuwk.github.io"/>
     <link rel="self" href="https://itliuwk.github.io/atom.xml"/>
     <logo>https://itliuwk.github.io/images/avatar.png</logo>
     <icon>https://itliuwk.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, 刘伟坤</rights>
-    <entry>
-        <title type="html"><![CDATA[CSS“隐藏”元素的几种方法的对比]]></title>
-        <id>https://itliuwk.github.io/post/css-yincang</id>
-        <link href="https://itliuwk.github.io/post/css-yincang">
-        </link>
-        <updated>2019-05-30T00:48:32.000Z</updated>
-        <content type="html"><![CDATA[<p>一说起CSS隐藏元素，我想大部分小伙伴们都会想到的第一种方法就是设置display为none..</p>
-<p><!--more-->这是最为人所熟知也是最常用的方法。我相信还有不少人想到使用设置visibility为hidden来隐藏元素，这种方式也是常用的方法，而且也有很多人知道两者的不同。除了这两种方法，本文还总结了一些比较不常用的方法，比较了这几种“隐藏”元素方法的区别和优缺点，欢迎大家交流！！</p>
-<h3 id="几种方法的简单介绍">几种方法的简单介绍</h3>
-<p>首先我们分别来说说到底有哪几种隐藏元素的方法，有一些方法是众所周知的，还有一些算是一种技巧。</p>
-<h4 id="display:none">display:none</h4>
-<p>设置元素的display为none是最常用的隐藏元素的方法。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="class">.hide <span class="rules">{<br><span class="line">    <span class="rule"><span class="attribute">display:<span class="value">none;<br><span class="line">}<br></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>将元素设置为display:none后，元素在页面上将彻底消失，元素本来占有的空间就会被其他元素占有，也就是说它会导致浏览器的重排和重绘。</p>
-<h4 id="visibility:hidden">visibility:hidden</h4>
-<p>设置元素的visibility为hidden也是一种常用的隐藏元素的方法，和display:none的区别在于，元素在页面消失后，其占据的空间依旧会保留着，所以它只会导致浏览器重绘而不会重排。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="class">.hidden{<br><span class="line">    <span class="attribute">visibility:hidden<br><span class="line">}<br></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>visibility:hidden适用于那些元素隐藏后不希望页面布局会发生变化的场景</p>
-<h4 id="opacity:0">opacity:0</h4>
-<p>opacity属性我相信大家都知道表示元素的透明度，而将元素的透明度设置为0后，在我们用户眼中，元素也是隐藏的，这算是一种隐藏元素的方法。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="class">.transparent <span class="rules">{<br><span class="line">    <span class="rule"><span class="attribute">opacity:<span class="value"><span class="number">0;<br><span class="line">}<br></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>这种方法和visibility:hidden的一个共同点是元素隐藏后依旧占据着空间，但我们都知道，设置透明度为0后，元素只是隐身了，它依旧存在页面中。</p>
-<h4 id="设置height，width等盒模型属性为0">设置height，width等盒模型属性为0</h4>
-<p>这是我总结的一种比较奇葩的技巧，简单说就是将元素的margin，border，padding，height和width等影响元素盒模型的属性设置成0，如果元素内有子元素或内容，还应该设置其overflow:hidden来隐藏其子元素，这算是一种奇技淫巧。</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="class">.hiddenBox <span class="rules">{<br><span class="line">    <span class="rule"><span class="attribute">margin:<span class="value"><span class="number">0;<br><span class="line">    <span class="rule"><span class="attribute">border:<span class="value"><span class="number">0;<br><span class="line">    <span class="rule"><span class="attribute">padding:<span class="value"><span class="number">0;<br><span class="line">    <span class="rule"><span class="attribute">height:<span class="value"><span class="number">0;<br><span class="line">    <span class="rule"><span class="attribute">width:<span class="value"><span class="number">0;<br><span class="line">    <span class="rule"><span class="attribute">overflow:<span class="value">hidden;<br><span class="line">}<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>这种方式既不实用，也可能存在着着一些问题。但平时我们用到的一些页面效果可能就是采用这种方式来完成的，比如jquery的slideUp动画，它就是设置元素的overflow:hidden后，接着通过定时器，不断地设置元素的height，margin-top，margin-bottom，border-top，border-bottom，padding-top，padding-bottom为0，从而达到slideUp的效果。</p>
-<h3 id="元素隐藏后的事件响应">元素隐藏后的事件响应</h3>
-<p>如果被隐藏的元素绑定了一些事件，我们执行了相关操作后，这些事件是否会被响应并执行呢，看看下面的代码：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br><span class="line">15<br><span class="line">16<br><span class="line">17<br><span class="line">18<br><span class="line">19<br><span class="line">20<br><span class="line">21<br><span class="line">22<br><span class="line">23<br><span class="line">24<br><span class="line">25<br><span class="line">26<br><span class="line">27<br><span class="line">28<br><span class="line">29<br><span class="line">30<br><span class="line">31<br><span class="line">32<br><span class="line">33<br><span class="line">34<br><span class="line">35<br><span class="line">36<br><span class="line">37<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="tag">&lt;<span class="title">style&gt;<span class="css"><br><span class="line">    <span class="tag">div <span class="rules">{ <br><span class="line">        <span class="rule"><span class="attribute">width:<span class="value"> <span class="number">100px; <br><span class="line">        <span class="rule"><span class="attribute">height:<span class="value"> <span class="number">100px; <br><span class="line">        <span class="rule"><span class="attribute">background:<span class="value"> red; <br><span class="line">        <span class="rule"><span class="attribute">margin:<span class="value"> <span class="number">15px; <br><span class="line">        <span class="rule"><span class="attribute">padding:<span class="value"> <span class="number">10px; <br><span class="line">        <span class="rule"><span class="attribute">border:<span class="value"> <span class="number">5px solid green; <br><span class="line">        <span class="rule"><span class="attribute">display:<span class="value"> inline-block; <br><span class="line">        <span class="rule"><span class="attribute">overflow:<span class="value"> hidden; <br><span class="line">    }<br><span class="line">    <span class="class">.none <span class="rules">{ <span class="rule"><span class="attribute">display:<span class="value"> none; }<br><span class="line">    <span class="class">.hidden <span class="rules">{ <span class="rule"><span class="attribute">visibility:<span class="value"> hidden; }<br><span class="line">    <span class="class">.opacity0 <span class="rules">{ <span class="rule"><span class="attribute">opacity:<span class="value"> <span class="number">0; }<br><span class="line">    <span class="class">.height0 <span class="rules">{ <span class="rule"><span class="attribute">height:<span class="value"> <span class="number">0; }  <br><span class="line"><span class="tag">&lt;/<span class="title">style&gt;  <br><span class="line"><br><span class="line"><span class="tag">&lt;<span class="title">div <span class="attribute">class=<span class="value">"none"&gt;<span class="tag">&lt;/<span class="title">div&gt;<br><span class="line"><span class="tag">&lt;<span class="title">div <span class="attribute">class=<span class="value">"hidden"&gt;<span class="tag">&lt;/<span class="title">div&gt;<br><span class="line"><span class="tag">&lt;<span class="title">div <span class="attribute">class=<span class="value">"opacity0"&gt;<span class="tag">&lt;/<span class="title">div&gt;<br><span class="line"><span class="tag">&lt;<span class="title">div <span class="attribute">class=<span class="value">"height0"&gt;aa<span class="tag">&lt;/<span class="title">div&gt;  <br><span class="line"><br><span class="line"><span class="tag">&lt;<span class="title">script <span class="attribute">src=<span class="value">"/Scripts/jquery-1.10.2.min.js"&gt;<span class="undefined"><span class="tag">&lt;/<span class="title">script&gt;<br><span class="line"><span class="tag">&lt;<span class="title">script&gt;<span class="javascript"><br><span class="line">    $(<span class="string">".none").on(<span class="string">"click", <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">        <span class="built_in">console.log(<span class="string">"none clicked");<br><span class="line">    })<br><span class="line">    $(<span class="string">".hidden").on(<span class="string">"click", <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">        <span class="built_in">console.log(<span class="string">"hidden clicked");<br><span class="line">    })<br><span class="line">    $(<span class="string">".opacity0").on(<span class="string">"click", <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">        <span class="built_in">console.log(<span class="string">"opacity0 clicked");<br><span class="line">    })<br><span class="line">    $(<span class="string">".height0").on(<span class="string">"click", <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">        <span class="built_in">console.log(<span class="string">"height0 clicked");<br><span class="line">    })<br><span class="line"><span class="tag">&lt;/<span class="title">script&gt;<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>这段代码将四种隐藏元素的方法分别展示出来，然后绑定其点击事件，经过测试，主要有下面的结论：<br>1、display:none：元素彻底消失，很显然不会触发其点击事件<br>2、visibility:hidden：无法触发其点击事件，有一种说法是display:none是元素看不见摸不着，而visibility:hidden是看不见摸得着，这种说法是不准确的，设置元素的visibility后无法触发点击事件，说明这种方法元素也是消失了，只是依然占据着页面空间。<br>3、opacity:0：可以触发点击事件，原因也很简单，设置元素透明度为0后，元素只是相对于人眼不存在而已，对浏览器来说，它还是存在的，所以可以触发点击事件<br>4、height:0：将元素的高度设置为0，并且设置overflow:hidden。使用这种方法来隐藏元素，是否可以触发事件要根据具体的情况来分析。如果元素设置了border，padding等属性不为0，很显然，页面上还是能看到这个元素的，触发元素的点击事件完全没有问题。如果全部属性都设置为0，很显然，这个元素相当于消失了，即无法触发点击事件。</p>
-<p>但是这些结论真的准确吗？<br>我们在上面的代码中添加这样一句代码：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="variable">$(<span class="string">".none").click();<br></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>结果发现，触发了click事件，也就是通过JS可以触发被设置为display:none的元素的事件。<br>所以前面无法触发点击事件的真正原因是鼠标无法真正接触到被设置成隐藏的元素！！！</p>
-<h3 id="CSS3_transition对这几种方法的影响">CSS3 transition对这几种方法的影响</h3>
-<p>CSS3提供的transition极大地提高了网页动画的编写，但并不是每一种CSS属性都可以通过transition来进行动画的。我们修改代码如下：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br><span class="line">3<br><span class="line">4<br><span class="line">5<br><span class="line">6<br><span class="line">7<br><span class="line">8<br><span class="line">9<br><span class="line">10<br><span class="line">11<br><span class="line">12<br><span class="line">13<br><span class="line">14<br><span class="line">15<br><span class="line">16<br><span class="line">17<br><span class="line">18<br><span class="line">19<br><span class="line">20<br><span class="line">21<br><span class="line">22<br><span class="line">23<br><span class="line">24<br><span class="line">25<br><span class="line">26<br><span class="line">27<br><span class="line">28<br><span class="line">29<br><span class="line">30<br><span class="line">31<br><span class="line">32<br><span class="line">33<br><span class="line">34<br><span class="line">35<br><span class="line">36<br><span class="line">37<br><span class="line">38<br><span class="line">39<br><span class="line">40<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="tag">&lt;<span class="title">style&gt;<span class="css"><br><span class="line">    <span class="tag">div <span class="rules">{ <br><span class="line">        <span class="rule"><span class="attribute">width:<span class="value"> <span class="number">100px; <br><span class="line">        <span class="rule"><span class="attribute">height:<span class="value"> <span class="number">100px; <br><span class="line">        <span class="rule"><span class="attribute">background:<span class="value"> red; <br><span class="line">        <span class="rule"><span class="attribute">margin:<span class="value"> <span class="number">15px; <br><span class="line">        <span class="rule"><span class="attribute">padding:<span class="value"> <span class="number">10px; <br><span class="line">        <span class="rule"><span class="attribute">border:<span class="value"> <span class="number">5px solid green; <br><span class="line">        <span class="rule"><span class="attribute">display:<span class="value"> inline-block; <br><span class="line">        <span class="rule"><span class="attribute">overflow:<span class="value"> hidden; <br><span class="line">        <span class="rule"><span class="attribute">transition:<span class="value"> all linear <span class="number">2s;  <br><span class="line">    }<br><span class="line"><span class="tag">&lt;/<span class="title">style&gt;  <br><span class="line"><br><span class="line"><span class="tag">&lt;<span class="title">div <span class="attribute">class=<span class="value">"none"&gt;<span class="tag">&lt;/<span class="title">div&gt;<br><span class="line"><span class="tag">&lt;<span class="title">div <span class="attribute">class=<span class="value">"hidden"&gt;<span class="tag">&lt;/<span class="title">div&gt;<br><span class="line"><span class="tag">&lt;<span class="title">div <span class="attribute">class=<span class="value">"opacity0"&gt;<span class="tag">&lt;/<span class="title">div&gt;<br><span class="line"><span class="tag">&lt;<span class="title">div <span class="attribute">class=<span class="value">"height0"&gt;aa<span class="tag">&lt;/<span class="title">div&gt;  <br><span class="line"><br><span class="line"><span class="tag">&lt;<span class="title">script <span class="attribute">src=<span class="value">"/Scripts/jquery-1.10.2.min.js"&gt;<span class="undefined"><span class="tag">&lt;/<span class="title">script&gt;<br><span class="line"><span class="tag">&lt;<span class="title">script&gt;<span class="javascript"><br><span class="line">$(<span class="string">".none").on(<span class="string">"click", <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">    <span class="built_in">console.log(<span class="string">"none clicked");<br><span class="line">    $(<span class="keyword">this).css(<span class="string">"display", <span class="string">"none");<br><span class="line">})<br><span class="line">$(<span class="string">".hidden").on(<span class="string">"click", <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">    <span class="built_in">console.log(<span class="string">"hidden clicked");<br><span class="line">    $(<span class="keyword">this).css(<span class="string">"visibility", <span class="string">"hidden");<br><span class="line">})<br><span class="line">$(<span class="string">".opacity0").on(<span class="string">"click", <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">    <span class="built_in">console.log(<span class="string">"opacity0 clicked");<br><span class="line">    $(<span class="keyword">this).css(<span class="string">"opacity", <span class="number">0);<br><span class="line">})<br><span class="line">$(<span class="string">".height0").on(<span class="string">"click", <span class="function"><span class="keyword">function (<span class="params">) {<br><span class="line">    <span class="built_in">console.log(<span class="string">"height0 clicked");<br><span class="line">    $(<span class="keyword">this).css({<br><span class="line">        <span class="string">"height": <span class="number">0,<br><span class="line">    });<br><span class="line">})<br><span class="line"><span class="tag">&lt;/<span class="title">script&gt;<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>经过测试，可以看到：<br>1、display:none：完全不受transition属性的影响，元素立即消失<br>2、visibility：hidden：元素消失的时间跟transition属性设置的时间一样，但是没有动画效果<br>3、opacity和height等属性能够进行正常的动画效果</p>
-<p>假设我们要通过CSS3来做一个淡出的动画效果，应该如下：</p>
-<table>
-<tbody>
-<tr>
-<td class="gutter">
-<pre><span class="line">1<br><span class="line">2<br></span></span></pre>
-</td>
-<td class="code">
-<pre><span class="line"><span class="class">.fadeOut <span class="rules">{ <span class="rule"><span class="attribute">visibility:<span class="value"> visible; <span class="rule"><span class="attribute">opacity:<span class="value"> <span class="number">1; <span class="rule"><span class="attribute">transition:<span class="value"> all linear <span class="number">2s; }<br><span class="line">    <span class="rule"><span class="attribute">.fadeOut:<span class="value">hover { visibility: hidden; <span class="rule"><span class="attribute">opacity:<span class="value"> <span class="number">0; }<br></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></pre>
-</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;</p>
-<p>应该同时设置元素的visibility和opacity属性。</p>
-<h3 id="总结说明">总结说明</h3>
-<p>本文总结说明了“隐藏”元素的几种方式，其中最常用的还是display:none和visibility:hidden。其他的方式只能算是奇技淫巧，并不推荐使用它们来隐藏元素，它们的真正用途应该不在隐藏元素，而是通过了解这些方法的特点，挖掘出其真正的使用场景。欢迎大家交流！！</p>
-<h3 id="补充">补充</h3>
-<p>来自网友们提供的技巧：</p>
-<p>1、设置元素的position与left，top，bottom，right等，将元素移出至屏幕外</p>
-<p>2、设置元素的position与z-index，将z-index设置成尽量小的负数</p></div>]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[关于]]></title>
-        <id>https://itliuwk.github.io/post/about</id>
-        <link href="https://itliuwk.github.io/post/about">
-        </link>
-        <updated>2019-01-25T11:09:48.000Z</updated>
-        <content type="html"><![CDATA[<p>这是关于的页面，可以在这里向世界介绍你！</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://itliuwk.github.io/post/hello-gridea</id>
-        <link href="https://itliuwk.github.io/post/hello-gridea">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="http://hvenotes.fehey.com/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>𝖶𝗂𝗇𝖽𝗈𝗐𝗌</strong> 或 <strong>𝖬𝖺𝖼𝖮𝖲</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
-]]></content>
-    </entry>
     <entry>
         <title type="html"><![CDATA[Ajax简单教程]]></title>
         <id>https://itliuwk.github.io/post/ajax</id>
@@ -263,5 +79,194 @@
 <li>jquery调用ajax</li>
 </ol>
 <figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">$.ajax({</div><div class="line">    type: <span class="string">"get"</span>,</div><div class="line">    url: <span class="string">"http://www.cnblogs.com/rss"</span>,</div><div class="line">    beforeSend: <span class="function"><span class="keyword">function</span>(<span class="params">XMLHttpRequest</span>)</span>{</div><div class="line">    <span class="comment">//ShowLoading();</span></div><div class="line">    },</div><div class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params">data, textStatus</span>)</span>{</div><div class="line">        $(<span class="string">".ajax.ajaxResult"</span>).html(<span class="string">""</span>);</div><div class="line">        $(<span class="string">"item"</span>,data).each(<span class="function"><span class="keyword">function</span>(<span class="params">i, domEle</span>)</span>{</div><div class="line">        $(<span class="string">".ajax.ajaxResult"</span>).append(<span class="string">"&lt;li&gt;"</span>+$(domEle).children(<span class="string">"title"</span>).text()+<span class="string">"&lt;/li&gt;"</span>);</div><div class="line">        });</div><div class="line"></div><div class="line">    },</div><div class="line">    complete: <span class="function"><span class="keyword">function</span>(<span class="params">XMLHttpRequest, textStatus</span>)</span>{</div><div class="line">    <span class="comment">//HideLoading();</span></div><div class="line">    },</div><div class="line">    error: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</div><div class="line">    <span class="comment">//请求出错处理</span></div><div class="line">    }</div><div class="line">});</div></pre></td></tr></tbody></table></figure> </the></div>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Git学习笔记]]></title>
+        <id>https://itliuwk.github.io/post/git-xue-xi-bi-ji</id>
+        <link href="https://itliuwk.github.io/post/git-xue-xi-bi-ji">
+        </link>
+        <updated>2016-08-14T02:16:43.000Z</updated>
+        <summary type="html"><![CDATA[<p>git的常用操作，高级技巧都要哦</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>git的常用操作，高级技巧都要哦</p>
+<!--more-->
+<div class="article-entry" itemprop="articleBody">
+>
+<h2 id="安装git"><a href="#安装git" class="headerlink"></a>安装git</h2><ol>
+<li>下载安装包 ?下载地址?</li>
+<li>安装git</li>
+<li>进入命令行,输入git看看是否成功</li>
+</ol>
+<h2 id="配置git"><a href="#配置git" class="headerlink"></a>配置git</h2><ol>
+<li>配置全局用户名和密码<br> `git config –global user.name "liuwk" <br> git config –global user.email   "1834183435@qq.com"<br> `</li>
+<li>配置ssh公钥<br> <code>cd ~/.ssh</code> 然后<code>ls</code><br> 如果没有,直接生成,一路点击enter<br> ```<br> ssh-keygen<br> cat ~/.ssh/id_rsa.pub<br> ```<br> 把公钥配置到github的个人设置</li>
+</ol>
+<h2 id="常用的命令"><a href="#常用的命令" class="headerlink"></a>常用的命令</h2><ol>
+<li><p>repository操作</p>
+<ul>
+<li>检出（clone）仓库代码：<code>git clone repository-url</code> / <code>git clone repository-url local-directoryname</code><ul>
+<li>例如，clone jquery 仓库到本地： <code>git clone git://github.com/jquery/jquery.git</code></li>
+<li>clone jquery 仓库到本地，并且重命名为 my-jquery ：<code>git clone git://github.com/jquery/jquery.git my-jquery</code></li>
+</ul>
+</li>
+<li>查看远程仓库：<code>git remote -v</code></li>
+<li>添加远程仓库：<code>git remote add [name] [repository-url]</code></li>
+<li>删除远程仓库：<code>git remote rm [name]</code></li>
+<li>修改远程仓库地址：<code>git remote set-url origin new-repository-url</code></li>
+<li>拉取远程仓库： <code>git pull [remoteName] [localBranchName]</code></li>
+<li>推送远程仓库： <code>git push [remoteName] [localBranchName]</code></li>
+</ul>
+</li>
+<li><p>提交/拉取/合并/删除</p>
+<ul>
+<li>添加文件到暂存区（staged）：<code>git add filename</code> / <code>git stage filename</code></li>
+<li>将所有修改文件添加到暂存区（staged）： <code>git add --all</code> / <code>git add -A</code></li>
+<li>提交修改到暂存区（staged）：<code>git commit -m 'commit message'</code> / <code>git commit -a -m 'commit message'</code> 注意理解 -a 参数的意义</li>
+<li>从Git仓库中删除文件：<code>git rm filename</code></li>
+<li>从Git仓库中删除文件，但本地文件保留：<code>git rm --cached filename</code></li>
+<li><p>重命名某个文件：<code>git mv filename newfilename</code> 或者直接修改完毕文件名 ，进行<code>git add -A &amp;&amp; git commit -m 'commit message'</code> Git会自动识别是重命名了文件</p>
+</li>
+<li><p>获取远程最新代码到本地：<code>git pull (origin branchname)</code> 可以指定分支名，也可以忽略。pull 命令自动 fetch 远程代码并且 merge，如果有冲突，会显示在状态栏，需要手动处理。更推荐使用：<code>git fetch</code> 之后 <code>git merge --no-ff origin branchname</code> 拉取最新的代码到本地仓库，并手动 merge 。</p>
+</li>
+</ul>
+</li>
+<li><p>日志查看</p>
+<ul>
+<li>查看日志：<code>git log</code></li>
+<li>查看日志，并查看每次的修改内容：<code>git log -p</code></li>
+<li>查看日志，并查看每次文件的简单修改状态：<code>git log --stat</code></li>
+<li>一行显示日志：<code>git log --pretty=oneline</code> / <code>git log --pretty='format:"%h - %an, %ar : %s'</code></li>
+<li>查看日志范围：<ul>
+<li>查看最近10条日志：<code>git log -10</code></li>
+<li>查看2周前：<code>git log --until=2week</code> 或者指定2周的明确日期，比如：<code>git log --until=2015-08-12</code></li>
+<li>查看最近2周内：<code>git log --since=2week</code> 或者指定2周明确日志，比如：<code>git log --since=2015-08-12</code></li>
+<li>只查看某个用户的提交：<code>git log --committer=user.name</code> / <code>git log --author=user.name</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>取消操作</p>
+<ul>
+<li>上次提交msg错误/有未提交的文件应该同上一次一起提交，需要重新提交备注：<code>git commit --amend -m 'new msg'</code></li>
+<li>一次<code>git add -A</code>后，需要将某个文件撤回到工作区，即：某个文件不应该在本次commit中：<code>git reset HEAD filename</code></li>
+<li>撤销某些文件的修改内容：<code>git checkout -- filename</code> 注意：一旦执行，所有的改动都没有了，谨慎！谨慎！谨慎！</li>
+<li>将工作区内容回退到远端的某个版本：<code>git reset --hard &lt;sha1-of-commit&gt;</code><ul>
+<li><code>--hard</code>：reset stage and working directory ,<commitid> 以来所有的变更全部丢弃，并将 HEAD 指向<commitid></commitid></commitid></li>
+<li><code>--soft</code>：nothing changed to stage and working directory ,仅仅将HEAD指向<commitid> ，所有变更显示在”changed to be committed”中</commitid></li>
+<li><code>--mixed</code>：default,reset stage ,nothing to working directory ，这也就是第二个例子的原因</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>比较差异</p>
+<ul>
+<li>查看工作区（working directory）和暂存区（staged）之间差异：<code>git diff</code></li>
+<li>查看工作区（working directory）与当前仓库版本（repository）HEAD版本差异：<code>git diff HEAD</code></li>
+<li>查看暂存区（staged）与当前仓库版本（repository）差异：<code>git diff --cached</code> / <code>git diff --staged</code></li>
+</ul>
+</li>
+<li><p>合并操作</p>
+<ul>
+<li>解决冲突后/获取远程最新代码后合并代码：<code>git merge branchname</code></li>
+<li>保留该存在版本合并log：<code>git merge --no-ff branchname</code> 参数<code>--no-ff</code>防止 fast-forward 的提交</li>
+</ul>
+</li>
+</ol>
+ </the></div>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hexo和github打造个人博客]]></title>
+        <id>https://itliuwk.github.io/post/hexo-he-github-da-zao-ge-ren-bo-ke</id>
+        <link href="https://itliuwk.github.io/post/hexo-he-github-da-zao-ge-ren-bo-ke">
+        </link>
+        <updated>2016-06-30T00:58:11.000Z</updated>
+        <summary type="html"><![CDATA[<p>使用hexo和github打造属于自己的静态博客，展示自己的作品，思想……</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>使用hexo和github打造属于自己的静态博客，展示自己的作品，思想……</p>
+<!-- more --> 
+<div class="article-entry" itemprop="articleBody">
+<the rest="" of="" contents="" |="" 余下全文="">
+<p>##说明<br>    自己在使用hexo搭建静态博客的时候踩了许多坑,最终去官网看教程搞定了,<br>    建议用hexo搭建个人博客的时候,最好看清教程的日期和使用的版本,这样就<br>    不会因为版本的不同导致的问题了.建议先去hexo官网了解一下<br>   <a href="https://hexo.io/zh-cn/"><strong>hexo官网</strong></a></p>
+<h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink"></a>1.准备工作</h2><ol>
+<li>安装nodejs<ul>
+<li>去官网下载nodejs安装(推荐安装4.x),安装之后在命令行 node -v,如果成功说明node环境ok,不成功就去环境变量配置一下.</li>
+</ul>
+</li>
+<li>安装hexo<ul>
+<li>使用命令 npm install hexo -g,执行hexo -v 查看版本,本教程适合<strong>3.1.1以上</strong>版本</li>
+</ul>
+</li>
+<li>安装git<ul>
+<li>去官网下载git安装,不会自行百度</li>
+</ul>
+</li>
+<li>配置git<ul>
+<li>配置ssh私钥,上传到github上</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-github-pages的说明"><a href="#2-github-pages的说明" class="headerlink"></a>2.github-pages的说明</h2><ol>
+<li>github有两种主页,一种是github-page(个人主页),一种是项目主页,本教程针对个人主页</li>
+<li>github-page需要将hexo博客发布到repository的master(主干)即可</li>
+<li>github的个人主页要求repository的名称和username一致，加入username是tom，则repository的名称为tom.github.io</li>
+</ol>
+<h2 id="3-使用hexo写博客"><a href="#3-使用hexo写博客" class="headerlink"></a>3.使用hexo写博客</h2><pre><code>- 新建一个文件夹myblog,
+- 右键git bash here使用git的shell
+- 在shell中输入hexo init,回车执行
+- 在shell中输入hexo g ,回车
+- 在shell中hexo s,回车
+- 去浏览器访问http://localhost:4000,访问到主页,然后在shell中ctrl c停止
+- 在shell中hexo new "first-blog",回车
+- 在shell中hexo g ,回车
+- 在shell中hexo s ,回车,在访问
+- ok,在本地测试就没问题了
+</code></pre><h2 id="4-发布到github"><a href="#4-发布到github" class="headerlink"></a>4.发布到github</h2><p>打开项目根部录下的.config.yml,找到deploy,修改如下:</p>
+<figure class="highlight less"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">deploy</span>:</div><div class="line"> - <span class="attribute">type</span>: git</div><div class="line">   <span class="attribute">repo</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:yourname/yourname.github.io.git,master</div></pre></td></tr></tbody></table></figure>
+<figure class="highlight dts"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">deploy:</span></div><div class="line"><span class="symbol">  type:</span> git</div><div class="line"><span class="symbol">  repo:</span> <span class="params">&lt;repository url&gt;</span></div><div class="line"><span class="symbol">  branch:</span> [branch]</div><div class="line"><span class="symbol">  message:</span> [message]</div></pre></td></tr></tbody></table></figure>
+<p>访问地址就是 <a href="http://tom.github.io/">http://tom.github.io/</a></p>
+<h2 id="5-常用命令"><a href="#5-常用命令" class="headerlink"></a>5.常用命令</h2><pre><code>命令的简写为：
+<figure class="highlight verilog"><table><tbody><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo n == hexo <span class="keyword">new</span></div><div class="line">hexo g == hexo <span class="keyword">generate</span></div><div class="line">hexo s == hexo server</div><div class="line">hexo d == hexo deploy</div><div class="line">hexo clean  删除public文件夹</div></pre></td></tr></tbody></table></figure>
+</code></pre><h2 id="6-常见问题"><a href="#6-常见问题" class="headerlink"></a>6.常见问题</h2><ol>
+<li>部署时出现git not found<ul>
+<li>npm install hexo-deployer-git –save  安装依赖包</li>
+</ul>
+</li>
+</ol>
+<h2 id="7-详细设置"><a href="#7-详细设置" class="headerlink"></a>7.详细设置</h2><pre><code>每个人对自己的博客都有不一样的要求，比如主题，分类，标签，评论插件的选择，  
+这些对程序员的你来说，都是小菜一碟，下面是官网教程：
+</code></pre><p>   <a href="https://hexo.io/docs/">hexo官方文档</a></p>
+<p>  </p></the></div>]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://itliuwk.github.io/post/hello-gridea</id>
+        <link href="https://itliuwk.github.io/post/hello-gridea">
+        </link>
+        <updated>2016-01-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="http://hvenotes.fehey.com/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>𝖶𝗂𝗇𝖽𝗈𝗐𝗌</strong> 或 <strong>𝖬𝖺𝖼𝖮𝖲</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
+]]></content>
     </entry>
 </feed>
