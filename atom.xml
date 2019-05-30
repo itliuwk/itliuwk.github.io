@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://itliuwk.github.io</id>
     <title>刘伟坤</title>
-    <updated>2019-05-30T00:47:10.936Z</updated>
+    <updated>2019-05-30T00:47:43.922Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://itliuwk.github.io"/>
     <link rel="self" href="https://itliuwk.github.io/atom.xml"/>
@@ -56,9 +56,9 @@
         <link href="https://itliuwk.github.io/post/ajax">
         </link>
         <updated>2016-09-26T12:15:43.000Z</updated>
-        <summary type="html"><![CDATA[<p>ajax简单教程：  ajax常用的 方法，一些容易出错的地方</p>
+        <summary type="html"><![CDATA[<p>ajax常用的 方法，一些容易出错的地方</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p>ajax简单教程：  ajax常用的 方法，一些容易出错的地方</p>
+        <content type="html"><![CDATA[<p>ajax常用的 方法，一些容易出错的地方</p>
 <!-- more -->
 <div class="article-entry" itemprop="articleBody">
 <h2 id="ajax原 理"><a href="#ajax原理" class="headerlink"></a>ajax 原理</h2><p>Ajax的原理简单来说通过XmlHttpRequest对象来向服务器发异步请求,,从服务器获得数据，然后用javascript来操作DOM而更新页面。这其中最关键的一步就是从服务器获得请求数据。要清楚这个过程和原理，我们必须对 XMLHttpRequest有所了解。<br>XMLHttpRequest是ajax的核心机制，它是在IE5中首先引入的，是一种支持异步请求的技术。简单的说，也就是javascript可以及时向服务器提出请求和处理响应，而不阻塞用户。达到无刷新的效果。<br>所以我们先从XMLHttpRequest讲起，来看看它的工作原理。首先，我们先来看看XMLHttpRequest这个对象的属性。<br>它的属性有：</p>
