@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://itliuwk.github.io</id>
-    <title>刘伟坤</title>
-    <updated>2019-05-30T08:11:49.481Z</updated>
+    <title>刘伟坤 -- 个人博客</title>
+    <updated>2019-05-31T01:11:10.773Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://itliuwk.github.io"/>
     <link rel="self" href="https://itliuwk.github.io/atom.xml"/>
+    <subtitle>刘伟坤 -- 个人博客  随心  随心it  </subtitle>
     <logo>https://itliuwk.github.io/images/avatar.png</logo>
     <icon>https://itliuwk.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, 刘伟坤</rights>
+    <rights>All rights reserved 2019, 刘伟坤 -- 个人博客</rights>
     <entry>
         <title type="html"><![CDATA[vue基于七牛云 上传图片、视频]]></title>
         <id>https://itliuwk.github.io/post/vue-ji-yu-qi-niu-yun-shang-chuan-tu-pian-shi-pin</id>
