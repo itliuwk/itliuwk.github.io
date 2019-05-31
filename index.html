@@ -1,127 +1,129 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>刘伟坤 - 个人博客</title>
-<meta name="description" content="刘伟坤 - 个人客博  随心  随心it  ">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+<link rel="shortcut icon" href="https://itliuwk.github.io/favicon.ico?v=1559287937620">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://itliuwk.github.io/favicon.ico?v=1559287192391">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://itliuwk.github.io/styles/main.css">
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
 
 
 
   </head>
   <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://itliuwk.github.io">
-        <img src="https://itliuwk.github.io/images/avatar.png?v=1559287192391" class="site-logo">
-        <h1 class="site-title">刘伟坤 - 个人博客</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itliuwk.github.io">
+  <img class="avatar" src="https://itliuwk.github.io/images/avatar.png?v=1559287937620" alt="">
+  </a>
+  <h1 class="site-title">
+    刘伟坤 - 个人博客
+  </h1>
+  <p class="site-description">
+    刘伟坤 - 个人客博  随心  随心it  
+  </p>
+  <div class="menu-container">
+    
       
-        
-          <a href="/" class="site-nav">
-            首页
-          </a>
-        
+        <a href="/" class="menu">
+          首页
+        </a>
       
-        
-          <a href="/archives" class="site-nav">
-            归档
-          </a>
-        
+    
       
-        
-          <a href="/tags" class="site-nav">
-            标签
-          </a>
-        
+        <a href="/archives" class="menu">
+          归档
+        </a>
       
-        
-          <a href="/post/about" class="site-nav">
-            关于
-          </a>
-        
+    
       
-    </div>
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
+  <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
-      
-    </div>
-    <div class="site-description">
-      刘伟坤 - 个人客博  随心  随心it  
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://itliuwk.github.io/atom.xml" target="_blank">RSS</a>
-    </div>
+    
   </div>
 </div>
 
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/vue-ji-yu-qi-niu-yun-shang-chuan-tu-pian-shi-pin">
-                  <h2 class="post-title">vue基于七牛云 上传图片、视频</h2>
-                </a>
-                <div class="post-date">
-                  2019-05-13 10:50:23
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-                <a class="right" href="https://itliuwk.github.io/post/vue-ji-yu-qi-niu-yun-shang-chuan-tu-pian-shi-pin">
-                  <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275765784&amp;di=847278305f88134e211dfe5bdcc50c3e&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.bbra.cn%2FUploadfiles%2Fimgs%2F2014%2F02%2F25%2Ffeng1%2FXbzs_002.jpg')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/fu-wen-ben-vue-quill-editor-zheng-he-qi-niu-yun-shang-chuan-tu-pian">
-                  <h2 class="post-title">富文本vue-quill-editor整合七牛云上传图片</h2>
-                </a>
-                <div class="post-date">
-                  2019-04-17 15:19:26
-                </div>
-                <div class="post-abstract">
-                  <p>1.概述
+    
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="https://itliuwk.github.io/post/vue-ji-yu-qi-niu-yun-shang-chuan-tu-pian-shi-pin">
+        <h2 class="post-title">vue基于七牛云 上传图片、视频</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2019-05-13 10:50:23 ·
+        </time>
+        
+          <a href="https://itliuwk.github.io/tag/qiniuyun" class="post-tag">
+            # 七牛云
+          </a>
+        
+          <a href="https://itliuwk.github.io/tag/vue" class="post-tag">
+            # vue
+          </a>
+        
+      </div>
+      
+        <a href="https://itliuwk.github.io/post/vue-ji-yu-qi-niu-yun-shang-chuan-tu-pian-shi-pin" class="post-feature-image" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275765784&amp;di=847278305f88134e211dfe5bdcc50c3e&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.bbra.cn%2FUploadfiles%2Fimgs%2F2014%2F02%2F25%2Ffeng1%2FXbzs_002.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://itliuwk.github.io/post/fu-wen-ben-vue-quill-editor-zheng-he-qi-niu-yun-shang-chuan-tu-pian">
+        <h2 class="post-title">富文本vue-quill-editor整合七牛云上传图片</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2019-04-17 15:19:26 ·
+        </time>
+        
+          <a href="https://itliuwk.github.io/tag/qiniuyun" class="post-tag">
+            # 七牛云
+          </a>
+        
+          <a href="https://itliuwk.github.io/tag/vue" class="post-tag">
+            # vue
+          </a>
+        
+      </div>
+      
+        <a href="https://itliuwk.github.io/post/fu-wen-ben-vue-quill-editor-zheng-he-qi-niu-yun-shang-chuan-tu-pian" class="post-feature-image" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275384477&amp;di=6091d6542a0c761f9591ef75ee5d7607&amp;imgtype=jpg&amp;src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1419159963%2C2364920045%26fm%3D214%26gp%3D0.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>1.概述
 实现前提:</p>
 <p>Element UI:上传使用的是Element 的el-upload组件,
 可以参考 <a href="http://element.eleme.io/#/zh-CN/component/upload" target="_blank">http://element.eleme.io/#/zh-CN/component/upload</a>
@@ -130,178 +132,175 @@ quill-editor:富文本处理，可以参考文档
 <p>参考文章大神的文章 <a href=" https://github.com/NextBoy/skill/issues/2" target="_blank">https://github.com/NextBoy/skill/issues/2</a>
 这里主要讲解的是如何使用Element和quill-editor还有七牛云整合的思路</p>
 
-                </div>
-              </div>
-              
-                <a class="right" href="https://itliuwk.github.io/post/fu-wen-ben-vue-quill-editor-zheng-he-qi-niu-yun-shang-chuan-tu-pian">
-                  <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275384477&amp;di=6091d6542a0c761f9591ef75ee5d7607&amp;imgtype=jpg&amp;src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1419159963%2C2364920045%26fm%3D214%26gp%3D0.jpg')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi">
-                  <h2 class="post-title">前端 nginx 跨域访问配置</h2>
-                </a>
-                <div class="post-date">
-                  2018-12-14 15:39:00
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-                <a class="right" href="https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi">
-                  <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275355401&amp;di=8ced641f787d40351c506316ba033a0d&amp;imgtype=0&amp;src=http%3A%2F%2Fk.zol-img.com.cn%2Fdcbbs%2F24196%2Fa24195003.jpg')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/git-jian-dan-sheng-cheng-sheng-cheng-gong-yao-he-si-yao-fang-fa">
-                  <h2 class="post-title">Git简单生成生成公钥和私钥方法</h2>
-                </a>
-                <div class="post-date">
-                  2018-12-14 12:28:19
-                </div>
-                <div class="post-abstract">
-                  <p><strong>Git配置</strong>
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi">
+        <h2 class="post-title">前端 nginx 跨域访问配置</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2018-12-14 15:39:00 ·
+        </time>
+        
+          <a href="https://itliuwk.github.io/tag/nginx" class="post-tag">
+            # nginx
+          </a>
+        
+      </div>
+      
+        <a href="https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi" class="post-feature-image" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275355401&amp;di=8ced641f787d40351c506316ba033a0d&amp;imgtype=0&amp;src=http%3A%2F%2Fk.zol-img.com.cn%2Fdcbbs%2F24196%2Fa24195003.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://itliuwk.github.io/post/git-jian-dan-sheng-cheng-sheng-cheng-gong-yao-he-si-yao-fang-fa">
+        <h2 class="post-title">Git简单生成生成公钥和私钥方法</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2018-12-14 12:28:19 ·
+        </time>
+        
+          <a href="https://itliuwk.github.io/tag/git" class="post-tag">
+            # Git
+          </a>
+        
+      </div>
+      
+        <a href="https://itliuwk.github.io/post/git-jian-dan-sheng-cheng-sheng-cheng-gong-yao-he-si-yao-fang-fa" class="post-feature-image" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275451848&amp;di=a7c4e9299098899dc8f5a1ca5382653c&amp;imgtype=0&amp;src=http%3A%2F%2Fk.zol-img.com.cn%2Fdcbbs%2F7482%2Fa7481296_s.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        <p><strong>Git配置</strong>
 <a href='793a97cc4c4d3a21ddcd7f99d0ac2198e8887d89'></a>
 Git安装完之后，需做最后一步配置。打开git bash，分别执行以下两句命令</p>
 
-                </div>
-              </div>
-              
-                <a class="right" href="https://itliuwk.github.io/post/git-jian-dan-sheng-cheng-sheng-cheng-gong-yao-he-si-yao-fang-fa">
-                  <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275451848&amp;di=a7c4e9299098899dc8f5a1ca5382653c&amp;imgtype=0&amp;src=http%3A%2F%2Fk.zol-img.com.cn%2Fdcbbs%2F7482%2Fa7481296_s.jpg')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/qian-duan-zen-yang-shi-yong-base64-tu-pian-shang-chuan-dao-qi-niu-yun">
-                  <h2 class="post-title">前端怎样使用base64图片上传到七牛云</h2>
-                </a>
-                <div class="post-date">
-                  2018-12-13 16:34:12
-                </div>
-                <div class="post-abstract">
-                  <p>先通过后端拿到 domain 和 token 值 其实就是后端通过 七牛仓库的一些配置 返为 domain 和 token</p>
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://itliuwk.github.io/post/qian-duan-zen-yang-shi-yong-base64-tu-pian-shang-chuan-dao-qi-niu-yun">
+        <h2 class="post-title">前端怎样使用base64图片上传到七牛云</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2018-12-13 16:34:12 ·
+        </time>
+        
+      </div>
+      
+        <a href="https://itliuwk.github.io/post/qian-duan-zen-yang-shi-yong-base64-tu-pian-shang-chuan-dao-qi-niu-yun" class="post-feature-image" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275464338&amp;di=425e2daea328253f4369d71ab68cb83a&amp;imgtype=0&amp;src=http%3A%2F%2Fk.zol-img.com.cn%2Fdcbbs%2F13419%2Fa13418652_s.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>先通过后端拿到 domain 和 token 值 其实就是后端通过 七牛仓库的一些配置 返为 domain 和 token</p>
 
-                </div>
-              </div>
-              
-                <a class="right" href="https://itliuwk.github.io/post/qian-duan-zen-yang-shi-yong-base64-tu-pian-shang-chuan-dao-qi-niu-yun">
-                  <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275464338&amp;di=425e2daea328253f4369d71ab68cb83a&amp;imgtype=0&amp;src=http%3A%2F%2Fk.zol-img.com.cn%2Fdcbbs%2F13419%2Fa13418652_s.jpg')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/zai-linux-xi-tong-an-zhuang-nodejs-zui-jian-dan-bu-zou">
-                  <h2 class="post-title">在Linux系统安装Nodejs 最简单步骤</h2>
-                </a>
-                <div class="post-date">
-                  2018-12-13 14:48:39
-                </div>
-                <div class="post-abstract">
-                  <p>1、 去官网下载和自己系统匹配的文件：</p>
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://itliuwk.github.io/post/zai-linux-xi-tong-an-zhuang-nodejs-zui-jian-dan-bu-zou">
+        <h2 class="post-title">在Linux系统安装Nodejs 最简单步骤</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2018-12-13 14:48:39 ·
+        </time>
+        
+          <a href="https://itliuwk.github.io/tag/linux" class="post-tag">
+            # linux
+          </a>
+        
+      </div>
+      
+        <a href="https://itliuwk.github.io/post/zai-linux-xi-tong-an-zhuang-nodejs-zui-jian-dan-bu-zou" class="post-feature-image" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275489115&amp;di=d58fcdbadecd8db10985254fa50b709b&amp;imgtype=0&amp;src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170221%2Ffbef1fd6cce941ea823b1d37bd71da27_th.jpeg')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>1、 去官网下载和自己系统匹配的文件：</p>
 
-                </div>
-              </div>
-              
-                <a class="right" href="https://itliuwk.github.io/post/zai-linux-xi-tong-an-zhuang-nodejs-zui-jian-dan-bu-zou">
-                  <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275489115&amp;di=d58fcdbadecd8db10985254fa50b709b&amp;imgtype=0&amp;src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170221%2Ffbef1fd6cce941ea823b1d37bd71da27_th.jpeg')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/centos68-an-zhuang-nginx">
-                  <h2 class="post-title">centOS6.8安装nginx</h2>
-                </a>
-                <div class="post-date">
-                  2018-12-13 14:48:22
-                </div>
-                <div class="post-abstract">
-                  <p>1.安装nginx所需环境：
+      </di>
+    </article>
+  
+    <article class="post">
+      <a href="https://itliuwk.github.io/post/centos68-an-zhuang-nginx">
+        <h2 class="post-title">centOS6.8安装nginx</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2018-12-13 14:48:22 ·
+        </time>
+        
+          <a href="https://itliuwk.github.io/tag/nginx" class="post-tag">
+            # nginx
+          </a>
+        
+      </div>
+      
+        <a href="https://itliuwk.github.io/post/centos68-an-zhuang-nginx" class="post-feature-image" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275504674&amp;di=6be01fbee2463403eb85a793573a63c5&amp;imgtype=0&amp;src=http%3A%2F%2Fimg0.ph.126.net%2Fme8v2SCimmNN8jrjYAOQrg%3D%3D%2F2858096913620520222.jpg')">
+        </a>
+      
+      <div class="post-abstract">
+        <p>1.安装nginx所需环境：
 yum install gcc
 yum install pcre-devel
 yum install zlib zlib-devel
 yum install openssl openssl-devel
 或者一键安装：yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel</p>
 
-                </div>
-              </div>
-              
-                <a class="right" href="https://itliuwk.github.io/post/centos68-an-zhuang-nginx">
-                  <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275504674&amp;di=6be01fbee2463403eb85a793573a63c5&amp;imgtype=0&amp;src=http%3A%2F%2Fimg0.ph.126.net%2Fme8v2SCimmNN8jrjYAOQrg%3D%3D%2F2858096913620520222.jpg')">
-                  </div>
-                </a>
-              
-            </article>
-          
-            <article class="post-item">
-              <div class="left">
-                <a href="https://itliuwk.github.io/post/layui-biao-ge-de-xia-la-xuan-ze">
-                  <h2 class="post-title">layui 表格的下拉选择</h2>
-                </a>
-                <div class="post-date">
-                  2018-09-13 14:40:33
-                </div>
-                <div class="post-abstract">
-                  
-                </div>
-              </div>
-              
-                <a class="right" href="https://itliuwk.github.io/post/layui-biao-ge-de-xia-la-xuan-ze">
-                  <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275517056&amp;di=694bac3e501293c2fbbc1f4add0b3788&amp;imgtype=0&amp;src=http%3A%2F%2Fimg8.zol.com.cn%2Fbbs%2Fupload%2F18108%2F18107649.JPG')">
-                  </div>
-                </a>
-              
-            </article>
-          
-
-          <div class="pagination-container">
+      </di>
+    </article>
   
-  
-    <a href="https://itliuwk.github.io/page/2/" class="next">下一页 <i class="icon-arrow-ios-forward-outline"></i></a>
+    <article class="post">
+      <a href="https://itliuwk.github.io/post/layui-biao-ge-de-xia-la-xuan-ze">
+        <h2 class="post-title">layui 表格的下拉选择</h2>
+      </a>
+      <div class="post-info">
+        <time class="post-time">
+          · 2018-09-13 14:40:33 ·
+        </time>
+        
+          <a href="https://itliuwk.github.io/tag/layui" class="post-tag">
+            # layui
+          </a>
+        
+      </div>
+      
+        <a href="https://itliuwk.github.io/post/layui-biao-ge-de-xia-la-xuan-ze" class="post-feature-image" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275517056&amp;di=694bac3e501293c2fbbc1f4add0b3788&amp;imgtype=0&amp;src=http%3A%2F%2Fimg8.zol.com.cn%2Fbbs%2Fupload%2F18108%2F18107649.JPG')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </di>
+    </article>
   
 </div>
 
-        </div>
-      </div>
-    </div>
+    
+        <div class="pagination-container">
+  
+  
+    <a href="https://itliuwk.github.io/page/2/" class="prev-page">下一页</a>
+  
+</div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://itliuwk.github.io/atom.xml" target="_blank">RSS</a>
+</div>
 
-<script type="application/javascript">
-
-AOS.init();
-
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
-
+<script>
+  hljs.initHighlightingOnLoad()
 </script>
 
-
-
-
+      </div>
+    </div>
   </body>
 </html>

@@ -1,107 +1,89 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Javascript中apply、call、bind | 刘伟坤 - 个人博客</title>
-<meta name="description" content="刘伟坤 - 个人客博  随心  随心it  ">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+<link rel="shortcut icon" href="https://itliuwk.github.io/favicon.ico?v=1559287937620">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://itliuwk.github.io/favicon.ico?v=1559287192391">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://itliuwk.github.io/styles/main.css">
 
-
-  
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
-  
-
-  
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
 
 
 
   </head>
   <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://itliuwk.github.io">
-        <img src="https://itliuwk.github.io/images/avatar.png?v=1559287192391" class="site-logo">
-        <h1 class="site-title">刘伟坤 - 个人博客</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itliuwk.github.io">
+  <img class="avatar" src="https://itliuwk.github.io/images/avatar.png?v=1559287937620" alt="">
+  </a>
+  <h1 class="site-title">
+    刘伟坤 - 个人博客
+  </h1>
+  <p class="site-description">
+    刘伟坤 - 个人客博  随心  随心it  
+  </p>
+  <div class="menu-container">
+    
       
-        
-          <a href="/" class="site-nav">
-            首页
-          </a>
-        
+        <a href="/" class="menu">
+          首页
+        </a>
       
-        
-          <a href="/archives" class="site-nav">
-            归档
-          </a>
-        
+    
       
-        
-          <a href="/tags" class="site-nav">
-            标签
-          </a>
-        
+        <a href="/archives" class="menu">
+          归档
+        </a>
       
-        
-          <a href="/post/about" class="site-nav">
-            关于
-          </a>
-        
+    
       
-    </div>
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
+  <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
-      
-    </div>
-    <div class="site-description">
-      刘伟坤 - 个人客博  随心  随心it  
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://itliuwk.github.io/atom.xml" target="_blank">RSS</a>
-    </div>
+    
   </div>
 </div>
 
 
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">Javascript中apply、call、bind</h2>
-            <div class="post-date">2017-05-02 09:15:01</div>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Javascript中apply、call、bind
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2017-05-02 09:15:01 ·
+              </time>
+              
+            </div>
             
-              <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275647164&amp;di=a7539c9aeb23bfad5a7338782e196b94&amp;imgtype=0&amp;src=http%3A%2F%2Fimgbdb2.bendibao.com%2Fguangzhou%2F20142%2F14%2F201421485654449.jpg')">
+              <div class="post-feature-image" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1559275647164&amp;di=a7539c9aeb23bfad5a7338782e196b94&amp;imgtype=0&amp;src=http%3A%2F%2Fimgbdb2.bendibao.com%2Fguangzhou%2F20142%2F14%2F201421485654449.jpg')">
               </div>
             
             <div class="post-content">
@@ -263,74 +245,58 @@ console.log(foo.getX.apply(obj));   <span style="color: #008000;">//</span><span
 <li>bind&nbsp;是返回对应函数，便于稍后调用；apply 、call 则是立即调用 。</li>
 </ul></div>
             </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://itliuwk.github.io/post/tong-bu-hui-diao-han-shu-yu-yi-bu-hui-diao-han-shu-shi-li">
-                  <h3 class="post-title">
-                    同步回调函数与异步回调函数示例
-                  </h3>
-                </a>
-              </div>
-            
-
-            
-              
-                <div id="gitalk-container" data-aos="fade-in"></div>
-              
-
-              
-            
-
-          </div>
-
+          </article>
         </div>
-      </div>
-    </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itliuwk.github.io/post/tong-bu-hui-diao-han-shu-yu-yi-bu-hui-diao-han-shu-shi-li">
+              <h3 class="post-title">
+                同步回调函数与异步回调函数示例
+              </h3>
+            </a>
+          </div>
+        
 
-<script type="application/javascript">
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
-AOS.init();
+<div id="gitalk-container"></div>
 
-hljs.initHighlightingOnLoad()
+<script>
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+  var gitalk = new Gitalk({
+    clientID: 'e2ff37019fc675e134bc',
+    clientSecret: '257d9f0deba52afa019fadb594d2f7c357af79bf',
+    repo: 'itliuwk.github.io',
+    owner: 'itliuwk',
+    admin: ['itliuwk'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
 
 </script>
 
+          
 
+          
+        
 
-  
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-    <script>
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://itliuwk.github.io/atom.xml" target="_blank">RSS</a>
+</div>
 
-      var gitalk = new Gitalk({
-        clientID: 'e2ff37019fc675e134bc',
-        clientSecret: '257d9f0deba52afa019fadb594d2f7c357af79bf',
-        repo: 'itliuwk.github.io',
-        owner: 'itliuwk',
-        admin: ['itliuwk'],
-        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-        distractionFreeMode: false  // Facebook-like distraction free mode
-      })
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
 
-      gitalk.render('gitalk-container')
-
-    </script>
-  
-
-  
-
-
-
-
+      </div>
+    </div>
   </body>
 </html>
