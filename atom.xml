@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://itliuwk.github.io</id>
     <title>刘伟坤 - 个人博客</title>
-    <updated>2019-05-31T01:25:39.824Z</updated>
+    <updated>2019-05-31T01:35:43.637Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://itliuwk.github.io"/>
     <link rel="self" href="https://itliuwk.github.io/atom.xml"/>
@@ -499,11 +499,13 @@ server {
         <link href="https://itliuwk.github.io/post/git-jian-dan-sheng-cheng-sheng-cheng-gong-yao-he-si-yao-fang-fa">
         </link>
         <updated>2018-12-14T04:28:19.000Z</updated>
-        <summary type="html"><![CDATA[<p><strong>Git配置</strong></p>
-<p>Git安装完之后，需做最后一步配置。打开git bash，分别执行以下两句命令</p>
+        <summary type="html"><![CDATA[<p><strong>Git配置</strong>
+<a href='793a97cc4c4d3a21ddcd7f99d0ac2198e8887d89'></a>
+Git安装完之后，需做最后一步配置。打开git bash，分别执行以下两句命令</p>
 ]]></summary>
-        <content type="html"><![CDATA[<p><strong>Git配置</strong></p>
-<p>Git安装完之后，需做最后一步配置。打开git bash，分别执行以下两句命令</p>
+        <content type="html"><![CDATA[<p><strong>Git配置</strong>
+<a href='793a97cc4c4d3a21ddcd7f99d0ac2198e8887d89'></a>
+Git安装完之后，需做最后一步配置。打开git bash，分别执行以下两句命令</p>
 <!-- more -->
 <pre><code>git config --global user.name &quot;liuwk&quot;
 
