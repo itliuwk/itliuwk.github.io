@@ -1,0 +1,171 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gridea 小白上手教程 | 刘伟坤 - 个人博客</title>
+<link rel="shortcut icon" href="https://itliuwk.github.io/favicon.ico?v=1562050514404">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://itliuwk.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.23.0/moment.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://itliuwk.github.io">
+  <img class="avatar" src="https://itliuwk.github.io/images/avatar.png?v=1562050514404" alt="">
+  </a>
+  <h1 class="site-title">
+    刘伟坤 - 个人博客
+  </h1>
+  <p class="site-description">
+    刘伟坤 - 个人客博  随心  随心it  
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Gridea 小白上手教程
+            </h2>
+            <div class="post-info">
+              <time class="post-time">
+                · 2019-02-18 14:42:45 ·
+              </time>
+              
+            </div>
+            
+            <div class="post-content">
+              <p>准备工作</p>
+<pre><code>由于 Github 和 Coding 的步骤差不多，下面就以 Github 为例来操作一下
+</code></pre>
+<p><strong>必须：确保你已经安装过 <a href="https://git-scm.com/downloads">Git</a> 和 <a href="https://gridea.dev/">Gridea</a>
+注意：同步会覆盖掉仓库的文件，若仓库内有需要备份的，请手动备份</strong></p>
+<p>首先你需要一个<a href="http://github.com">Github</a> 账号，如果没有的话，快去注册一个吧！</p>
+<p>登录 Github，然后进入到 <a href="https://github.com/settings/tokens/new">这里</a> 创建一个 Token，勾选上 repo 的相关权限即可，下面是对应的截图示例：
+<img src="https://fehey.com/post-images/1550403256560.png" alt="Github Personal access tokesn"></p>
+<p>生成之后你可以复制  <strong>Token</strong> 到你可以再次找到的某个地方，因为一旦你关了这个网页就再也不会看到它了，稍后会在软件中使用</p>
+<img src="https://fehey.com/post-images/1550403732691.png" alt="Token示例">
+<p>接下来你需要创建一个仓库，用来存放博客构建后的静态文件。我们建议你创建仓库名为 用户名  <strong>.github.io</strong>  的仓库，因为 Github 会默认将此仓库设置成<a href="https://pages.github.com/">Github Pages</a> 可访问类型，若不是用此命名的仓库，则不能默认使用 Github Pages，所以请认真确认。例如我的 Github 用户名为  <strong>liuweikun</strong> ，则仓库名为   <strong>liuweikun.github.io</strong> 。使用这种方式还有一个好处是，在没有自定义域名的情况下，使你的博客域名更短。当然如果想使用其他仓库来存放博客静态文件的话，也不是不可以，只不过，存放之后，若没有设置自定义域名，则访问地址将变成 https://用户名.github.io/blog （blog 为仓库名）这种二级目录的形式。</p>
+<p><strong>开始使用</strong>
+打开 <strong>Hve Notes</strong> 进入到配置页面，然后按照下面示例，输入相关配置并保存</p>
+<img src="https://fehey.com/post-images/1550405739647.png" alt="配置示例">
+<p>在不开启文章评论的情况下，到此为止，你已经可以点击预览，点击同步进行博客部署啦，快去试试看吧！（当然在不同步的情况下）</p>
+<p><strong>开启文章评论</strong>
+Hve Notes 目前提供了 <a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md">Gitalk</a> 和 <a href="">Disqus</a>两种评论系统支持。</p>
+<pre><code>Gitalk 是一个基于 GitHub Issue 和 Preact 开发的评论插件。如果你博客使用的是 Gitalk 的话，建议你可以选择 Gitalk 来作为评论插件。
+</code></pre>
+<p>你可以按照 <a href="https://github.com/gitalk/gitalk/blob/master/readme-cn.md">Gitalk 的文档</a> 的文档 进行相关字段配置，或者按照下面的步骤操作。</p>
+<p>首先你需要有一个 <strong>Github OAuth Application</strong>，点击<a href="https://github.com/settings/applications/new">这里</a>创建，字段填写可以参照下图</p>
+<img src="https://fehey.com/post-images/1550455713413.png" alt="Github OAuth">
+<p>创建完成后可将  <strong>Client ID</strong>  和    <strong>Client Secret</strong> 复制一下，保存到本地</p>
+<img src="https://fehey.com/post-images/1550455918492.png" alt="">
+<p>接下来就可以去应用里面填写对应的信息，并开启评论</p>
+<img src="https://fehey.com/post-images/1550456148809.png" alt="">
+<p>这样评论插件就设置好了，在预览时会在文章页显示评论模块，但不会显示具体的评论信息，因为这个是本地预览，而   <strong>Github OAuth</strong>  设置的域名为线上的域名。待博客同步到线上时就可以显示啦！</p>
+<p>快快开始你的创作吧！</p>
+
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://itliuwk.github.io/post/qian-duan-nginx-kua-yu-fang-wen-pei-zhi">
+              <h3 class="post-title">
+                前端 nginx 跨域访问配置
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'e2ff37019fc675e134bc',
+    clientSecret: '257d9f0deba52afa019fadb594d2f7c357af79bf',
+    repo: 'itliuwk.github.io',
+    owner: 'itliuwk',
+    admin: ['itliuwk'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://itliuwk.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
